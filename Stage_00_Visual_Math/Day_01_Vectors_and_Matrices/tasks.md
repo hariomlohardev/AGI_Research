@@ -12,10 +12,10 @@
 ### 🎥 BLOCK 1: Theory (Watch & Visualize)
 Go to YouTube and search for: **"Essence of linear algebra" by 3Blue1Brown**. 
 Watch these 4 videos carefully. Do not memorize formulas; focus on what the shapes are doing.
-*   [ ] **Video 1:** Vectors, what even are they?
-*   [ ] **Video 2:** Linear combinations, span, and basis vectors.
-*   [ ] **Video 3:** Linear transformations and matrices. *(Crucial: Notice how a matrix is just a "movement" of space).*
-*   [ ] **Video 4:** Matrix multiplication as composition. *(Crucial: Notice how multiplying two matrices means doing two movements one after the other).*
+*   [x] **Video 1:** Vectors, what even are they?
+*   [x] **Video 2:** Linear combinations, span, and basis vectors.
+*   [x] **Video 3:** Linear transformations and matrices. *(Crucial: Notice how a matrix is just a "movement" of space).*
+*   [x] **Video 4:** Matrix multiplication as composition. *(Crucial: Notice how multiplying two matrices means doing two movements one after the other).*
 
 ---
 
@@ -45,11 +45,11 @@ Watch these 4 videos carefully. Do not memorize formulas; focus on what the shap
 ### 💻 BLOCK 3: Python Coding Lab (in `day1_math.py`)
 *Write these 5 functions from scratch using pure Python logic (`for` loops, lists, or list comprehensions). I am giving you the specifications, you write the logic.*
 
-*   [ ] **Task 1:** Write `add_vectors(v1, v2)` -> Returns a new list.
-*   [ ] **Task 2:** Write `scale_vector(scalar, v)` -> Returns a new list multiplied by the scalar.
-*   [ ] **Task 3:** Write `dot_product(v1, v2)` -> Returns a single number.
-*   [ ] **Task 4:** Write `matrix_vector_mult(matrix, vector)` -> Returns a new list (the transformed vector). 
-*   [ ] **Task 5 (Boss Level):** Write `matrix_matrix_mult(m1, m2)` -> Returns a new list of lists (the new composed matrix).
+*   [x] **Task 1:** Write `add_vectors(v1, v2)` -> Returns a new list.
+*   [x] **Task 2:** Write `scale_vector(scalar, v)` -> Returns a new list multiplied by the scalar.
+*   [x] **Task 3:** Write `dot_product(v1, v2)` -> Returns a single number.
+*   [x] **Task 4:** Write `matrix_vector_mult(matrix, vector)` -> Returns a new list (the transformed vector). 
+*   [x] **Task 5 (Boss Level):** Write `matrix_matrix_mult(m1, m2)` -> Returns a new list of lists (the new composed matrix).
 
 **Final Step (The Verification):**
 At the bottom of `day1_math.py`, write `print()` statements that pass the exact numbers from **Block 2** into your functions. Run the file in your terminal (`python day1_math.py`). 
