@@ -5,7 +5,7 @@ def add_vectors(v1, v2):
 
     return result
 
-print(add_vectors([4,-2],[1,5]))
+# print(add_vectors([4,-2],[1,5]))
 
 
 def scale_vector(scalar, v):
@@ -15,7 +15,7 @@ def scale_vector(scalar, v):
 
     return result
 
-print(scale_vector(3,[4,-2]))
+# print(scale_vector(3,[4,-2]))
 
 
 def dot_product(v1, v2):
@@ -26,7 +26,7 @@ def dot_product(v1, v2):
 
     return result
 
-print(dot_product([3,4],[2,-1]))
+# print(dot_product([3,4],[2,-1]))
 
 
 
@@ -48,4 +48,38 @@ def matrix_vector_mult(matrix, vector):
     return result
 
 
-print(matrix_vector_mult([[2,0],[0,3]],[2,1]))
+# print(matrix_vector_mult([[2,0],[0,3]],[2,1]))
+
+
+
+def matrix_matrix_mult(m1, m2):
+    result = []
+
+    for i in range(len(m1)):
+        m1_row = m1[i]
+
+        new =[]
+
+        for j in range(len(m2[0])):
+            m2_col =[]
+            
+            for k in range(len(m2)):
+                m2_col.append(m2[k][j])
+            print(m2_col)
+
+            dp =dot_product(m1_row,m2_col)
+
+            new.append(dp)
+
+        result.append(new)
+
+
+    return result
+
+print(matrix_matrix_mult(
+    [[1, 2], 
+     [3, 4]],
+
+    [[2, 0], 
+     [1, 2]]
+))
