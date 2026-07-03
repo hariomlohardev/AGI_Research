@@ -16,5 +16,5 @@ This repository documents my daily, 8-hour deep work journey from 12th-grade mat
 
 ### 🛠️ Daily Log
 *   **Day 1:** Coded Vector addition, Dot products, and Matrix Multiplication from scratch using pure Python. Built the foundation for linear transformations.
-*   **Day 2:** *Mastered NumPy, matrix determinants, and benchmarked C-optimized vectorization (NumPy was 759x faster than pure Python!).*
-***
+*   **Day 2:** Mastered NumPy, matrix determinants, and benchmarked C-optimized vectorization (NumPy was 759x faster than pure Python!). Built matrix inverse operations.
+*   **Day 3:** Mastered Eigenvalues & Eigenvectors. Mathematically proved the core AI equation $A\vec{v} = \lambda\vec{v}$ in NumPy and learned the theory of data compression/dimensionality reduction (PCA). **Graduated Stage 0!**

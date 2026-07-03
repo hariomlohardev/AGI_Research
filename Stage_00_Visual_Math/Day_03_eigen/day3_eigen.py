@@ -17,3 +17,8 @@ LHS =A @ v
 RHS = lam * v
 
 print(LHS , RHS)
+
+
+## How does an AI use eigenvectors to compress data?
+'''AI uses eigenvectors when the dataset is too large and we want to compress it down
+ while remaing all the important information then we use eigenvectors then one with highest eignevalue'''
