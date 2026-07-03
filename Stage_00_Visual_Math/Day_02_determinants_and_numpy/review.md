@@ -1,0 +1,1 @@
+day 2 tasks are very easy to do and i also found out that the numpy is sooo fast that you cant beleive to compare with simple python functions that do the same job 
