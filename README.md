@@ -1,6 +1,6 @@
 
 # 🧠 First Principles AI & AGI Roadmap
-**Author:** [Your Name] | **Location:** India | **Goal:** Building AGI systems from scratch in 18 months.
+**Author:** Hariom lohar | **Location:** India | **Goal:** Building AGI systems from scratch in 18 months.
 
 ### 🎯 Objective
 This repository documents my daily, 8-hour deep work journey from 12th-grade mathematics to advanced Artificial General Intelligence (AGI) research. I do not rely on high-level libraries until I have built the underlying mathematical engines from scratch in pure Python and NumPy.
