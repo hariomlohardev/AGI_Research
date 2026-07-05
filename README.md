@@ -19,5 +19,6 @@ This repository documents my daily, 8-hour deep work journey from 12th-grade mat
 *   **Day 2:** Mastered NumPy, matrix determinants, and benchmarked C-optimized vectorization (NumPy was 759x faster than pure Python!). Built matrix inverse operations.
 *   **Day 3:** Mastered Eigenvalues & Eigenvectors. Mathematically proved the core AI equation $A\vec{v} = \lambda\vec{v}$ in NumPy and learned the theory of data compression/dimensionality reduction (PCA). **Graduated Stage 0!**
 *   **Day 4:** Started MIT Linear Algebra. Mastered the "Column Picture" (linear combinations/Transformer Attention intuition) and used `np.linalg.solve`. Mastered Vector Spaces, Subspaces, and calculated the "Null Space" (blind spots of matrices) using SciPy, proving $A \times \text{NullSpace} = 0$.
+*   **Day 5:** Mastered Orthogonality, Vector Projections, and the Least Squares method. Coded the **Normal Equation** $(\theta = (X^T X)^{-1} X^T y)$ from scratch using NumPy to build a Linear Regression model, and visualized the line of best fit using Matplotlib.
 
 *   **Day 6:** Coded the **Gram-Schmidt Orthogonalization** algorithm and **QR Decomposition** ($A = QR$) from scratch using NumPy. Mathematically proved that $Q$ is orthogonal ($Q^T Q = I$) and reconstructed the original matrix $A = QR$ with zero numerical loss.
