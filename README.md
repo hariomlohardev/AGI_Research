@@ -23,3 +23,4 @@ This repository documents my daily, 8-hour deep work journey from 12th-grade mat
 
 *   **Day 6:** Coded the **Gram-Schmidt Orthogonalization** algorithm and **QR Decomposition** ($A = QR$) from scratch using NumPy. Mathematically proved that $Q$ is orthogonal ($Q^T Q = I$) and reconstructed the original matrix $A = QR$ with zero numerical loss.
 *   **Day 7:** Mastered the algebraic properties of Determinants & Cofactors. Coded **Cramer's Rule** from scratch in NumPy to solve a $3\times3$ system of equations using only determinant calculations, and verified its accuracy against `np.linalg.solve`.
+*   **Day 8:** Mastered Matrix Diagonalization ($A = S\Lambda S^{-1}$) and calculated matrix powers. Wrote a dynamic simulation proving the **Vanishing & Exploding Gradients** problem in Deep Learning—showing how eigenvalues $\lambda > 1$ cause exponential explosion ($10^{14}$) and $\lambda < 1$ cause exponential collapse ($10^{-9}$) over 50 layers.
