@@ -22,3 +22,4 @@ This repository documents my daily, 8-hour deep work journey from 12th-grade mat
 *   **Day 5:** Mastered Orthogonality, Vector Projections, and the Least Squares method. Coded the **Normal Equation** $(\theta = (X^T X)^{-1} X^T y)$ from scratch using NumPy to build a Linear Regression model, and visualized the line of best fit using Matplotlib.
 
 *   **Day 6:** Coded the **Gram-Schmidt Orthogonalization** algorithm and **QR Decomposition** ($A = QR$) from scratch using NumPy. Mathematically proved that $Q$ is orthogonal ($Q^T Q = I$) and reconstructed the original matrix $A = QR$ with zero numerical loss.
+*   **Day 7:** Mastered the algebraic properties of Determinants & Cofactors. Coded **Cramer's Rule** from scratch in NumPy to solve a $3\times3$ system of equations using only determinant calculations, and verified its accuracy against `np.linalg.solve`.
