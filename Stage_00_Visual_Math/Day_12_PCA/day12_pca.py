@@ -23,8 +23,8 @@ class PCA:
         # 4. Extract and store the right singular vectors (V) as self.components
         self.components = Vt.T
         # Hint: np.linalg.svd returns Vt. You need to transpose it to get V!
-        # pass
-
+        
+        
     def transform(self, X, k):
         # 1. Center the input data X using the stored self.mean
         self.mean = np.mean(X )
@@ -43,7 +43,6 @@ pca.fit(X)
 
 X_projected = pca.transform(X, k=2)
 X_projected.shape
-
 
 # Scatter plot the 2D projected data
 # We color the points using 'y' so we can see if our math grouped the flower species correctly!
