@@ -7,7 +7,7 @@ This repository documents my daily, 8-hour deep work journey from 12th-grade mat
 
 ### 📅 Progress Tracker
 - [x] **Stage 0:** Visual Intuition & Linear Algebra *(In Progress)*
-- [ ] **Stage 1:** Calculus & Gradients
+- [x] **Stage 1:** Calculus & Gradients
 - [ ] **Stage 2:** Probability & Statistics 
 - [ ] **Stage 3:** Machine Learning Algorithms (Scratch)
 - [ ] **Stage 4:** Deep Learning & Neural Networks
