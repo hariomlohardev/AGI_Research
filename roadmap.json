@@ -9,10 +9,26 @@
           "name": "day1_math.py",
           "url": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_01_Vectors_and_Matrices/day1_math.py"
         }
+      },
+      "day_2": {
+        "created_at": "2026-07-14 15:48:44",
+        "topic": "Determinants and Numpy",
+        "tasks_md": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_02_determinants_and_numpy/tasks.md",
+        "python_file": {
+          "name": "day2_numpy.py",
+          "url": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_02_determinants_and_numpy/day2_numpy.py"
+        }
       }
     }
   },
-  "learned_skills": [],
+  "learned_skills": [
+    {
+      "day": 1,
+      "skill": "Vectors and Matrices",
+      "description": "learn about the vectors and matrices as its corresponding things",
+      "created_at": "2026-07-14 15:47:07"
+    }
+  ],
   "projects": {},
   "status": {
     "current_day": 0,
