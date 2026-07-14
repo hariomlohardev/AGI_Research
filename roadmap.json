@@ -18,6 +18,42 @@
           "name": "day2_numpy.py",
           "url": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_02_determinants_and_numpy/day2_numpy.py"
         }
+      },
+      "day_3": {
+        "created_at": "2026-07-14 19:17:15",
+        "topic": "eigen",
+        "tasks_md": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_03_eigen/tasks.md",
+        "python_file": {
+          "name": "day3_eigen.py",
+          "url": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_03_eigen/day3_eigen.py"
+        }
+      },
+      "day_4": {
+        "created_at": "2026-07-14 19:19:18",
+        "topic": "elemination",
+        "tasks_md": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_04_elemination/tasks.md",
+        "python_file": {
+          "name": "day4_elemination.py",
+          "url": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_04_elemination/day4_elimination.py"
+        }
+      },
+      "day_5": {
+        "created_at": "2026-07-14 19:20:36",
+        "topic": "least squares",
+        "tasks_md": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_05_least_squares/tasks.md",
+        "python_file": {
+          "name": "day5_least_squares.py",
+          "url": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_05_least_squares/day5_least_squares.py"
+        }
+      },
+      "day_6": {
+        "created_at": "2026-07-14 19:25:17",
+        "topic": "Gram schmidt",
+        "tasks_md": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_06_gram_schmidt/tasks.md",
+        "python_file": {
+          "name": "day6_qr.py",
+          "url": "https://raw.githubusercontent.com/hariomlohardev/AGI_Research/main/Stage_00_Visual_Math/Day_06_gram_schmidt/day6_qr.py"
+        }
       }
     }
   },
