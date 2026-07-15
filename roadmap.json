@@ -70,6 +70,18 @@
             "created_at": "2026-07-15 08:00:00"
           }
         ]
+      },
+      "stage_2": {
+        "name": "Stage_01_Calculus_and_Gradients",
+        "created_at": "2026-07-15 08:11:09",
+        "skills": [
+          {
+            "title": "linear algebra",
+            "keyword": "MATH",
+            "description": "nothni",
+            "created_at": "2026-07-15 08:11:55"
+          }
+        ]
       }
     }
   },
