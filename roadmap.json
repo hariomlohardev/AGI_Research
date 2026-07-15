@@ -57,14 +57,22 @@
       }
     }
   },
-  "learned_skills": [
-    {
-      "day": 1,
-      "skill": "Vectors and Matrices",
-      "description": "learn about the vectors and matrices as its corresponding things",
-      "created_at": "2026-07-14 15:47:07"
+  "learned_skills": {
+    "stages": {
+      "stage_1": {
+        "name": "Foundations",
+        "created_at": "2026-07-15 07:56:42",
+        "skills": [
+          {
+            "title": "Data Structures",
+            "description": "Learned about Trees and Graphs",
+            "keyword": "Computer Science",
+            "created_at": "2026-07-15 08:00:00"
+          }
+        ]
+      }
     }
-  ],
+  },
   "projects": {},
   "status": {
     "current_day": 0,
