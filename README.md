@@ -37,3 +37,5 @@ This repository documents my daily, 8-hour deep work journey from 12th-grade mat
 *   **Day 19 (The Autograd Engine):** Built a custom **Scalar Automatic Differentiation Engine (Autograd)** from scratch in Python. Implemented a `Value` class with dynamic graph construction (DAG), magic methods (`__add__`, `__mul__`, `__sub__`), a post-order topological sorting algorithm (DFS) to traverse the computational graph, and automatic backpropagation.
 
 *   **Day 20 (Stage 2 Graduation Project):** Fully completed the custom **Scalar Autograd Engine**. Built object-oriented classes for `Neuron`, `Layer`, and `MLP` (Multilayer Perceptron) using the scratch-built `Value` class, recursively gathered all 41 network parameters, and successfully trained the MLP on non-linear dataset targets, dropping loss to near-zero. **Graduated Stage 2!**
+
+*   **Day 23:** Scaled the optimization framework by implementing **SGD with Momentum** and **RMSprop** from scratch. Extended the `Value` class to track historical velocity and squared gradient variance, allowing the training loop to dynamically scale and smooth weight updates on steep loss surfaces.

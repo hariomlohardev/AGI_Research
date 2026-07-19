@@ -6,7 +6,6 @@ import os
 os.environ["PATH"] += os.pathsep + r'C:\Program Files\Graphviz\bin'
 import random
 
- [markdown]
 # ### code 
 
 
@@ -235,9 +234,7 @@ class MLP:
     def __repr__(self):
         return f"MLP(layers={self.layers})"
 
- [markdown]
-# ### test
-
+ 
 
 class Loss:
     def __init__(self, mlp : MLP ,xs , ys):
