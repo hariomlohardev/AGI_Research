@@ -25,4 +25,6 @@ description: One-time setup step to fast-forward the current month's progress to
 
 4. Update `progress.md` to reflect the new state for this month.
 
-5. `git add -A && git commit -m "Skip to day <target> in month <N>"`.
+5. Run `python3 scripts/validate_state.py`. If it reports errors, stop and fix the write before committing.
+
+6. `git add -A && git commit -m "Skip to day <target> in month <N>"`.

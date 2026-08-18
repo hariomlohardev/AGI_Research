@@ -12,19 +12,44 @@ hands-on micro-projects that build on completed days.
 Rest days are explicit in the source plans and are tracked as real entries
 (status `rest`), not skipped silently.
 
-## Source of truth for state
+## Source of truth for state — and how it's enforced
 
-**`STATE_SCHEMA.md` at the project root is the single canonical definition of
-`state.json`'s shape.** Every skill and agent must read/write `state.json`
-strictly according to that file. If a new field is ever needed, update
-`STATE_SCHEMA.md` first, then use it consistently everywhere. Do not let
-individual skills improvise their own fields.
+`STATE_SCHEMA.md` at the project root is the canonical **human-readable**
+definition of `state.json`'s shape and the rules a schema can't express
+(what's computed vs. stored, the "exactly one current day" invariant, etc.).
+`state.schema.json` is its **machine-enforced** counterpart — the same shape,
+in a JSON-Schema-like format. The two must always be kept in sync: if a field
+is ever added or changed, update `state.schema.json` first (that's what
+actually gets checked), then update `STATE_SCHEMA.md`'s prose to match.
+
+This isn't just a convention skills are expected to remember:
+
+- `scripts/validate_state.py` (stdlib only, no `pip install` required)
+  checks `state.json` against `state.schema.json` structurally (required
+  fields, types, enums, and rejecting any field not defined in the schema),
+  plus a couple of semantic checks a schema alone can't express — exactly
+  one day in the current month has `status: "current"`, and it's the one
+  `current_day` actually points to.
+- Every skill that writes `state.json` runs this validator before
+  committing, and stops if it fails.
+- `.githooks/pre-commit` runs the same validator automatically on any
+  commit that stages `state.json`, and **blocks the commit** if it doesn't
+  pass — this is the actual backstop, not just a convention. `/month`'s
+  first-run setup runs `git config core.hooksPath .githooks` so this hook
+  is active from the start (`.git/hooks/` itself isn't version-controlled,
+  so this has to be set explicitly).
+
+Do not let individual skills improvise fields not in `state.schema.json` —
+they'll fail validation and the commit will be rejected.
 
 ## Folder layout
 
 ```
 CLAUDE.md
-STATE_SCHEMA.md
+STATE_SCHEMA.md              <- human-readable canonical shape + rules
+state.schema.json            <- machine-enforced counterpart of the above
+scripts/validate_state.py    <- validates state.json against state.schema.json
+.githooks/pre-commit         <- blocks commits with invalid state.json
 .claude/skills/{month,skip-to,i-am-in,done,progress,micro-project,for-read,
                 review,explain,pace,final-project-check,confused,recap}/SKILL.md
 .claude/agents/{video-researcher,reading-researcher,code-evaluator}.md

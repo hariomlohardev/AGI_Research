@@ -17,4 +17,6 @@ description: Log a confusion note against the current day for durable tracking, 
 
 4. Optionally, if you can give a quick, accurate clarifying answer right now from the day's own materials (`learn.md`, etc.), do so — but don't treat that as "resolving" the note. The note stays logged regardless, since the primary job here is durable tracking for `/review`, not necessarily fixing it in the moment.
 
-5. `git add -A && git commit -m "Log confusion note for day <D>"`.
+5. Run `python3 scripts/validate_state.py`. If it reports errors, stop and fix the write before committing.
+
+6. `git add -A && git commit -m "Log confusion note for day <D>"`.

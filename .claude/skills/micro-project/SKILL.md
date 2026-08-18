@@ -24,4 +24,6 @@ description: Design and scaffold a small hands-on project applying the current (
 
 6. When the user tells you conversationally that they've finished a micro-project, set its `status: "done"` in `state.json` and note it in `progress.md`.
 
-7. `git add -A && git commit -m "Add/update micro-project <slug> for day <D>"`.
+7. Run `python3 scripts/validate_state.py`. If it reports errors, stop and fix the write before committing.
+
+8. `git add -A && git commit -m "Add/update micro-project <slug> for day <D>"`.

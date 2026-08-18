@@ -26,4 +26,6 @@ description: Spaced-repetition review pulling questions from past completed days
 
 6. For every day a question was pulled from, update its `review_history`: set `last_reviewed` to today's date and increment `times_reviewed` by 1.
 
-7. `git add -A && git commit -m "Review session across <days>"`.
+7. Run `python3 scripts/validate_state.py`. If it reports errors, stop and fix the write before committing.
+
+8. `git add -A && git commit -m "Review session across <days>"`.

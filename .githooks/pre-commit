@@ -1,0 +1,18 @@
+#!/bin/sh
+# Blocks any commit that stages state.json unless it passes
+# scripts/validate_state.py. Activated via:
+#   git config core.hooksPath .githooks
+# (this is set automatically by /month's first-run setup).
+
+if git diff --cached --name-only | grep -qx "state.json"; then
+    python3 scripts/validate_state.py
+    status=$?
+    if [ $status -ne 0 ]; then
+        echo ""
+        echo "Commit aborted: state.json failed schema validation (see errors above)."
+        echo "Fix the write in state.json — don't hand-edit around this check — then try committing again."
+        exit 1
+    fi
+fi
+
+exit 0

@@ -37,4 +37,6 @@ description: Run the current day's tests, get non-blocking code review from the 
 
 8. **Week review.** If the day just completed was the last day of its week: quiz the user strictly against that week's own `done_when` criteria from `state.json` (sourced from the plan doc) before setting `review_status: "done"` on that week.
 
-9. `git add -A && git commit -m "Complete day <D> (+ week <W> review)"` — name the day, and the week if a review ran.
+9. Run `python3 scripts/validate_state.py`. If it reports errors, stop and fix the write before committing — this catches things like an out-of-range `confidence` value or a day left without exactly one `"current"` in the month.
+
+10. `git add -A && git commit -m "Complete day <D> (+ week <W> review)"` — name the day, and the week if a review ran.

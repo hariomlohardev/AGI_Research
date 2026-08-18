@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Machine-enforced counterpart to STATE_SCHEMA.md. Any change here must also be reflected there, and vice versa. Validated by scripts/validate_state.py (no external dependencies required) and gated by the .githooks/pre-commit hook on any commit that touches state.json.",
+  "type": "object",
+  "required": ["current_month", "current_day", "months"],
+  "additionalProperties": false,
+  "properties": {
+    "current_month": { "type": "integer" },
+    "current_day": { "type": "integer" },
+    "months": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[0-9]+$": { "$ref": "#/definitions/month" }
+      }
+    }
+  },
+  "definitions": {
+    "month": {
+      "type": "object",
+      "required": ["started", "weeks"],
+      "additionalProperties": false,
+      "properties": {
+        "started": { "type": "string" },
+        "weeks": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9]+$": { "$ref": "#/definitions/week" }
+          }
+        }
+      }
+    },
+    "week": {
+      "type": "object",
+      "required": ["done_when", "review_status", "days"],
+      "additionalProperties": false,
+      "properties": {
+        "done_when": { "type": "string" },
+        "review_status": { "enum": ["pending", "done"] },
+        "days": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9]+$": { "$ref": "#/definitions/day" }
+          }
+        }
+      }
+    },
+    "day": {
+      "type": "object",
+      "required": [
+        "day_in_week", "global_day", "label", "status", "has_flags",
+        "topic", "time_spent_minutes", "expected_minutes", "confidence",
+        "confusion_notes", "review_history", "micro_projects"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "day_in_week": { "type": "integer", "minimum": 1 },
+        "global_day": { "type": "integer", "minimum": 1 },
+        "label": { "type": "string" },
+        "status": { "enum": ["pending", "current", "done", "rest"] },
+        "has_flags": { "type": "boolean" },
+        "topic": { "type": ["string", "null"] },
+        "time_spent_minutes": { "type": ["integer", "null"], "minimum": 0 },
+        "expected_minutes": { "type": ["integer", "null"], "minimum": 0 },
+        "confidence": { "enum": ["strong", "shaky", "struggled", null] },
+        "confusion_notes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/confusion_note" }
+        },
+        "review_history": { "$ref": "#/definitions/review_history" },
+        "micro_projects": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/micro_project" }
+        }
+      }
+    },
+    "confusion_note": {
+      "type": "object",
+      "required": ["note", "date"],
+      "additionalProperties": false,
+      "properties": {
+        "note": { "type": "string" },
+        "date": { "type": "string" }
+      }
+    },
+    "review_history": {
+      "type": "object",
+      "required": ["last_reviewed", "times_reviewed"],
+      "additionalProperties": false,
+      "properties": {
+        "last_reviewed": { "type": ["string", "null"] },
+        "times_reviewed": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "micro_project": {
+      "type": "object",
+      "required": ["slug", "name", "status", "created"],
+      "additionalProperties": false,
+      "properties": {
+        "slug": { "type": "string" },
+        "name": { "type": "string" },
+        "status": { "enum": ["in_progress", "done"] },
+        "created": { "type": "string" }
+      }
+    }
+  }
+}

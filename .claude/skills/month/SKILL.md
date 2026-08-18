@@ -14,6 +14,7 @@ description: Parse a newly pasted/attached month's learning plan (Week -> Day, w
    - Create `.gitignore` (venv, `__pycache__/`, `*.pyc`, `.pytest_cache/`, `.DS_Store`, `*.egg-info/`) if missing.
    - Create `requirements.txt` starting with `pytest` if missing.
    - Note in `CLAUDE.md` (create if missing, per the project's `CLAUDE.md` template) that dependencies are installed via `pip install -r requirements.txt`.
+   - Run `git config core.hooksPath .githooks` so the schema-enforcement pre-commit hook (`.githooks/pre-commit`, which runs `scripts/validate_state.py`) is actually active for this repo — `.git/hooks/` itself isn't version-controlled, so this has to be set explicitly on first setup.
    - `git add -A && git commit -m "Initial project setup"`.
 
 2. **Parse the plan text.**
@@ -38,4 +39,6 @@ description: Parse a newly pasted/attached month's learning plan (Week -> Day, w
 
 7. **Do not auto-run `/i-am-in`.** The user's next `/i-am-in` will generate day 1 naturally, or they can run `/skip-to` first to jump ahead.
 
-8. `git add -A && git commit -m "Add month <N> plan"`.
+8. **Validate before committing.** Run `python3 scripts/validate_state.py`. If it reports errors, stop and fix the `state.json` write — do not commit invalid state. (The pre-commit hook enforces this too, but checking proactively surfaces a clearer, closer-to-the-cause error.)
+
+9. `git add -A && git commit -m "Add month <N> plan"`.

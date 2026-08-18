@@ -29,4 +29,6 @@ description: Generate today's study materials (learning resources, coding proble
 
 7. Update `state.json`: this day's entry stays `status: "current"` (unchanged — generating content doesn't mark it done, `/done` does). Set its `topic` field to a short human-readable label for today's core topic (e.g. `"gradient descent"`), derived from the material you just wrote — this is used later by `/explain` and `/recap`.
 
-8. `git add -A && git commit -m "Generate day <D> (week <W>, month <N>)"`.
+8. Run `python3 scripts/validate_state.py`. If it reports errors, stop and fix the write before committing.
+
+9. `git add -A && git commit -m "Generate day <D> (week <W>, month <N>)"`.

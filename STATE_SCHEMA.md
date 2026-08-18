@@ -1,10 +1,20 @@
 # STATE_SCHEMA.md
 
-This is the **single source of truth** for the shape of `state.json`. Every
-skill in `.claude/skills/` and every agent in `.claude/agents/` must read and
-write `state.json` strictly according to this schema. Do not invent new
-top-level fields in a skill/agent — if a field is missing here, add it here
-first, then use it everywhere consistently.
+This is the canonical **human-readable** definition of the shape of
+`state.json`, plus the rules that a JSON Schema alone can't express (which
+fields are computed live vs. stored, the "exactly one current day"
+invariant, etc.). Every skill in `.claude/skills/` and every agent in
+`.claude/agents/` must read and write `state.json` strictly according to
+this file. Do not invent new top-level fields in a skill/agent — if a field
+is missing here, add it here first, then use it everywhere consistently.
+
+**This is no longer just a convention.** `state.schema.json` at the project
+root is the machine-enforced counterpart of this file, checked by
+`scripts/validate_state.py` and gated on every commit by
+`.githooks/pre-commit`. Any invented or mistyped field, wrong enum value, or
+missing required field in `state.json` gets **rejected at commit time**, not
+just flagged by a reader of this doc. If you change the shape here, change
+`state.schema.json` to match — they must stay in sync.
 
 ## Top-level shape
 
@@ -175,3 +185,7 @@ the throughline, but uses `state.json` only to know which month number is
    same logic: advance `current_day`, and if the resulting day's `status` is
    `rest`, keep advancing until a non-rest day is reached (marking each
    skipped rest day's status unchanged — it's already `rest`, not `done`).
+5. Any skill that writes `state.json` runs `python3 scripts/validate_state.py`
+   before committing, and stops (fixes the write, doesn't force the commit)
+   if it reports errors. `.githooks/pre-commit` enforces this regardless, but
+   checking proactively gives a clearer, closer-to-the-cause error message.
