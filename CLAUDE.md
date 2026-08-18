@@ -25,11 +25,14 @@ individual skills improvise their own fields.
 ```
 CLAUDE.md
 STATE_SCHEMA.md
-.claude/skills/{month,skip-to,i-am-in,done,progress,micro-project,for-read}/SKILL.md
+.claude/skills/{month,skip-to,i-am-in,done,progress,micro-project,for-read,
+                review,explain,pace,final-project-check,confused,recap}/SKILL.md
 .claude/agents/{video-researcher,reading-researcher,code-evaluator}.md
 .gitignore
 progress.md                 <- human-readable log, across all months
-growth-notes.md             <- created by code-evaluator on its first run
+growth-notes.md             <- code-style patterns, written by code-evaluator
+struggle-log.md             <- conceptual/quiz struggle patterns, written by /done
+project-history.md          <- how each month's final project connects to the next
 state.json                  <- machine-readable state (see STATE_SCHEMA.md)
 month_<N>/
   final_project/
@@ -45,6 +48,7 @@ month_<N>/
       code_review.md         <- written by code-evaluator, non-blocking
       further_reading.md     <- appended to by /for-read
       flagged_questions.md   <- written by /done's escape hatch, if used
+      confusion_notes.md     <- appended to by /confused
       micro_projects/
         <slug>/
           brief.md
@@ -69,3 +73,10 @@ month_<N>/
 - Subagents (`.claude/agents/`) handle research and code review so the
   skills themselves stay focused on orchestration/state, not doing that work
   inline.
+- **Some values are computed live, never stored** (study streaks, pace
+  projections) — see `STATE_SCHEMA.md`'s "deliberately NOT stored" section.
+  This keeps `state.json` from holding numbers that could drift out of sync
+  with reality.
+- **Self-reported data (time spent, confusion notes) is never invented.**
+  If the user doesn't give a number/note, the field stays `null`/empty
+  rather than being estimated on their behalf.

@@ -14,6 +14,7 @@ first, then use it everywhere consistently.
   "current_day": 7,
   "months": {
     "1": {
+      "started": "ISO date, set when /month first creates this month",
       "weeks": {
         "1": {
           "done_when": "string, the week's own success criteria from the source doc",
@@ -25,6 +26,20 @@ first, then use it everywhere consistently.
               "label": "e.g. 'Day 1' or 'Rest Day'",
               "status": "pending | current | done | rest",
               "has_flags": false,
+              "topic": "short human-readable topic label, e.g. 'gradient descent'",
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [
+                {
+                  "note": "string, the user's own words",
+                  "date": "ISO date"
+                }
+              ],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
               "micro_projects": [
                 {
                   "slug": "kebab-case-folder-name",
@@ -74,6 +89,50 @@ first, then use it everywhere consistently.
 - **...days.<D>.micro_projects**: array, populated by `/micro-project`. Each
   entry has `slug` (matches the folder name under `micro_projects/`), `name`,
   `status` (`in_progress` or `done`), and `created` (ISO date string).
+- **months.<N>.started** (ISO date string): set once, when `/month` first
+  creates month `N`. Used by `/pace` to project a finish date from the
+  completion rate so far. Never edited after creation.
+- **...days.<D>.topic** (string): a short human-readable label for the day's
+  core topic, set by `/i-am-in` when it generates the day's content (derived
+  from the source plan / the material it wrote). Used by `/explain <concept>`
+  to find which past day(s) a concept belongs to, and by `/recap` to
+  summarize a week in plain language.
+- **...days.<D>.time_spent_minutes** (int or `null`): self-reported by the
+  user during `/done`. Stays `null` if they don't say, or if a day is not
+  yet done. Never guessed or estimated by Claude.
+- **...days.<D>.expected_minutes** (int or `null`): only set if the source
+  plan itself states an expected duration for the day; otherwise stays
+  `null` and `/progress`/`/pace` simply omit the comparison for that day
+  rather than inventing a number.
+- **...days.<D>.confidence** (`"strong" | "shaky" | "struggled" | null`): set
+  by `/done` right after the quiz, from how it went — few/no re-asks and no
+  flags is `"strong"`, some re-asks or one flag is `"shaky"`, repeated
+  re-asks or multiple flags is `"struggled"`. `null` until the day is done.
+  Used by `/review` to weight which days' questions resurface first.
+- **...days.<D>.confusion_notes**: array of `{note, date}`, appended to by
+  `/confused`. Never cleared automatically — these are meant to persist as a
+  record and to feed `/review`, not to be marked "resolved" implicitly.
+- **...days.<D>.review_history**: `{last_reviewed, times_reviewed}`, updated
+  by `/review` each time it actually pulls and re-asks a question from that
+  day. `last_reviewed` is an ISO date or `null` if never reviewed;
+  `times_reviewed` starts at `0`.
+
+## Fields that are deliberately NOT stored (computed live instead)
+
+To avoid two sources of truth drifting apart, the following are always
+**derived at read time**, never written to `state.json`:
+
+- **Study streak** (consecutive study days completed, excluding rest days):
+  computed by `/progress` and `/recap` by scanning backward from the most
+  recently **completed** day (i.e. skip past today's `current` day if it
+  isn't done yet — an in-progress day should never zero out the streak),
+  counting consecutive `done` days and passing over `rest` days without
+  breaking the count, stopping at the first non-`done`, non-`rest` day. Not
+  stored as a counter that could go stale.
+- **Pace / projected finish date**: computed by `/pace` from
+  `months.<N>.started`, today's date, and the ratio of days marked `done`
+  vs. total real (non-rest) days in the month so far. Recomputed fresh every
+  time `/pace` runs.
 
 ## What growth-notes.md needs from state.json
 
@@ -84,6 +143,26 @@ correctly. It gets the day identity (`month N, day D`) from the invoking
 skill (`/done` or `/micro-project`), not by re-deriving it from `state.json`
 itself — the invoking skill passes `current_month` / `current_day` (and the
 micro-project slug, if applicable) into the agent's prompt.
+
+## What struggle-log.md needs from state.json
+
+Unlike `growth-notes.md` (code style, written by `code-evaluator`),
+`struggle-log.md` tracks **conceptual** sticking points from quiz
+performance and gets updated directly by `/done` (no subagent needed — it's
+reading its own quiz transcript, not external code). It follows the same
+non-overclaiming rule as `growth-notes.md`: a topic-level struggle is only
+written up as a pattern once it has shown up on 3+ separate days; below that
+it's logged as a plain single-day observation. `/done` identifies the day via
+`current_month`/`current_day` and the day's `topic` field, the same way
+`code-evaluator` does for `growth-notes.md`.
+
+## What project-history.md needs from state.json
+
+`project-history.md` (root) is updated by `/month` whenever it creates a new
+month's `final_project/structure.md`. It reads the previous month's
+`final_project/structure.md` (on disk, not from `state.json`) to describe
+the throughline, but uses `state.json` only to know which month number is
+"previous" (`current_month` before it's bumped to `N`).
 
 ## Rules for all skills/agents
 

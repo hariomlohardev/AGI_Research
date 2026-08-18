@@ -27,6 +27,6 @@ description: Generate today's study materials (learning resources, coding proble
 
 6. If today's tasks introduce a new dependency, add it to `requirements.txt`.
 
-7. Update `state.json`: this day's entry stays `status: "current"` (unchanged — generating content doesn't mark it done, `/done` does).
+7. Update `state.json`: this day's entry stays `status: "current"` (unchanged — generating content doesn't mark it done, `/done` does). Set its `topic` field to a short human-readable label for today's core topic (e.g. `"gradient descent"`), derived from the material you just wrote — this is used later by `/explain` and `/recap`.
 
 8. `git add -A && git commit -m "Generate day <D> (week <W>, month <N>)"`.
