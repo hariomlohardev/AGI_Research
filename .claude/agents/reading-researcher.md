@@ -1,6 +1,6 @@
 ---
 name: reading-researcher
-description: Finds supplementary reading (articles, papers, explainers) on a given learning topic, distinct from video-researcher. Use automatically from /for-read whenever the user wants deeper/additional reading on the current day's topic.
+description: Finds supplementary reading (articles, papers, explainers) on a given learning topic, distinct from video-researcher. Purely opt-in — only used when the user explicitly runs /for-read, never bundled automatically into /i-am-in's base day generation in either guided or challenge mode.
 tools: WebSearch, WebFetch
 model: sonnet
 ---

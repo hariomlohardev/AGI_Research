@@ -20,4 +20,6 @@ description: Find supplementary reading (articles, papers, explainers) on the cu
 
 4. This can be run any number of times per day. Each run adds a new dated section rather than replacing the last.
 
-5. `git add -A && git commit -m "Add further reading for day <D>"`.
+5. This is **entirely optional** — reading material is never a requirement to run `/done` or mark a day complete, in either `guided` or `challenge` mode. It's just something to reach for whenever the user wants more depth.
+
+6. `git add -A && git commit -m "Add further reading for day <D>"`.

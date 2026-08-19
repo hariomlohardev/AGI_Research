@@ -36,6 +36,7 @@ just flagged by a reader of this doc. If you change the shape here, change
               "label": "e.g. 'Day 1' or 'Rest Day'",
               "status": "pending | current | done | rest",
               "has_flags": false,
+              "mode": "guided | challenge — set at month creation, may be switched to 'challenge' by /i-am-in",
               "topic": "short human-readable topic label, e.g. 'gradient descent'",
               "time_spent_minutes": null,
               "expected_minutes": null,
@@ -96,6 +97,22 @@ just flagged by a reader of this doc. If you change the shape here, change
 - **...days.<D>.has_flags** (bool): set `true` by `/done` if any quiz
   questions were flagged/skipped that day (see the escape-hatch behavior in
   `/done`). Read by `/progress` and noted in `progress.md`.
+- **...days.<D>.mode** (`"guided" | "challenge"`): defaults to `"guided"`,
+  set by `/month` at creation. Controls how `/i-am-in` generates the day:
+  - `"guided"` (base/default): `/i-am-in` delegates to `video-researcher`
+    and includes real video links in `learn.md`, aiming for **at least two**
+    strong videos, not just one.
+  - `"challenge"`: triggered when the user includes something like
+    "challenge me" in `/i-am-in`'s `$ARGUMENTS`. `/i-am-in` does **not**
+    call `video-researcher` and `learn.md` contains only the topic name and
+    a short framing line — no resource links at all. The user finds and
+    learns the material themselves.
+  - Either way, supplementary reading via `reading-researcher`/`/for-read`
+    stays **optional and separate** — it's never bundled into the base day
+    generation in either mode, only pulled in when the user explicitly runs
+    `/for-read`.
+  - Set once when `/i-am-in` actually generates the day (not editable
+    afterward without regenerating).
 - **...days.<D>.micro_projects**: array, populated by `/micro-project`. Each
   entry has `slug` (matches the folder name under `micro_projects/`), `name`,
   `status` (`in_progress` or `done`), and `created` (ISO date string).

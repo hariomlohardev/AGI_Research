@@ -13,7 +13,7 @@ Read-only. Makes no changes to any file.
 
 2. Read `state.json` and report:
    - Current month and current `(week, day)`.
-   - A done/pending/rest overview of every day in the current month, in order (e.g. `Week 1: Day 1 done, Day 2 done, Day 3 rest, Day 4 current, Day 5 pending`). Include each done day's `confidence` where set.
+   - A done/pending/rest overview of every day in the current month, in order (e.g. `Week 1: Day 1 done, Day 2 done, Day 3 rest, Day 4 current, Day 5 pending`). Include each done day's `confidence` where set. For any day that's been generated (has a `topic`), note its `mode` if it's `"challenge"` — guided is the default and doesn't need calling out, but a challenge day is worth flagging.
    - Each week's `review_status`.
    - For any day with `has_flags: true`, note it has flagged questions pending review.
    - For any day with non-empty `confusion_notes`, note it has open confusion notes.

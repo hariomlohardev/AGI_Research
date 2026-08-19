@@ -50,7 +50,7 @@
     "day": {
       "type": "object",
       "required": [
-        "day_in_week", "global_day", "label", "status", "has_flags",
+        "day_in_week", "global_day", "label", "status", "has_flags", "mode",
         "topic", "time_spent_minutes", "expected_minutes", "confidence",
         "confusion_notes", "review_history", "micro_projects"
       ],
@@ -61,6 +61,7 @@
         "label": { "type": "string" },
         "status": { "enum": ["pending", "current", "done", "rest"] },
         "has_flags": { "type": "boolean" },
+        "mode": { "enum": ["guided", "challenge"] },
         "topic": { "type": ["string", "null"] },
         "time_spent_minutes": { "type": ["integer", "null"], "minimum": 0 },
         "expected_minutes": { "type": ["integer", "null"], "minimum": 0 },
