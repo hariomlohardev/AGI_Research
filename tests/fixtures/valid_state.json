@@ -1,0 +1,88 @@
+{
+  "schema_version": 2,
+  "current_month": 1,
+  "current_day": 2,
+  "badges_unlocked": [
+    {
+      "id": "first-day-done",
+      "date": "2026-08-01"
+    }
+  ],
+  "months": {
+    "1": {
+      "started": "2026-08-01",
+      "language": "python",
+      "skill_level": "intermediate",
+      "test_command": null,
+      "weeks": {
+        "1": {
+          "done_when": "Can explain and implement gradient descent from scratch.",
+          "review_status": "pending",
+          "days": {
+            "1": {
+              "day_in_week": 1,
+              "global_day": 1,
+              "label": "Day 1",
+              "status": "done",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": "linear regression",
+              "tags": [
+                "math-heavy"
+              ],
+              "difficulty": "medium",
+              "time_spent_minutes": 90,
+              "expected_minutes": 60,
+              "confidence": "strong",
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "micro_projects": [
+                {
+                  "slug": "lr-demo",
+                  "name": "Linear regression demo",
+                  "status": "done",
+                  "created": "2026-08-01"
+                }
+              ],
+              "github_contribution": null
+            },
+            "2": {
+              "day_in_week": 2,
+              "global_day": 2,
+              "label": "Day 2",
+              "status": "current",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "micro_projects": [],
+              "github_contribution": null
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -20,6 +20,6 @@ description: On-demand deep dive into a concept from any past (or current) day, 
 4. **If the existing material is thin, or the user is asking for "more" / a different angle**, delegate to the `reading-researcher` subagent (and `video-researcher` too, if the user wants video) for fresh supplementary resources on this specific concept. Never fabricate a source.
    - Append any new resources found to that day's `further_reading.md` (same file `/for-read` uses — create it if missing, otherwise append a new dated section), noting it was triggered by `/explain`. If the concept isn't tied to any existing day, skip this file-write step and just answer conversationally.
 
-5. This command doesn't change quiz/confidence state — it's informational. If it surfaces that this concept has been a recurring point of confusion, mention that the user might want to run `/review` on it, but don't take that action automatically.
+5. This command doesn't change quiz/confidence state — it's informational. If it surfaces that this concept has been a recurring point of confusion, mention that the user might want to run `/spaced-review` on it, but don't take that action automatically.
 
 6. If any files were written, `git add -A && git commit -m "Explain: <concept>"`. If nothing was written (pure conversational answer), skip the commit.

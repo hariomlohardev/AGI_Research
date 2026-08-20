@@ -2,11 +2,16 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$comment": "Machine-enforced counterpart to STATE_SCHEMA.md. Any change here must also be reflected there, and vice versa. Validated by scripts/validate_state.py (no external dependencies required) and gated by the .githooks/pre-commit hook on any commit that touches state.json.",
   "type": "object",
-  "required": ["current_month", "current_day", "months"],
+  "required": ["schema_version", "current_month", "current_day", "badges_unlocked", "months"],
   "additionalProperties": false,
   "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
     "current_month": { "type": "integer" },
     "current_day": { "type": "integer" },
+    "badges_unlocked": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/badge" }
+    },
     "months": {
       "type": "object",
       "additionalProperties": false,
@@ -16,12 +21,24 @@
     }
   },
   "definitions": {
+    "badge": {
+      "type": "object",
+      "required": ["id", "date"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" }
+      }
+    },
     "month": {
       "type": "object",
-      "required": ["started", "weeks"],
+      "required": ["started", "language", "skill_level", "test_command", "weeks"],
       "additionalProperties": false,
       "properties": {
         "started": { "type": "string" },
+        "language": { "enum": ["python", "javascript", "typescript", "other"] },
+        "skill_level": { "enum": ["beginner", "intermediate", "advanced"] },
+        "test_command": { "type": ["string", "null"] },
         "weeks": {
           "type": "object",
           "additionalProperties": false,
@@ -51,8 +68,9 @@
       "type": "object",
       "required": [
         "day_in_week", "global_day", "label", "status", "has_flags", "mode",
-        "topic", "time_spent_minutes", "expected_minutes", "confidence",
-        "confusion_notes", "review_history", "micro_projects"
+        "topic", "tags", "difficulty", "time_spent_minutes", "expected_minutes",
+        "confidence", "confusion_notes", "review_history", "srs",
+        "github_contribution", "micro_projects"
       ],
       "additionalProperties": false,
       "properties": {
@@ -63,6 +81,11 @@
         "has_flags": { "type": "boolean" },
         "mode": { "enum": ["guided", "challenge"] },
         "topic": { "type": ["string", "null"] },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "difficulty": { "enum": ["easy", "medium", "hard", null] },
         "time_spent_minutes": { "type": ["integer", "null"], "minimum": 0 },
         "expected_minutes": { "type": ["integer", "null"], "minimum": 0 },
         "confidence": { "enum": ["strong", "shaky", "struggled", null] },
@@ -71,10 +94,24 @@
           "items": { "$ref": "#/definitions/confusion_note" }
         },
         "review_history": { "$ref": "#/definitions/review_history" },
+        "srs": { "$ref": "#/definitions/srs" },
+        "github_contribution": { "$ref": "#/definitions/github_contribution" },
         "micro_projects": {
           "type": "array",
           "items": { "$ref": "#/definitions/micro_project" }
         }
+      }
+    },
+    "github_contribution": {
+      "type": ["object", "null"],
+      "required": ["status", "repo", "issue_url", "issue_title", "pr_url"],
+      "additionalProperties": false,
+      "properties": {
+        "status": { "enum": ["in_progress", "pr_submitted", "reviewed"] },
+        "repo": { "type": "string" },
+        "issue_url": { "type": "string" },
+        "issue_title": { "type": "string" },
+        "pr_url": { "type": ["string", "null"] }
       }
     },
     "confusion_note": {
@@ -93,6 +130,16 @@
       "properties": {
         "last_reviewed": { "type": ["string", "null"] },
         "times_reviewed": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "srs": {
+      "type": "object",
+      "required": ["ease_factor", "interval_days", "next_review_due"],
+      "additionalProperties": false,
+      "properties": {
+        "ease_factor": { "type": "number", "minimum": 1.3 },
+        "interval_days": { "type": "integer", "minimum": 1 },
+        "next_review_due": { "type": ["string", "null"] }
       }
     },
     "micro_project": {

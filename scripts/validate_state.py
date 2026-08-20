@@ -25,9 +25,9 @@ SCHEMA_PATH = ROOT / "state.schema.json"
 
 # ---------------------------------------------------------------------------
 # Minimal structural validator: supports exactly the JSON Schema subset used
-# in state.schema.json (type incl. nullable, enum, object/array, required,
-# properties, additionalProperties: false, patternProperties, items,
-# minimum, and local $ref into #/definitions/<name>).
+# in state.schema.json (type incl. nullable, enum, object/array, integer,
+# number, required, properties, additionalProperties: false,
+# patternProperties, items, minimum, and local $ref into #/definitions/<name>).
 # ---------------------------------------------------------------------------
 
 def resolve_ref(ref, schema_root):
@@ -45,6 +45,8 @@ def check_type(value, t):
         return isinstance(value, str)
     if t == "integer":
         return isinstance(value, int) and not isinstance(value, bool)
+    if t == "number":
+        return isinstance(value, (int, float)) and not isinstance(value, bool)
     if t == "boolean":
         return isinstance(value, bool)
     if t == "object":
@@ -73,7 +75,7 @@ def validate(instance, schema, schema_root, path="state"):
         if instance not in schema["enum"]:
             errors.append(f"{path}: value {instance!r} not in allowed enum {schema['enum']}")
 
-    if "minimum" in schema and isinstance(instance, int) and not isinstance(instance, bool):
+    if "minimum" in schema and isinstance(instance, (int, float)) and not isinstance(instance, bool):
         if instance < schema["minimum"]:
             errors.append(f"{path}: value {instance} is below minimum {schema['minimum']}")
 

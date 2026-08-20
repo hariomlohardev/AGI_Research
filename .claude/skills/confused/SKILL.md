@@ -1,6 +1,6 @@
 ---
 name: confused
-description: Log a confusion note against the current day for durable tracking, so it resurfaces later in /review. Use when the user invokes /confused with a note about what's unclear.
+description: Log a confusion note against the current day for durable tracking, so it resurfaces later in /spaced-review. Use when the user invokes /confused with a note about what's unclear.
 ---
 
 # /confused
@@ -15,7 +15,7 @@ description: Log a confusion note against the current day for durable tracking, 
 
 3. Append the same note (with date) to `day_<D>/confusion_notes.md`, creating it with a short header if it doesn't exist yet.
 
-4. Optionally, if you can give a quick, accurate clarifying answer right now from the day's own materials (`learn.md`, etc.), do so — but don't treat that as "resolving" the note. The note stays logged regardless, since the primary job here is durable tracking for `/review`, not necessarily fixing it in the moment.
+4. Optionally, if you can give a quick, accurate clarifying answer right now from the day's own materials (`learn.md`, etc.), do so — but don't treat that as "resolving" the note. The note stays logged regardless, since the primary job here is durable tracking for `/spaced-review`, not necessarily fixing it in the moment.
 
 5. Run `python3 scripts/validate_state.py`. If it reports errors, stop and fix the write before committing.
 
