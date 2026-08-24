@@ -1,8 +1,17 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 7,
-  "badges_unlocked": [],
+  "current_day": 8,
+  "badges_unlocked": [
+    {
+      "id": "first-day-done",
+      "date": "2026-08-24"
+    },
+    {
+      "id": "five-day-streak",
+      "date": "2026-08-24"
+    }
+  ],
   "months": {
     "2": {
       "started": "2026-08-24",
@@ -180,15 +189,15 @@
               "day_in_week": 1,
               "global_day": 7,
               "label": "Day 1",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "Maximum Likelihood Estimation (MLE)",
               "tags": ["math-heavy", "coding-heavy"],
-              "difficulty": null,
-              "time_spent_minutes": null,
+              "difficulty": "medium",
+              "time_spent_minutes": 150,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "strong",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -206,7 +215,7 @@
               "day_in_week": 2,
               "global_day": 8,
               "label": "Day 2",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

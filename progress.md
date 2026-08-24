@@ -13,7 +13,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 ## Month 2 — Probability, Information Theory & Classical ML From Scratch
 - **Started:** 2026-08-24
 - **Language:** `python` · **Skill level:** `intermediate` · **Test command:** `pytest` (default)
-- **Current:** Month 2, Day 7 (Week 2 Day 1 — `current`) — fast-forwarded via `/skip-to day 7`; Week 1 (Days 1–6) marked `done`
+- **Current:** Month 2, Day 8 (Week 2 Day 2 — `current`)
 - **Source plan:** `D:\Roadmap\firefox\months\month-2-detailed.md`
 
 ### Weeks & days
@@ -29,8 +29,8 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 
 **Week 2 — Maximum Likelihood, MAP & Information Theory** — `review_status: pending`
 - Done when: Learn how models actually learn parameters from data (MLE/MAP), then learn the mathematical vocabulary of "surprise" and "difference between distributions" (entropy, cross-entropy, KL divergence) — this is the exact math behind every loss function you'll use for the rest of this roadmap.
-- Day 1 (global 7) — **current** — Maximum Likelihood Estimation (MLE)
-- Day 2 (global 8) — pending — MAP Estimation & Priors
+- Day 1 (global 7) — **done** — Maximum Likelihood Estimation (MLE) — confidence: `strong`, difficulty: `medium`, time: 150m
+- Day 2 (global 8) — **current** — MAP Estimation & Priors
 - Day 3 (global 9) — pending — Shannon Entropy
 - Day 4 (global 10) — pending — Cross-Entropy & KL Divergence
 - Day 5 (global 11) — pending — Mutual Information

@@ -29,4 +29,24 @@ def log_likelihood(data: Sequence[float], mu: float, sigma: float) -> float:
         >>> log_likelihood([0, 1, 2], mu=1.0, sigma=1.0)  # doctest: +SKIP
         -3.75...  # compute by hand to verify
     """
-    raise NotImplementedError
+    
+    # type checking 
+    if sigma <= 0 :
+        raise ValueError("sigma cant be lessthan or equal to 0")
+    if len(data) <= 0:
+        raise ValueError("data is empy")
+
+
+    output = 0
+    std = sigma ** 2
+    fst  = -0.5 * math.log(2*math.pi*std)
+    for i in range(len(data)):
+        scd  = -((data[i] - mu) ** 2 / (2 * (std)))
+        result  = fst + scd
+        output += result
+
+    return output
+
+
+if __name__ == "__main__":
+    print(log_likelihood(data=[0,1,2], mu=1, sigma=1))

@@ -9,7 +9,7 @@ Implement without scipy.stats / sklearn.
 from __future__ import annotations
 
 from typing import Sequence, Tuple
-
+from log_likelihood import log_likelihood
 
 def mle_fit_gaussian_closed_form(data: Sequence[float]) -> Tuple[float, float]:
     """Return (mu_hat, sigma_hat) via closed-form MLE.
@@ -30,7 +30,14 @@ def mle_fit_gaussian_closed_form(data: Sequence[float]) -> Tuple[float, float]:
     Raises:
         ValueError: if data is empty.
     """
-    raise NotImplementedError
+    if len(data) <= 0:
+        raise ValueError("data is empty.")
+
+    mu_hat = sum(data)/ len(data)
+    var = sum([(x - mu_hat)**2 for x in data])/len(data)
+    sigma_hat = var ** (0.5)
+
+    return (mu_hat, sigma_hat)
 
 
 def mle_fit_gaussian_grid(
@@ -54,7 +61,33 @@ def mle_fit_gaussian_grid(
     Returns:
         (mu_hat, sigma_hat) of the best grid point.
     """
-    raise NotImplementedError
+    mu_hat = 0
+    sigma_hat = sigma_range[0]
+    mu_log_likehd = float('-inf')
+    step = (mu_range[1] - mu_range[0])/ steps
+    for i in range(steps):
+        cureent_mu = mu_range[0] + (i * step)
+        log_likehd = log_likelihood(data , cureent_mu ,sigma_hat )
+        if mu_log_likehd < log_likehd:
+            mu_log_likehd = log_likehd
+            mu_hat = cureent_mu
+
+    step = (sigma_range[1] - sigma_range[0])/ steps
+    sigma_log_likehd = float('-inf')
+    for i in range(steps):
+        cureent_sigma = sigma_range[0] + (i * step)
+        log_likehd = log_likelihood(data , mu_hat ,cureent_sigma )
+        if sigma_log_likehd < log_likehd:
+            sigma_log_likehd = log_likehd
+            sigma_hat = cureent_sigma
+
+    return (mu_hat ,sigma_hat)
+        
+
+
+
+
+    # raise NotImplementedError
 
 
 # Backwards-compatible alias — some tests/solutions expose a single entry point.
@@ -65,3 +98,9 @@ def mle_fit_gaussian(data: Sequence[float]) -> Tuple[float, float]:
     wording usable without forcing a grid search.
     """
     return mle_fit_gaussian_closed_form(data)
+
+
+
+if __name__ == "__main__":
+    print(mle_fit_gaussian_closed_form([1,2,3,4,5,6,6]))
+    print(mle_fit_gaussian_grid([1,2,3,4,5,6,6], (1, 5) , (1,5) ,steps=5000))
