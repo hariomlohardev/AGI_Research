@@ -1,0 +1,664 @@
+{
+  "schema_version": 2,
+  "current_month": 2,
+  "current_day": 1,
+  "badges_unlocked": [],
+  "months": {
+    "2": {
+      "started": "2026-08-24",
+      "language": "python",
+      "skill_level": "intermediate",
+      "test_command": null,
+      "weeks": {
+        "1": {
+          "done_when": "Bayes' theorem is the single most important idea in this week — everything else (Naive Bayes, MLE, MAP, even how LLMs sample the next token) traces back to it. By the end of this week you should be able to derive Bayes' theorem from scratch, on paper, without looking it up.",
+          "review_status": "pending",
+          "days": {
+            "1": {
+              "day_in_week": 1,
+              "global_day": 1,
+              "label": "Day 1",
+              "status": "current",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "2": {
+              "day_in_week": 2,
+              "global_day": 2,
+              "label": "Day 2",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "3": {
+              "day_in_week": 3,
+              "global_day": 3,
+              "label": "Day 3",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "4": {
+              "day_in_week": 4,
+              "global_day": 4,
+              "label": "Day 4",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "5": {
+              "day_in_week": 5,
+              "global_day": 5,
+              "label": "Day 5",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "6": {
+              "day_in_week": 6,
+              "global_day": 6,
+              "label": "Day 6",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            }
+          }
+        },
+        "2": {
+          "done_when": "Learn how models actually learn parameters from data (MLE/MAP), then learn the mathematical vocabulary of \"surprise\" and \"difference between distributions\" (entropy, cross-entropy, KL divergence) — this is the exact math behind every loss function you'll use for the rest of this roadmap.",
+          "review_status": "pending",
+          "days": {
+            "1": {
+              "day_in_week": 1,
+              "global_day": 7,
+              "label": "Day 1",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "2": {
+              "day_in_week": 2,
+              "global_day": 8,
+              "label": "Day 2",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "3": {
+              "day_in_week": 3,
+              "global_day": 9,
+              "label": "Day 3",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "4": {
+              "day_in_week": 4,
+              "global_day": 10,
+              "label": "Day 4",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "5": {
+              "day_in_week": 5,
+              "global_day": 11,
+              "label": "Day 5",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "6": {
+              "day_in_week": 6,
+              "global_day": 12,
+              "label": "Day 6",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            }
+          }
+        },
+        "3": {
+          "done_when": "Build the algorithms that ran the world before deep learning — and understand that they're not \"outdated,\" they're still the right tool for a huge fraction of real-world problems (tabular data, small datasets, interpretability requirements).",
+          "review_status": "pending",
+          "days": {
+            "1": {
+              "day_in_week": 1,
+              "global_day": 13,
+              "label": "Day 1",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "2": {
+              "day_in_week": 2,
+              "global_day": 14,
+              "label": "Day 2",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "3": {
+              "day_in_week": 3,
+              "global_day": 15,
+              "label": "Day 3",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "4": {
+              "day_in_week": 4,
+              "global_day": 16,
+              "label": "Day 4",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "5": {
+              "day_in_week": 5,
+              "global_day": 17,
+              "label": "Day 5",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "6": {
+              "day_in_week": 6,
+              "global_day": 18,
+              "label": "Day 6",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            }
+          }
+        },
+        "4": {
+          "done_when": "Stop writing isolated scripts. Package everything from Weeks 1–3 into one real, reusable, tested library — and use it on a genuine dataset the way you'd use sklearn.",
+          "review_status": "pending",
+          "days": {
+            "1": {
+              "day_in_week": 1,
+              "global_day": 19,
+              "label": "Day 1",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "2": {
+              "day_in_week": 2,
+              "global_day": 20,
+              "label": "Day 2",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "3": {
+              "day_in_week": 3,
+              "global_day": 21,
+              "label": "Day 3",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "4": {
+              "day_in_week": 4,
+              "global_day": 22,
+              "label": "Day 4",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "5": {
+              "day_in_week": 5,
+              "global_day": 23,
+              "label": "Day 5",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            },
+            "6": {
+              "day_in_week": 6,
+              "global_day": 24,
+              "label": "Day 6",
+              "status": "pending",
+              "has_flags": false,
+              "mode": "guided",
+              "topic": null,
+              "tags": [],
+              "difficulty": null,
+              "time_spent_minutes": null,
+              "expected_minutes": null,
+              "confidence": null,
+              "confusion_notes": [],
+              "review_history": {
+                "last_reviewed": null,
+                "times_reviewed": 0
+              },
+              "srs": {
+                "ease_factor": 2.5,
+                "interval_days": 1,
+                "next_review_due": null
+              },
+              "github_contribution": null,
+              "micro_projects": []
+            }
+          }
+        }
+      }
+    }
+  }
+}
