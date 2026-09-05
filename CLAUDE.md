@@ -114,6 +114,7 @@ tests/test_validate_state.py <- pytest suite locking in validator behavior
 tests/fixtures/               <- valid/invalid state.json fixtures for the tests above
 .github/workflows/ci.yml     <- runs validation + tests automatically on push
 .githooks/pre-commit         <- blocks commits with invalid state.json
+.githooks/commit-msg         <- strips AI-attribution trailers from commit messages
 .claude/skills/{month,skip-to,i-am-in,done,progress,micro-project,for-read,
                 spaced-review,explain,pace,final-project-check,confused,
                 week-recap,yt-video-ai,learning-stats,safe-revert,

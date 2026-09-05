@@ -1,0 +1,26 @@
+#!/bin/sh
+# Strips AI-attribution trailers out of commit messages before they land.
+#
+# Activated via `git config core.hooksPath .githooks` (same setup step that
+# activates pre-commit). Runs on every commit, including `git commit -m`.
+#
+# Removes:
+#   - "Co-Authored-By: Claude <...>" / any Claude/Anthropic co-author trailer
+#   - "🤖 Generated with [Claude Code](...)" advertising lines
+# Human co-author trailers are left alone on purpose.
+
+MSG_FILE="$1"
+[ -f "$MSG_FILE" ] || exit 0
+
+TMP="$MSG_FILE.strip.$$"
+
+sed -E \
+    -e '/^[[:space:]]*Co-[Aa]uthored-[Bb]y:.*([Cc]laude|[Aa]nthropic).*$/d' \
+    -e '/[Gg]enerated with .*[Cc]laude [Cc]ode/d' \
+    "$MSG_FILE" > "$TMP" || { rm -f "$TMP"; exit 0; }
+
+# Collapse any trailing blank lines the deletions left behind.
+sed -e :a -e '/^\n*$/{$d;N;};/\n$/ba' "$TMP" > "$MSG_FILE"
+rm -f "$TMP"
+
+exit 0
