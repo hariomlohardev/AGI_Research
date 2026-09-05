@@ -34,3 +34,36 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
 
 **Today's artefacts:** `month_2/week_2/day_2/{learn,roadmap,coding_problems}.md`, `code/map_fit_gaussian.py`, `code/log_likelihood.py` (clean copy for independence), `code/tests/` (13 tests: prior/posterior + MAP), videos via verified oEmbed (mathematicalmonk MAP, Brunton MAP, StatQuest Ridge).
 
+---
+
+## 2026-09-05 — Day 8 done: MAP Estimation & Priors (global Day 8, Week 2 Day 2)
+
+- **Result:** 13/13 tests passed. `log_prior_gaussian`, `log_posterior`,
+  `map_fit_gaussian_closed_form` (precision-weighted average) and `map_fit_gaussian_grid`
+  (2-D grid over the posterior) all implemented. The `__main__` experiments print the
+  3-point outlier demo (`mu_mle = 8.0` vs `mu_map = 6.545` with prior `N(0,1)`) and the
+  prior-strength sweep, which climbs `0.135 -> 4.882` as `prior_sigma` tightens `10 -> 0.03`.
+- **Confidence:** `struggled` — the quiz needed three rounds. Q3's precision arithmetic was
+  right first time, but `lambda = 1/(2 tau^2)` lost its factor of 2, the flat-prior argument
+  reached for `tau -> infinity` instead of a uniform prior's constant density, the derivative of
+  `|z|` came out as `mu`, and the joint-vs-conditional sigma question went unanswered until it was
+  decomposed. All five were correct by round three. No flags. Difficulty `hard`
+  (self-reported: math in `learn.md` was the hard part); time not given.
+- **Bugs found and fixed in the day's own test suite:** two assertions were unreachable with a
+  correct implementation — `test_prior_sweep_monotonic`'s endpoint expected `mu_map ~= 5.0` at
+  `prior_sigma=0.5` when the data's precision `n/sigma^2 ~= 27.6` makes that impossible (needs
+  `tau <= 0.084`), and `test_closed_form_strong_prior_approaches_prior` used a seed whose sample
+  variance is 0.36, not 1. Both corrected, plus the matching over-claim in `coding_problems.md`.
+  Worth remembering for Week 4: **a tolerance that passes is not the same as a tolerance that
+  tests something**, and `sklearn` comparisons will need the same scrutiny.
+- **The number that mattered today:** `m = sigma^2/tau^2` — the prior expressed as a count of
+  pseudo-observations. For `data=[0.5,-0.3,0.2]` at `prior_sigma=0.5` it is **0.436**, less than
+  half a data point against 3 real ones. This is the quantity Week 3's Ridge `lambda` and Week 4's
+  `prior_strength` hyper-parameter are really tuning.
+- **Advances to:** Day 9 (global 9) — Shannon Entropy (`/i-am-in` next).
+- **Badge unlocked today:** `comeback` (Day 7 closed 2026-08-24, Day 8 closed 2026-09-05 — a
+  12-day gap, well past the 3-day threshold).
+- **Code review:** `month_2/week_2/day_2/code_review.md` (12 items, all style; bare `raise
+  ValueError` x4, `np.arange` excluding the endpoint the docstring promises, dead `n = len(data)`).
+  Written inline — the `code-evaluator` subagent failed twice with a 403 auth error.
+  `growth-notes.md` updated; three categories now stand at 2 days each, one short of promotion.

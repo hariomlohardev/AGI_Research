@@ -61,9 +61,11 @@ def test_closed_form_weak_prior_approaches_mle():
 def test_closed_form_strong_prior_approaches_prior():
     data = _synthetic_gaussian(0.0, 1.0, n=10, seed=11)
     prior_mu = 5.0
-    # Very strong prior — tiny sigma — should be near prior
-    mu_map_strong, _ = map_fit_gaussian_closed_form(data, prior_mu, prior_sigma=0.1)
-    assert mu_map_strong == pytest.approx(prior_mu, abs=0.5)
+    # Very strong prior — tiny sigma — should be near prior. It has to be *very*
+    # tiny: this sample's precision is n/sigma^2_mle ~= 27.9, so prior_sigma=0.1
+    # is only worth 1/0.1^2 = 100 and lands at 3.78, not 5.
+    mu_map_strong, _ = map_fit_gaussian_closed_form(data, prior_mu, prior_sigma=0.02)
+    assert mu_map_strong == pytest.approx(prior_mu, abs=0.3)
 
 
 def test_grid_agrees_with_closed_form():
@@ -92,14 +94,18 @@ def test_prior_sweep_monotonic():
     """MAP estimate must move monotonically from MLE toward prior as prior tightens."""
     data = [0.5, -0.3, 0.2]  # mean ~0.13
     prior_mu = 5.0
-    sigmas = [10.0, 5.0, 2.0, 1.0, 0.5]
+    # These 3 points are tightly clustered (sigma^2_mle ~= 0.109), so the data's
+    # precision n/sigma^2 ~= 27.6 is big. The prior only starts to win once
+    # 1/prior_sigma^2 clears that, which needs prior_sigma well under 0.2 —
+    # at prior_sigma=0.5 the prior is worth just 4, and mu_map is still 0.75.
+    sigmas = [10.0, 5.0, 2.0, 1.0, 0.5, 0.1, 0.03]
     mus = [map_fit_gaussian_closed_form(data, prior_mu, s)[0] for s in sigmas]
     # As sigma shrinks, mu_map should move *up* toward 5.0
     for i in range(1, len(mus)):
         assert mus[i] >= mus[i - 1] - 1e-9, f"not monotonic: {mus}"
     #Endpoints sanity
     assert mus[0] == pytest.approx(sum(data) / len(data), abs=0.1)
-    assert mus[-1] == pytest.approx(prior_mu, abs=0.8)
+    assert mus[-1] == pytest.approx(prior_mu, abs=0.5)
 
 
 def test_map_more_robust_than_mle_on_outliers():
