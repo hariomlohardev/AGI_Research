@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 9,
+  "current_day": 10,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -251,7 +251,7 @@
               "day_in_week": 3,
               "global_day": 9,
               "label": "Day 3",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "Shannon Entropy",
@@ -259,10 +259,10 @@
                 "math-heavy",
                 "coding-heavy"
               ],
-              "difficulty": null,
+              "difficulty": "easy",
               "time_spent_minutes": null,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "shaky",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -280,7 +280,7 @@
               "day_in_week": 4,
               "global_day": 10,
               "label": "Day 4",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

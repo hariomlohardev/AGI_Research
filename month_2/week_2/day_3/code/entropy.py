@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import math
 from typing import Sequence
+import math
 
 
 def entropy(pmf: Sequence[float], base: float = 2.0) -> float:
@@ -28,4 +29,15 @@ def entropy(pmf: Sequence[float], base: float = 2.0) -> float:
         ValueError: if pmf is empty, any entry is negative, the entries do
             not sum to ~1, or base <= 0.
     """
-    raise NotImplementedError
+    if len(pmf) == 0:
+        raise ValueError("The pmf is empty")
+    elif base <= 0:
+        raise ValueError("The base is less than 0")
+    elif any(p < 0 for p in pmf):
+        raise ValueError("one or more entry in pmf is negative")
+    elif not abs(sum(pmf) - 1) < 0.001:
+        raise ValueError("The pmf not sum up to 1")
+
+    H = -sum(p*math.log(p , base) for p in pmf if p > 0)
+
+    return H

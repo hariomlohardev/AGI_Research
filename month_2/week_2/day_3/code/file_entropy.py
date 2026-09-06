@@ -10,7 +10,7 @@ Problem 2): a lower-entropy file needs fewer bits per symbol on average
 """
 
 from __future__ import annotations
-
+from typing import Sequence
 import random
 import tempfile
 from collections import Counter
@@ -18,6 +18,12 @@ from pathlib import Path
 
 from entropy import entropy
 
+
+def pdf(data:Sequence[float]):
+    len_data = len(data)
+    value_count = Counter(data)
+
+    return [count /len_data for count in value_count.values()]
 
 def file_entropy(path: str | Path, level: str = "char") -> float:
     """Shannon entropy (bits) of a text file's token distribution.
@@ -34,7 +40,32 @@ def file_entropy(path: str | Path, level: str = "char") -> float:
         ValueError: if the file yields no tokens, or level is not
             "char"/"word". (A missing file raises FileNotFoundError.)
     """
-    raise NotImplementedError
+
+    if level not in ("char", "word"):
+        raise ValueError(f"Given level is {level}, but this function only takes 'word' or 'char'")
+
+
+
+    
+    try :
+        with open(path , encoding='utf-8') as file:
+            file_content = file.read().strip()
+            if len(file_content) == 0:
+                raise ValueError("The file has no tokens")
+            words = file_content.split(" ")
+            if level == "word":
+               pdf_words = pdf(words)
+               return entropy(pdf_words)
+
+            elif level== "char":
+                chars = []
+                for word in words:
+                    chars += list(word)
+                pdf_chars = pdf(chars)
+                return entropy(pdf_chars)
+
+    except FileNotFoundError:
+        raise FileNotFoundError(f"File is not found on the given file path {path}")
 
 
 if __name__ == "__main__":

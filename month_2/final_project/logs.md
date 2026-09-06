@@ -77,3 +77,27 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
 **How it ties to `minisklearn`:** Today's `H(P)` is the vocabulary every later loss is written in. Day 10's cross-entropy `H(P,Q)` is the loss Week 3 Day 2's Logistic Regression minimises and every neural net from Month 3 onward trains on. Week 3 Day 4's Decision Trees reuse `entropy()` almost verbatim for information-gain splits. Week 4's evaluation reports cross-entropy alongside accuracy — keep both files.
 
 **Today's artefacts:** `month_2/week_2/day_3/{learn,roadmap,coding_problems}.md`, `code/entropy.py`, `code/file_entropy.py`, `code/tests/` (13 tests: pmf values + file ordering), videos via `video-researcher` (StatQuest entropy, 3Blue1Brown Compression-is-Intelligence Part 1; Part 2 deliberately deferred to Day 10).
+
+---
+
+## 2026-09-06 — Day 9 done: Shannon Entropy (global Day 9, Week 2 Day 3)
+
+- **Result:** 13/13 tests passed. `entropy(pmf, base=2.0)` with explicit `0 * log 0 = 0`
+  handling plus `file_entropy(path, level)` at char and word levels. The `__main__`
+  experiments print the ordering proof (repetitive < English < random) and the char-vs-word
+  pair on the same file.
+- **Confidence:** `shaky` — Q2/Q3 correct first-ask, but the fair-die number came out in
+  base 10 (`0.7781` instead of `2.585` bits), the word-vs-char reason needed restating in
+  terms of alphabet size, and the `if p > 0` guard took three attempts (including one
+  backwards proposal to use `>=`). No flags. Difficulty `easy` (self-reported, enjoyed the
+  videos); time not given.
+- **The number that mattered today:** per-token surprise follows alphabet size — tens of
+  distinct characters vs tens of thousands of distinct words is why word-level entropy
+  reads higher on the same file. Same reasoning returns tomorrow for why a flat predictive
+  distribution is maximally uncertain, and in Week 3 for information-gain splits.
+- **Advances to:** Day 10 (global 10) — Cross-Entropy & KL Divergence (`/i-am-in` next).
+- **Code review:** `month_2/week_2/day_3/code_review.md` (9 items + 7 nits, all style;
+  headline: duplicate `import math`, `pdf` misnomer for a discrete distribution, `1e-9`
+  docstring vs `0.001` code, redundant `FileNotFoundError` re-raise). Written by
+  `code-evaluator`, which worked this time. `growth-notes.md` updated — still no
+  3-day patterns; `sum([...])` streak broken (improvement logged).
