@@ -67,3 +67,20 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
   ValueError` x4, `np.arange` excluding the endpoint the docstring promises, dead `n = len(data)`).
   Written inline — the `code-evaluator` subagent failed twice with a 403 auth error.
   `growth-notes.md` updated; three categories now stand at 2 days each, one short of promotion.
+
+---
+
+## Week 2 Day 3 — Shannon Entropy (global Day 9) — 2026-09-06
+
+**Topic:** `entropy` + `entropy_of_text` (expected surprise; char- vs word-level text entropy)
+
+**How it ties to `minisklearn`:** Entropy is the impurity measure behind Week 3's
+Decision Trees (Day 4, ID3 splits on information gain = entropy drop) and the base unit
+of tomorrow's cross-entropy/KL losses — the same losses Week 4 compares against `sklearn`.
+The char-vs-word experiment is the first encounter with "choice of outcome space changes
+the number", which returns when Week 3 compares per-sample vs per-class losses.
+
+**Today's artefacts:** `month_2/week_2/day_3/{learn,roadmap,coding_problems}.md`,
+`code/entropy.py`, `code/text_entropy.py`, `code/tests/` (15 tests), videos via
+`video-researcher` (StatQuest entropy, 3Blue1Brown Wordle information theory — both
+verified live via oEmbed + creator sites).
