@@ -1,48 +1,31 @@
-"""Shannon entropy of a probability mass function.
+"""entropy — Week 2 Day 3: Shannon Entropy.
 
-This module provides a function to compute the Shannon entropy (in bits) of a
-discrete probability distribution given as a mapping from outcomes to
-probabilities.
+H(X) = -sum_x P(x) * log P(x) — the mathematical definition of "surprise"
+or uncertainty. Foundation of every loss function that follows this week
+(cross-entropy, KL divergence), and the measure of how compressible
+information is.
 """
 
 from __future__ import annotations
 
 import math
-from typing import Dict, Union
+from typing import Sequence
 
 
-def entropy(pmf: Dict[Union[str, int, float], float]) -> float:
-    """Compute the Shannon entropy H = -∑ p_i * log2(p_i).
+def entropy(pmf: Sequence[float], base: float = 2.0) -> float:
+    """Shannon entropy of a discrete distribution, in the given log base.
 
     Args:
-        pmf: A dictionary where keys are outcomes and values are their
-             probabilities. Probabilities should be non-negative and sum to
-             approximately 1 (within a small tolerance). Zero probabilities
-             contribute 0 to the sum (by convention 0 * log2(0) = 0).
+        pmf: probabilities, one per outcome. Entries must be >= 0 and sum
+            to 1 (within 1e-9). Zero entries are allowed and contribute 0
+            (the 0 * log 0 = 0 convention).
+        base: log base — 2.0 gives bits (default), e gives nats.
 
     Returns:
-        The entropy in bits (float).
+        H = -sum(p * log(p)) in the given base. Always >= 0.
 
     Raises:
-        ValueError: If any probability is negative or if the sum of
-                    probabilities is not approximately 1.
-        ValueError: If the pmf is empty.
+        ValueError: if pmf is empty, any entry is negative, the entries do
+            not sum to ~1, or base <= 0.
     """
-    if not pmf:
-        raise ValueError("pmf must not be empty")
-
-    total = sum(pmf.values())
-    if not math.isclose(total, 1.0, rel_tol=1e-9, abs_tol=1e-12):
-        raise ValueError(f"probabilities must sum to 1 (got {total})")
-
-    # Check for negative probabilities
-    for prob in pmf.values():
-        if prob < 0:
-            raise ValueError("probabilities must be non-negative")
-
-    # Compute entropy, skipping zero probabilities to avoid log(0)
-    ent = 0.0
-    for prob in pmf.values():
-        if prob > 0:  # log2(0) is -inf, but we skip as term is 0
-            ent -= prob * math.log2(prob)
-    return ent
+    raise NotImplementedError

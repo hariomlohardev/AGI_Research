@@ -1,55 +1,50 @@
-# Week 2 Day 3 — Shannon Entropy
+# Day 9 — Shannon Entropy: coding problems
 
-## Coding Problems
+## Problem 1 — `entropy(pmf)` from scratch
 
-### Problem 1: Entropy of a probability mass function
-Write a function `entropy(pmf)` that takes a dictionary mapping outcomes to their probabilities and returns the Shannon entropy in bits (using base-2 logarithm).
+```python
+def entropy(pmf: Sequence[float], base: float = 2.0) -> float:
+    """Shannon entropy H = -sum(p * log(p)) in the given log base (bits by default)."""
+```
 
-- **Input**: `pmf: dict[float, float]` or `dict[str, float]` etc. – keys are outcomes, values are probabilities (should sum to 1, but you may normalize or assume they are valid).
-- **Output**: `float` – entropy `H = -∑ p_i * log2(p_i)`. For any outcome with probability 0, the term contributes 0 (by convention `0 * log2(0) = 0`).
-- **Requirements**:
-  - Do not use `numpy` or `scipy`; use only `math.log2` or `math.log` with base conversion.
-  - Raise `ValueError` if any probability is negative or if the sum of probabilities is not approximately 1 (within `1e-9`).
-  - Handle empty pmf by raising `ValueError`.
+- Implement in `code/entropy.py` using only `math.log` — no `scipy.stats.entropy`, no `np.mean`-style shortcuts around the definition.
+- `pmf` entries must be `>= 0` and sum to 1 (within `1e-9`); zero entries are allowed and contribute `0` (that is the `0 * log 0 = 0` convention — handle it explicitly, don't let `math.log(0)` blow up). Raise `ValueError` on empty input, any negative entry, a total that isn't `~1`, or `base <= 0`.
+- Verify by hand first, then against your function: fair coin `[0.5, 0.5]` → exactly `1.0`; biased coin `[0.99, 0.01]` → `≈ 0.0808`; fair die `[1/6]*6` → `log2(6) ≈ 2.585`.
 
-### Problem 2: File entropy calculator
-Write a script that computes the Shannon entropy of a text file, treating the file as a sequence of symbols.
+## Problem 2 — file entropy (the real task)
 
-- **Input**: a filename (string) and optionally a flag `--unit` that can be `char` (default) or `word`.
-- **Behavior**:
-  - Read the file as text (UTF-8).
-  - If `--unit char`: treat each character (including whitespace and newline) as a symbol.
-  - If `--unit word`: split on whitespace (using `.split()`) to get words; treat each word as a symbol.
-  - Count frequencies of each symbol, compute probabilities, then compute entropy via the same formula as Problem 1.
-  - Print the entropy in bits (as a float) to standard output.
-- **Requirements**:
-  - Do not use external libraries for counting; you may use `collections.Counter` or a plain dict.
-  - Handle empty files (entropy = 0? or raise? We'll define entropy of empty file as 0).
-  - Ensure the script can be run from the command line: `python file_entropy.py <filename> [--unit char|word]`.
-  - Include a docstring and comment explaining why lower entropy means the file is more compressible (fewer bits needed per symbol on average).
+```python
+def file_entropy(path: str | Path, level: str = "char") -> float:
+    """Shannon entropy (bits) of a text file's token distribution.
 
-### Problem 3: Verify properties (optional, for understanding)
-These are not required to pass tests but are good to check:
-- Confirm that entropy is always ≥ 0.
-- Confirm that for a uniform distribution over `n` outcomes, entropy = `log2(n)`.
-- Confirm that as one probability → 1 and others → 0, entropy → 0.
-- Run your file entropy script on:
-  - A file containing only the character `a` repeated 1000 times.
-  - A file containing fair coin flips represented as `H` and `T` (e.g., `HTHT...`).
-  - A file of uniformly random bytes (you can generate using `os.urandom` or `/dev/urandom` if available).
-  - Observe how entropy changes.
+    `level="char"` treats each character as the random variable;
+    `level="word"` splits on whitespace and treats each word as the outcome.
+    Probabilities are estimated from within-file frequencies (count / total).
+    """
+```
 
-## Stubs
-Place the following stubs in `code/`:
-- `entropy.py`: contains `def entropy(pmf: dict) -> float: ...`
-- `file_entropy.py`: contains a `main()` that implements the script described above.
+- Implement in `code/file_entropy.py`, built on your `entropy()` from Problem 1 (normalise the counts before calling it). Stdlib only (`collections.Counter`, `pathlib`).
+- Raise `ValueError` on an empty file (no tokens to estimate from) or an unknown `level`.
+- Leave a short comment in the file relating this to compression: why is a lower-entropy file more compressible? (Think: average bits per symbol needed.)
 
-## Tests
-We will provide tests in `code/tests/` that check:
-- Correct entropy for known PMFs (fair coin, biased coin, uniform die).
-- Handling of zero probabilities.
-- Error on negative probabilities or probabilities not summing to 1.
-- File entropy on simple known strings.
-- Script runs and outputs a number.
+## Problem 3 — experiments (keep runnable under `__main__`)
 
-You may use `numpy` only in tests for generating random data, but not in the implementation.
+1. **Ordering proof:** three texts — a highly repetitive one (e.g. `"ab" * 500`), a genuinely varied English paragraph, a pseudo-random string (fixed seed so it reruns identically). Print all three entropies. You must see repetitive < English < random.
+2. **Char vs word:** run both levels on the same English file and print the pair. This is practice-question 4 — have an explanation ready for which is higher and why.
+
+### Running
+
+```bash
+cd code && pytest -v
+```
+
+Stubs raise `NotImplementedError` until you implement them. Tests import from `code.entropy` and `code.file_entropy`.
+
+### What not to use
+
+- No `scipy.stats`, no `sklearn.metrics`.
+- For the entropy math use `math.log` directly — the one-line formula is the whole point.
+
+### Done when (from the source plan)
+
+Your entropy calculator correctly reports higher entropy for more "random"-looking text and lower entropy for repetitive text, and you can compute the entropy of a fair die by hand.

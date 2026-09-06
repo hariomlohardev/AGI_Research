@@ -1,85 +1,67 @@
-"""Compute Shannon entropy of a text file.
+"""file_entropy — Week 2 Day 3: exact Shannon entropy of a text file.
 
-This script reads a text file and computes its Shannon entropy in bits,
-treating either each character or each whitespace-separated word as a symbol.
+Treats each character (or word) as a random variable with probabilities
+estimated from its frequency in the file, then applies entropy().
+
+Compression link — leave your own explanation here (coding_problems.md
+Problem 2): a lower-entropy file needs fewer bits per symbol on average
+(Shannon's source coding theorem), so it compresses better.
+# TODO(student): write 1-2 sentences on why lower entropy => more compressible.
 """
 
 from __future__ import annotations
 
-import argparse
-import math
-import sys
+import random
+import tempfile
 from collections import Counter
-from typing import Dict, List, Tuple, Union
+from pathlib import Path
+
+from entropy import entropy
 
 
-def entropy_from_counts(counts: Dict[Union[str, int], int]) -> float:
-    """Compute entropy from symbol counts.
-
-    Args:
-        counts: mapping from symbol to its frequency (non-negative ints).
-
-    Returns:
-        Shannon entropy in bits.
-    """
-    total = sum(counts.values())
-    if total == 0:
-        return 0.0
-    ent = 0.0
-    for c in counts.values():
-        p = c / total
-        if p > 0:
-            ent -= p * math.log2(p)
-    return ent
-
-
-def compute_file_entropy(filename: str, unit: str = "char") -> float:
-    """Compute entropy of a file.
+def file_entropy(path: str | Path, level: str = "char") -> float:
+    """Shannon entropy (bits) of a text file's token distribution.
 
     Args:
-        filename: path to the text file.
-        unit: either "char" (default) or "word".
+        path: text file to analyse (read as UTF-8).
+        level: "char" treats each character as an outcome; "word" splits
+            on whitespace and treats each word as an outcome.
 
     Returns:
-        Entropy in bits.
+        Entropy in bits, estimated from within-file token frequencies.
+
+    Raises:
+        ValueError: if the file yields no tokens, or level is not
+            "char"/"word". (A missing file raises FileNotFoundError.)
     """
-    with open(filename, "r", encoding="utf-8") as f:
-        text = f.read()
-
-    if unit == "char":
-        symbols: List[str] = list(text)
-    elif unit == "word":
-        symbols = text.split()  # splits on any whitespace
-    else:
-        raise ValueError("unit must be 'char' or 'word'")
-
-    counts = Counter(symbols)
-    return entropy_from_counts(counts)
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Compute Shannon entropy of a text file."
-    )
-    parser.add_argument("filename", help="Path to the text file")
-    parser.add_argument(
-        "--unit",
-        choices=["char", "word"],
-        default="char",
-        help="Treat each character or each word as a symbol (default: char)",
-    )
-    args = parser.parse_args()
-
-    try:
-        ent = compute_file_entropy(args.filename, args.unit)
-        print(f"{ent:.6f}")
-    except FileNotFoundError:
-        print(f"Error: file not found: {args.filename}", file=sys.stderr)
-        sys.exit(1)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+    raise NotImplementedError
 
 
 if __name__ == "__main__":
-    main()
+    # Required experiments — keep these runnable (coding_problems.md §3):
+    # 1) ordering: repetitive < varied English < pseudo-random
+    repetitive = "ab" * 500
+    english = (
+        "Entropy is the mathematical definition of surprise. A fair coin "
+        "toss is maximally uncertain, while a coin that almost always lands "
+        "heads barely surprises you at all. Language sits in between: "
+        "letters follow habits and patterns, so English text is far from "
+        "random, yet far from perfectly predictable either."
+    )
+    rng = random.Random(0)
+    alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
+    random_text = "".join(rng.choice(alphabet) for _ in range(2000))
+    with tempfile.TemporaryDirectory() as tmp:
+        paths = {}
+        for name, text in (("repetitive", repetitive), ("english", english), ("random", random_text)):
+            p = Path(tmp) / f"{name}.txt"
+            p.write_text(text, encoding="utf-8")
+            paths[name] = p
+        for name, p in paths.items():
+            print(f"{name:>12}: {file_entropy(p, 'char'):.4f} bits/char")
+    # 2) char vs word level on the same English file
+    with tempfile.TemporaryDirectory() as tmp:
+        p = Path(tmp) / "english.txt"
+        p.write_text(english, encoding="utf-8")
+        print(f"char-level: {file_entropy(p, 'char'):.4f} bits/char")
+        print(f"word-level: {file_entropy(p, 'word'):.4f} bits/word")
