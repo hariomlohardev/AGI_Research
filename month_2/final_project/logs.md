@@ -101,3 +101,12 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
   docstring vs `0.001` code, redundant `FileNotFoundError` re-raise). Written by
   `code-evaluator`, which worked this time. `growth-notes.md` updated — still no
   3-day patterns; `sum([...])` streak broken (improvement logged).
+## Week 2 Day 4 — Cross-Entropy & KL Divergence (global Day 10) — 2026-09-07
+
+**Topic:** `cross_entropy` + `kl_divergence` + `binary_log_loss` (the cost of the wrong distribution, the classifier's loss in miniature)
+
+**How it ties to `minisklearn`:** This is the loss-function implementation day. `binary_log_loss` is the miniature BCE that Week 3 Day 2's Logistic Regression minimises, and today's functions (or their direct descendants) land in Week 4's `metrics.py` / `linear_model.py`, where evaluation reports cross-entropy alongside accuracy. The KL-asymmetry intuition foreshadows Week 3 Day 4: information gain is a KL-shaped quantity whose direction is what makes it meaningful.
+
+**Today's artefacts:** `month_2/week_2/day_4/{learn,roadmap,coding_problems}.md`, `code/cross_entropy.py`, `code/log_loss.py`, `code/tests/` (15 tests, proven 15/15 vs a throwaway reference impl), videos via `video-researcher` (3Blue1Brown Compression-is-Intelligence Part 2 with KL chapter, StatQuest NN Part 6 Cross Entropy, StatQuest Mutual Information as KL-in-the-wild reinforcement).
+
+---
