@@ -110,6 +110,16 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
 **Today's artefacts:** `month_2/week_2/day_4/{learn,roadmap,coding_problems}.md`, `code/cross_entropy.py`, `code/log_loss.py`, `code/tests/` (15 tests, proven 15/15 vs a throwaway reference impl), videos via `video-researcher` (3Blue1Brown Compression-is-Intelligence Part 2 with KL chapter, StatQuest NN Part 6 Cross Entropy, StatQuest Mutual Information as KL-in-the-wild reinforcement).
 
 ---
+## Week 2 Day 5 — Mutual Information (global Day 11) — 2026-09-08
+
+**Topic:** `mutual_information` + `rank_features_by_mi` (uncertainty reduction, distance from independence, the feature-selection tool)
+
+**How it ties to `minisklearn`:** This is the feature-selection day. Week 4 Day 2's EDA step decides which columns of a real dataset are worth modelling — `rank_features_by_mi` is the principled version of that decision, replacing correlation tables that go blind on nonlinear structure. The deeper tie is Week 3 Day 4: information gain is MI between feature and label in different notation, so today's function is nearly the split criterion verbatim. Keep both files.
+
+**Today's artefacts:** `month_2/week_2/day_5/{learn,roadmap,coding_problems}.md`, `code/mutual_information.py`, `code/feature_selection.py`, `code/tests/` (21 tests, proven 21/21 vs a throwaway reference impl), videos via `video-researcher` (StatQuest MI, Complexity Explorer MI tutorial, Ben Lambert intro — all verified via oEmbed).
+
+---
+
 ## 2026-09-08 — Day 10 done: Cross-Entropy & KL Divergence (global Day 10, Week 2 Day 4)
 
 - **Result:** 15/15 tests passed. `cross_entropy(p, q)` + `kl_divergence(p, q)` with the
