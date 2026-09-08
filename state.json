@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 10,
+  "current_day": 11,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -280,7 +280,7 @@
               "day_in_week": 4,
               "global_day": 10,
               "label": "Day 4",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "Cross-Entropy & KL Divergence",
@@ -288,10 +288,10 @@
                 "math-heavy",
                 "coding-heavy"
               ],
-              "difficulty": null,
+              "difficulty": "easy",
               "time_spent_minutes": null,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "shaky",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -309,7 +309,7 @@
               "day_in_week": 5,
               "global_day": 11,
               "label": "Day 5",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

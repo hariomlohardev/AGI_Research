@@ -110,3 +110,21 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
 **Today's artefacts:** `month_2/week_2/day_4/{learn,roadmap,coding_problems}.md`, `code/cross_entropy.py`, `code/log_loss.py`, `code/tests/` (15 tests, proven 15/15 vs a throwaway reference impl), videos via `video-researcher` (3Blue1Brown Compression-is-Intelligence Part 2 with KL chapter, StatQuest NN Part 6 Cross Entropy, StatQuest Mutual Information as KL-in-the-wild reinforcement).
 
 ---
+## 2026-09-08 — Day 10 done: Cross-Entropy & KL Divergence (global Day 10, Week 2 Day 4)
+
+- **Result:** 15/15 tests passed. `cross_entropy(p, q)` + `kl_divergence(p, q)` with the
+  `q(x)==0 where p(x)>0` guard raising `ValueError`, plus `binary_log_loss(y_true, y_pred)`
+  as mean binary cross-entropy. Hand values confirmed: `CE ≈ 1.737`, `KL(P||Q) ≈ 0.737`
+  vs `KL(Q||P) ≈ 0.531`, confident-wrong `3.322` vs confident-correct `0.152`.
+- **Confidence:** `shaky` — all numbers first-ask and Q4/Q5 clean, but the Q1-why (why CE
+  must exceed H) and Q2-why (why direction matters) were circular on round 1 and needed
+  re-asks; explain-back skipped. No flags. Difficulty `easy` (self-reported); time not given.
+- **The number that mattered today:** the extra `0.737` bits — the price of coding with the
+  wrong distribution. Same reasoning returns in Week 3 Day 2 (logistic-regression loss) and
+  Day 4 (information-gain splits).
+- **Advances to:** Day 11 (global 11) — Mutual Information (`/i-am-in` next).
+- **Code review:** `month_2/week_2/day_4/code_review.md` (7 items + nits, all style;
+  headline: duplicated-then-diverged validation across siblings, exact float `sum != 1`).
+  `growth-notes.md` updated — first Theme promotions (leftover scaffold, list-for-reduction,
+  docstring-vs-code, whitespace, message wording). Durable process fix from user feedback:
+  future stubs carry the full `ValueError` contract in their docstrings.

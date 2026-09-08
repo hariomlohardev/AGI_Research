@@ -62,3 +62,23 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   flags. No pattern promoted — day 7's quiz was clean and day 8's trouble was different
   concepts (MAP derivation, `|z|` derivative, joint-vs-conditional); none of today's items
   has appeared on 3 days.
+
+## 2026-09-08 — Day 10 (Month 2 Week 2 Day 4) — Cross-Entropy & KL Divergence
+
+- Six-question quiz took **three rounds**. Round 1: all hand numbers correct first-ask
+  (`1.7369`, `0.7369` / `0.531`, `3.3219`); Q4 (q-zero `ValueError`) and Q5 (`CE − H = KL`
+  identity) correct first-ask; Q6 feedback given. Q1-why was circular ("must exceed H(P)
+  because H(P) is less and Q is more skewed to one side" — skewedness is not the general
+  reason); Q2-why was circular ("swapping changes the answer because D_KL is asymmetric" —
+  the name of the phenomenon, not the reason); Q3 accepted (the `y=0` formula walk-through
+  contained the mechanism even if wordy). Round 2: Q2 accepted (P is the reference doing
+  the weighting, Q the newcomer being judged). Round 3: Q1 accepted (Q isn't fitted to the
+  world P describes, so coding P-outcomes with Q wastes bits).
+- Explain-back was skipped — `/done` was re-run without answering it. Not a gate, noted
+  here instead of stalling the session.
+- Self-reported difficulty `easy`; `time_spent_minutes` left `null` (no time given).
+  Durable feedback from Q6: generated stubs should list the `ValueError` contract in their
+  docstrings (validation cases, not just the formula) — folded into future `/i-am-in` runs.
+- Confidence recorded as `shaky` (two questions needed re-asks, one of them twice). No
+  flags. No pattern promoted — `CE ≥ H` and KL asymmetry are first-time concepts; none of
+  today's items has appeared on 3 days.
