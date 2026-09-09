@@ -23,6 +23,7 @@ def _synthetic(seed=11, n=300, flip=0.10):
 def test_informative_beats_noise():
     rows, label = _synthetic()
     ranking = rank_features_by_mi(rows, label)
+    print(ranking)
     assert ranking[0][0] == 0
     assert ranking[0][1] - ranking[1][1] > 0.2
 

@@ -1,6 +1,7 @@
 """Feature selection by mutual information (stdlib only)."""
 
 from collections.abc import Hashable, Sequence
+from mutual_information import mutual_information
 
 
 def rank_features_by_mi(
@@ -19,7 +20,30 @@ def rank_features_by_mi(
         ValueError: if `base <= 0` or `base == 1` (passed through to
             `mutual_information` — one place owns the rule).
     """
-    raise NotImplementedError
+
+    
+
+    if len(features) == 0 or len(y) == 0:
+        raise ValueError("the size of either features or labels(y) is 0")
+    if len(features) != len(y):
+        raise ValueError("the features length is not equal to label length")
+    if not all(len(row) == len(features[0]) for row in features):
+        raise ValueError("every features should have same lenth")
+
+    columns = []
+    for i in range(len(features[0])):
+        column = [row[i] for row in features]
+        columns.append(column)
+    n_columns = len(columns)
+
+    rank = []
+    for i in range(n_columns):
+        column = columns[i]
+        mi = mutual_information(column , y , base)
+        rank.append((i , mi))
+    rank.sort(key= lambda pair : pair[1] , reverse=True)
+    return rank
+    
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 ## Month 2 — Probability, Information Theory & Classical ML From Scratch
 - **Started:** 2026-08-24
 - **Language:** `python` · **Skill level:** `intermediate` · **Test command:** `pytest` (default)
-- **Current:** Month 2, Day 11 (Week 2 Day 5 — `current`)
+- **Current:** Month 2, Day 12 (Week 2 Day 6 — `current`)
 - **Source plan:** `D:\Roadmap\firefox\months\month-2-detailed.md`
 
 ### Weeks & days
@@ -33,8 +33,8 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 - Day 2 (global 8) — **done** — MAP Estimation & Priors — confidence: `struggled`, difficulty: `hard`, time: not reported
 - Day 3 (global 9) — **done** — Shannon Entropy — confidence: `shaky`, difficulty: `easy`, time: not reported
 - Day 4 (global 10) — **done** — Cross-Entropy & KL Divergence — confidence: `shaky`, difficulty: `easy`, time: not reported
-- Day 5 (global 11) — **current** — Mutual Information
-- Day 6 (global 12) — pending — Review + Consolidation
+- Day 5 (global 11) — **done** — Mutual Information — confidence: `shaky`, difficulty: `medium`, time: 2–3 hours (self-reported range)
+- Day 6 (global 12) — **current** — Review + Consolidation
 
 **Week 3 — Classical ML From Scratch** — `review_status: pending`
 - Done when: Build the algorithms that ran the world before deep learning — and understand that they're not "outdated," they're still the right tool for a huge fraction of real-world problems (tabular data, small datasets, interpretability requirements).

@@ -82,3 +82,28 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
 - Confidence recorded as `shaky` (two questions needed re-asks, one of them twice). No
   flags. No pattern promoted — `CE ≥ H` and KL asymmetry are first-time concepts; none of
   today's items has appeared on 3 days.
+
+## 2026-09-09 — Day 11 (Month 2 Week 2 Day 5) — Mutual Information
+
+- Six-question quiz took **three rounds**. Round 1: Q1 accepted with a terminology fix
+  (`X^2` is quadratic, not exponential — covariance is blind to any nonlinear shape, not
+  just that one); Q2 accepted (MI *is* a KL, KL can't go below zero); Q3 accepted
+  (`I = 0` means independent, `Cov = 0` only means linearly uncorrelated); Q6 feedback
+  NA. Q4 ("don't know, teach me") and Q5 ("don't understand it") went to re-ask —
+  teaching mid-quiz was declined per the no-answers rule, flagging offered instead.
+  Round 2: Q5 accepted (order is the interface — callers take `ranking[0]` as best, so
+  ascending silently hands them the worst column). Round 3: Q4 accepted (the
+  `I(X;Y) <= min(H(X), H(Y))` bound, so `1.35 > H(x) = 1.0` means the implementation
+  is broken).
+- Concepts that needed the re-asks, on this day:
+  - **MI bounded by the marginal entropies** — needed two re-asks and still arrived as
+    a stated rule rather than via `H(X) - H(X|Y)` with non-negative conditional
+    entropy; worth a `/spaced-review` probe.
+  - **Ranking order as API contract** — one re-ask; the "same information" intuition
+    is true for a human reading a list, false for code taking the top entry.
+- Explain-back covered the feature-selection use correctly but missed the day's actual
+  insight (uncertainty removed / distance from independence, and why covariance can't
+  see it) — one-line steer given, non-blocking.
+- Confidence recorded as `shaky` (two questions needed re-asks, one of them twice). No
+  flags. No pattern promoted — MI bounds and ranking semantics are first-time
+  concepts; none of today's items has appeared on 3 days.

@@ -138,3 +138,27 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
   `growth-notes.md` updated — first Theme promotions (leftover scaffold, list-for-reduction,
   docstring-vs-code, whitespace, message wording). Durable process fix from user feedback:
   future stubs carry the full `ValueError` contract in their docstrings.
+
+---
+
+## 2026-09-09 — Day 11 done: Mutual Information (global Day 11, Week 2 Day 5)
+
+- **Result:** 21/21 tests passed. `mutual_information(x, y)` (empirical joint/marginal
+  counting + KL-shaped sum, any hashable labels) plus `rank_features_by_mi(features, y)`
+  returning `(index, score)` best-first. Hand values confirmed: correlated binary `1.0`
+  bit, independent binary `0.0`, `Y = X^2` demo prints covariance `0.0` vs MI `≈ 2.28`.
+- **Confidence:** `shaky` — Q1–Q3 first-ask (Q1 with a quadratic-vs-exponential terminology
+  fix), but Q5 (ranking order as API contract) took one re-ask and Q4 (MI bounded by
+  marginal entropies) took two. No flags. Difficulty `medium` (self-reported); time `2-3
+  hours` (self-reported as a range, so `time_spent_minutes` stays `null` — never estimated).
+  Confusion note, verbatim-ish: a bit confused in code from overthinking; all fixed by
+  the end.
+- **The number that mattered today:** `0.0` vs `2.28` — covariance blind, MI not, on the
+  same `X, X^2` pair. Same reasoning returns in Week 3 Day 4 (information-gain splits).
+- **Advances to:** Day 12 (global 12) — Review + Consolidation (`/i-am-in` next, then
+  the Week 2 review quiz at `/done`).
+- **Code review:** `month_2/week_2/day_5/code_review.md` (7 items + nits, all style;
+  headline: Cartesian-product loop instead of iterating observed pairs, `Counter` from
+  `typing`, `range(len(...))` indexing ×3). `growth-notes.md` updated — new Theme
+  (UPPERCASE accumulator, days 9–11), spelling-typo count promoted and folded into the
+  wording Theme (days 7, 8, 11).
