@@ -162,3 +162,13 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
   `typing`, `range(len(...))` indexing ×3). `growth-notes.md` updated — new Theme
   (UPPERCASE accumulator, days 9–11), spelling-typo count promoted and folded into the
   wording Theme (days 7, 8, 11).
+
+---
+
+## Week 2 Day 6 — Review + Consolidation (global Day 12) — 2026-09-10
+
+**Topic:** `week2_utils.py` consolidating Bayes, Gaussian MLE/MAP, entropy, cross-entropy, KL divergence, and mutual information.
+
+**How it ties to `minisklearn`:** This compatibility layer makes Week 2's formulas deliberate shared utilities for the Week 3 models: MAP explains L2 regularisation, cross-entropy becomes logistic-regression loss, entropy and MI support tree splits and feature selection, and the Gaussian estimators provide the parameter-fitting vocabulary.
+
+**Today's artefacts:** `month_2/week_2/day_6/{learn,roadmap,coding_problems}.md`, `code/week2_utils.py`, and `code/tests/test_week2_utils.py`. The day is generated with a guided review sequence covering statistical estimation, Bayesian inference, and information/entropy.
