@@ -6,6 +6,7 @@ should pass after the functions are implemented.
 """
 
 from collections.abc import Hashable, Sequence
+from collections import Counter
 import math
 
 
@@ -22,7 +23,32 @@ def bayes_update(
             within ``1e-9``, ``evidence <= 0``, or the posterior denominator
             computed from prior and likelihood is zero.
     """
-    raise NotImplementedError
+    
+
+    if len(prior) == 0 or len(likelihood) == 0 or len(likelihood) == 0:
+        raise ValueError("the length of eigther 'prior' , 'likelihood' or 'evidence' is 0")
+    
+    if not len(prior) == len(likelihood):
+        raise ValueError("The length of the 'prior' , 'likelihood' and 'evidence' is not equal")
+
+    if any(p < 0 for p in prior) :
+        raise ValueError("an valude of the prior is negative")
+    
+    if any(lh <= 0 for lh in likelihood) :
+        raise ValueError("an valude of the likelihood is negative")
+    
+    if not math.isclose(1 ,sum(prior) , rel_tol=1e-9):
+        raise ValueError("the prior doesnot sum up to 1")
+
+    if evidence <= 0:
+        raise ValueError("evedence is either 0 or negative ")
+
+    posterior = []
+    for i in range(len(prior)):
+        posterior.append((prior[i] * likelihood[i])/evidence)
+
+    return posterior
+
 
 
 def log_likelihood(data: Sequence[float], mu: float, sigma: float) -> float:
@@ -33,7 +59,17 @@ def log_likelihood(data: Sequence[float], mu: float, sigma: float) -> float:
     Raises:
         ValueError: if ``data`` is empty or ``sigma <= 0``.
     """
-    raise NotImplementedError
+    if len(data) == 0:
+        raise ValueError("the data is empty")
+    
+    if sigma <= 0:
+        raise ValueError(f"the Standerd Deviation is either 0 or negative")
+
+    output = 0
+    for x in data:
+        output += -0.5*math.log(2*math.pi*sigma**2 ) - (x-mu)**2/(2*sigma**2)
+
+    return output
 
 
 def mle_fit_gaussian(data: Sequence[float]) -> tuple[float, float]:
@@ -45,7 +81,15 @@ def mle_fit_gaussian(data: Sequence[float]) -> tuple[float, float]:
     Raises:
         ValueError: if ``data`` is empty.
     """
-    raise NotImplementedError
+    if len(data) == 0:
+        raise ValueError("the data is empty")
+
+    n = len(data)
+
+    mu_hat = sum(data)/n
+    sigma_hat = math.sqrt(sum((x-mu_hat)** 2 for x in data)/n)
+
+    return (mu_hat , sigma_hat)
 
 
 def map_fit_gaussian(
@@ -60,7 +104,16 @@ def map_fit_gaussian(
     Raises:
         ValueError: if ``data`` is empty or ``prior_sigma <= 0``.
     """
-    raise NotImplementedError
+    if len(data) == 0:
+        raise ValueError("the data is empty")
+
+    if prior_sigma <= 0 :
+        raise ValueError("the prior is either 0 or negative")
+
+    n = len(data)
+    s_mu , s_sigma = mle_fit_gaussian(data)
+    mu = (n*s_mu / s_sigma**2 + prior_mu/prior_sigma ** 2) / (n/s_sigma **2  + 1/prior_sigma **2)
+    return mu
 
 
 def entropy(pmf: Sequence[float], base: float = 2.0) -> float:
@@ -71,7 +124,20 @@ def entropy(pmf: Sequence[float], base: float = 2.0) -> float:
             probabilities do not sum to 1 within ``1e-9``, or ``base <= 0``
             or ``base == 1``.
     """
-    raise NotImplementedError
+    if len(pmf) == 0 :
+        raise ValueError("the PMF is empty")
+    if any(p < 0 for p in pmf):
+        raise ValueError("either 1 or more prorbabilites are negative")
+    if not math.isclose(1.0, sum(pmf), abs_tol=1e-9) :
+        raise ValueError("the probabilities doesnot sum up to 1")
+    if base <= 0 or base == 1:
+        raise ValueError("the base can't be 0 , negative or 1")
+
+    output = 0
+    for p in pmf:
+        if p != 0:
+            output -= p * math.log(p , base)
+    return output
 
 
 def cross_entropy(
@@ -85,7 +151,36 @@ def cross_entropy(
             ``base <= 0`` or ``base == 1``, or ``q[i] == 0`` where
             ``p[i] > 0``.
     """
-    raise NotImplementedError
+    if len(p) == 0 or len(q) == 0:
+        raise ValueError("either p or q is empty")
+    
+    if not len(p) == len(q):
+        raise ValueError("the length of p and q should be same")
+
+    if any(_p < 0 for _p in p):
+        raise ValueError("1 or more values in the p is negative")
+    
+    if any(_q < 0 for _q in q):
+        raise ValueError("1 or more values in the q is negative")
+    
+    if not math.isclose(1 ,sum(p) ,abs_tol=1e-9):
+        raise ValueError("the sum of p doesnot add up to 1")
+    
+    if not math.isclose(1 ,sum(q) ,abs_tol=1e-9):
+        raise ValueError("the sum of q doesnot add up to 1")
+
+    if base <= 0 or base == 1:
+        raise ValueError("the base is can't be 0 , negative or 1")
+
+    output = 0
+    for i in range(len(p)):
+        if q[i] == 0 :
+            if p[i] > 0 :
+                raise ValueError("``q[i] == 0`` where ``p[i] > 0``")
+        else:
+            output -= p[i] * math.log(q[i] , base)
+
+    return output
 
 
 def kl_divergence(
@@ -99,7 +194,10 @@ def kl_divergence(
             ``base <= 0`` or ``base == 1``, or ``q[i] == 0`` where
             ``p[i] > 0``.
     """
-    raise NotImplementedError
+
+    _entropy = entropy(p,base)
+    _cross_entropy = cross_entropy(p,q,base)
+    return _cross_entropy - _entropy 
 
 
 def mutual_information(
@@ -115,7 +213,43 @@ def mutual_information(
             ``base <= 0`` or ``base == 1``. A ``TypeError`` from using an
             unhashable label as a dictionary key is allowed to propagate.
     """
-    raise NotImplementedError
+    if len(x) == 0 or len(y) == 0:
+        raise ValueError("either x or y is empty")
+    
+    if not len(x) == len(y):
+        raise ValueError("the length of x and y should be same")
+
+    if base <= 0 or base == 1:
+        raise ValueError("the base is can't be 0 , negative or 1")
+
+    if not isinstance(x, Sequence) or not isinstance(y, Sequence):
+        raise TypeError("x and y must be sequences (e.g., lists, tuples)")
+        
+    if not all(isinstance(item, Hashable) for item in x) or not all(isinstance(item, Hashable) for item in y):
+        raise TypeError("the elements inside x and y must be hashable")
+
+    
+    n = len(x)
+
+    count_x = Counter(x)
+    count_y = Counter(y)
+
+    pairs  = ((x[i] , y[i]) for i in range(len(x)))
+    pairs_count = Counter(pairs)
+
+    MI = 0
+    for a in count_x:
+        for b in count_y:
+            joint_count = pairs_count[(a,b)]
+
+            if joint_count > 0:
+
+                p_xy = joint_count/ n
+                p_x = count_x[a] / n
+                p_y  = count_y[b] / n
+                MI += p_xy * math.log(p_xy/(p_x*p_y) , base)
+
+    return MI
 
 
 if __name__ == "__main__":

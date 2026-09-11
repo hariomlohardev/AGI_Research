@@ -163,6 +163,36 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
   (UPPERCASE accumulator, days 9–11), spelling-typo count promoted and folded into the
   wording Theme (days 7, 8, 11).
 
+## 2026-09-11 — Day 12 done: Week 2 Review + Consolidation (global Day 12, Week 2 Day 6) + Week 2 review
+
+- **Result:** 12/12 tests passed, plus the `__main__` assertions. Manual
+  spot-check caught a sign bug the suite misses (`CE = -1.737`, `KL = -2.737`
+  from `output += p log q`); fixed to `-sum` with `base` threaded through
+  `kl_divergence`, re-verified at `CE = 1.737`, `KL = 0.737`. Consolidated
+  `week2_utils.py` now holds `bayes_update`, `log_likelihood`,
+  `mle_fit_gaussian`, `map_fit_gaussian`, `entropy`, `cross_entropy`,
+  `kl_divergence`, `mutual_information` behind full `ValueError` contracts.
+- **Confidence:** `struggled` — consolidation quiz took five rounds (Q1/Q3
+  repeated re-asks; three discipline-log entries for asking to be told the
+  answers and to mark Q1 correct as-is, all declined with flagging offered, no
+  flags raised). Week 2 review took three rounds (W1/W2 both needed re-asks).
+  Self-reported time `4-5 hours` (range, so `time_spent_minutes` stays `null`);
+  difficulty `easy to medium` (not a single value, so `difficulty` stays
+  `null`). Hand values confirmed: `H = 1.0`, `CE ≈ 1.737`, `KL(P||Q) ≈ 0.737`,
+  `KL(Q||P) ≈ 0.531`, correlated-binary MI `1.0`, independent MI `0.0`.
+- **Week 2 review:** passed — MLE (`argmax log P(X|theta)`) vs MAP
+  (`argmax [log P(X|theta) + log P(theta)]`) coinciding at a uniform prior, and
+  `H(P,Q) = H(P) + D_KL(P||Q)` with `H(P)` constant in `Q`, so minimizing CE
+  and minimizing KL give the same argmin. `review_status` set to `done`.
+- **Advances to:** Day 13 (global 13) — Week 3 Day 1, Linear Regression
+  (`/i-am-in` next).
+- **Code review:** `month_2/week_2/day_6/code_review.md` (16 findings + nits,
+  all style; headline: duplicated `evidence` length check, `range(len(...))`
+  ×3, `MI` uppercase accumulator, `rel_tol` vs `abs_tol` drift).
+  `growth-notes.md` updated — `range(len(...))` promoted to Theme (days 7, 11,
+  12); wording, whitespace, docstring-vs-code, and UPPERCASE-accumulator Themes
+  extended to Day 12. No new badge.
+
 ---
 
 ## Week 2 Day 6 — Review + Consolidation (global Day 12) — 2026-09-10

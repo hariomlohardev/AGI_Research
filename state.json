@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 12,
+  "current_day": 13,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -187,7 +187,7 @@
         },
         "2": {
           "done_when": "Learn how models actually learn parameters from data (MLE/MAP), then learn the mathematical vocabulary of \"surprise\" and \"difference between distributions\" (entropy, cross-entropy, KL divergence) — this is the exact math behind every loss function you'll use for the rest of this roadmap.",
-          "review_status": "pending",
+          "review_status": "done",
           "days": {
             "1": {
               "day_in_week": 1,
@@ -343,7 +343,7 @@
               "day_in_week": 6,
               "global_day": 12,
               "label": "Day 6",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "Week 2 Review and Consolidation",
@@ -351,7 +351,7 @@
               "difficulty": null,
               "time_spent_minutes": null,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "struggled",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -375,7 +375,7 @@
               "day_in_week": 1,
               "global_day": 13,
               "label": "Day 1",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

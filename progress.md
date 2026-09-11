@@ -13,7 +13,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 ## Month 2 — Probability, Information Theory & Classical ML From Scratch
 - **Started:** 2026-08-24
 - **Language:** `python` · **Skill level:** `intermediate` · **Test command:** `pytest` (default)
-- **Current:** Month 2, Day 12 (Week 2 Day 6 — `current`)
+- **Current:** Month 2, Day 13 (Week 3 Day 1 — `current`)
 - **Source plan:** `D:\Roadmap\firefox\months\month-2-detailed.md`
 
 ### Weeks & days
@@ -27,14 +27,15 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 - Day 5 (global 5) — **done** — Covariance Matrices _(via `/skip-to`)_
 - Day 6 (global 6) — **done** — Gaussian, Bernoulli, Multinomial + CLT _(via `/skip-to`)_
 
-**Week 2 — Maximum Likelihood, MAP & Information Theory** — `review_status: pending`
+**Week 2 — Maximum Likelihood, MAP & Information Theory** — `review_status: done`
 - Done when: Learn how models actually learn parameters from data (MLE/MAP), then learn the mathematical vocabulary of "surprise" and "difference between distributions" (entropy, cross-entropy, KL divergence) — this is the exact math behind every loss function you'll use for the rest of this roadmap.
 - Day 1 (global 7) — **done** — Maximum Likelihood Estimation (MLE) — confidence: `strong`, difficulty: `medium`, time: 150m
 - Day 2 (global 8) — **done** — MAP Estimation & Priors — confidence: `struggled`, difficulty: `hard`, time: not reported
 - Day 3 (global 9) — **done** — Shannon Entropy — confidence: `shaky`, difficulty: `easy`, time: not reported
 - Day 4 (global 10) — **done** — Cross-Entropy & KL Divergence — confidence: `shaky`, difficulty: `easy`, time: not reported
 - Day 5 (global 11) — **done** — Mutual Information — confidence: `shaky`, difficulty: `medium`, time: 2–3 hours (self-reported range)
-- Day 6 (global 12) — **current** — Review + Consolidation
+- Day 6 (global 12) — **done** — Review + Consolidation — confidence: `struggled`, difficulty: easy-to-medium (self-reported as a range, so `difficulty` stays `null`), time: 4–5 hours (self-reported range, so `time_spent_minutes` stays `null`)
+- Week 2 review: **passed** — MLE vs MAP objectives plus uniform-prior coincidence, and `H(P,Q) = H(P) + D_KL(P||Q)` with `H(P)` constant in `Q`.
 
 **Week 3 — Classical ML From Scratch** — `review_status: pending`
 - Done when: Build the algorithms that ran the world before deep learning — and understand that they're not "outdated," they're still the right tool for a huge fraction of real-world problems (tabular data, small datasets, interpretability requirements).

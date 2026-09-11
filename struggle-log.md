@@ -107,3 +107,49 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
 - Confidence recorded as `shaky` (two questions needed re-asks, one of them twice). No
   flags. No pattern promoted — MI bounds and ranking semantics are first-time
   concepts; none of today's items has appeared on 3 days.
+
+## 2026-09-11 — Day 12 (Month 2 Week 2 Day 6) — Week 2 Review and Consolidation
+
+- Twelve consolidation tests passed first run (12/12), but a manual spot-check
+  blocked `/done`: `cross_entropy` accumulated `+sum(p log q)` instead of
+  `-sum(p log q)`, so `CE = -1.737` and `KL = -2.737`. Fixed by the learner
+  before the quiz resumed (sign flip plus `base` threading through
+  `kl_divergence`); re-run shows `CE = 1.737`, `KL = 0.737` with 12/12 still
+  green. Tests alone did not catch the sign because the suite only checks the
+  `CE - H = KL` identity, which holds for the negated values too.
+- Six-question consolidation quiz took **five rounds**. Round 1: Q4 hand values
+  correct first-ask (`1.0`, `1.737`, `0.737`, `0.531`); Q5 accepted with a
+  terminology fix (`Y = X^2` is quadratic, not exponential); Q6 feedback given.
+  Q1 (Bayes/MLE/MAP + when MAP becomes MLE), Q2 (entropy/CE/KL + which term is
+  constant), and Q3 (flat prior without a limit) went to re-ask. Round 2: Q2
+  accepted (`KL = CE - H`, `P` constant); Q1/Q3 still open. Mid-quiz the learner
+  asked to be told what the questions wanted, then twice asked for the Q1
+  attempt to be marked correct as-is — both declined per the no-answers rule
+  and logged in `discipline-log.md`; flagging offered each time, never used.
+  Round 3-4: Q3 accepted (uniform prior is a constant scaling factor, so the
+  argmax does not move); Q1 accepted on round 5 (posterior vs likelihood
+  objectives, uniform prior makes them identical).
+- Week 2 review (against the week's `done_when`) took **three rounds**. W1
+  accepted on round 3 (MLE `argmax log P(X|theta)` vs MAP
+  `argmax [log P(X|theta) + log P(theta)]`, coinciding at a uniform prior;
+  the extra asymptotic-infinite-data condition offered is true but beyond what
+  was asked). W2 accepted on round 3 (`H(P,Q) = H(P) + D_KL(P||Q)`, `H(P)` is
+  constant in `Q` so minimizing CE and minimizing KL give the same argmin).
+- Concepts that needed the re-asks, on this day:
+  - **Stating both halves of a "relate X, Y, Z" question** — first attempts
+    gave one half (e.g. "MAP uses a prior", "KL = CE - H") without the asked
+    second half (when MAP becomes MLE; which term is constant and why).
+  - **Flat prior as a constant that cannot move an argmax** — needed several
+    passes despite being the same argument as Day 8's dropped
+    `-0.5 log(2 pi tau^2)` constant. Second occurrence across days (Day 8,
+    Day 12), still below the 3-day pattern threshold.
+- Explain-back was asked alongside the quiz but never answered separately;
+  the quiz answers themselves covered both paragraphs by the end. Non-blocking,
+  noted here instead of stalling.
+- Self-reported time `4-5 hours` (a range, so `time_spent_minutes` stays
+  `null` — never estimated); difficulty `easy to medium` (not a single
+  easy/medium/hard value, so `difficulty` stays `null`, verbatim preserved in
+  the logs). No flags.
+- Confidence recorded as `struggled` (repeated re-asks on Q1/Q3/W1/W2 plus
+  three discipline-log entries). No pattern promoted — none of today's items
+  has appeared on 3 days.
