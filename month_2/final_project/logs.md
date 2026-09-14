@@ -195,6 +195,25 @@ No entries yet — generate Day 1 with `/i-am-in` to begin.
 
 ---
 
+## Week 3 Day 1 — Linear Regression (Gradient Descent) (global Day 13) — 2026-09-14
+
+**Topic:** `LinearRegressionGD` (batch GD on MSE, `l2` support) + closed-form
+`solve_normal_equation` reference via Gaussian elimination.
+
+**How it ties to `minisklearn`:** This is Week 4's `linear_model.py` in
+embryo — the `fit`/`predict` interface, the MSE objective, and the L2 knob
+are what `LinearRegression` ships with. Day 14's logistic regression reuses
+the same GD loop with BCE instead of MSE.
+
+**Today's artefacts:** `month_2/week_3/day_1/{learn,roadmap,coding_problems}.md`,
+`code/linear_regression.py`, `code/normal_equation.py`, `code/tests/`
+(gradient finite-difference check, GD↔Normal-Equation agreement, L2
+shrinkage), videos via `video-researcher` (StatQuest linear regression,
+gradient descent step-by-step, multiple regression — titles/channels verified
+via YouTube metadata).
+
+---
+
 ## Week 2 Day 6 — Review + Consolidation (global Day 12) — 2026-09-10
 
 **Topic:** `week2_utils.py` consolidating Bayes, Gaussian MLE/MAP, entropy, cross-entropy, KL divergence, and mutual information.
