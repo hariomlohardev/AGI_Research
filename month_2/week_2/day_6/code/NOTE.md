@@ -1,0 +1,1 @@
+i use an google search for map_fit_gaussian because i did not remeber the formula so do i know the concept that is the introduction of prior in MLE 

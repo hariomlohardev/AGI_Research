@@ -30,3 +30,14 @@ Not a scolding — just a record, so the honesty of `state.json` stays auditable
 - **Asked (repeat):** to accept the same Q1 attempt as correct.
 - **Declined.** Same reason — the required parts of Q1 are still unanswered, so it cannot be marked correct; flagging remains the sanctioned alternative.
 - **Outcome:** day left as `status: "current"` with Q1 and Q3 still open.
+
+## 2026-09-15 — Month 2, Day 13 (Week 3 Day 1 — Linear Regression, GD version)
+
+- **Asked:** to skip implementing `solve_normal_equation` on the grounds that
+  numpy will handle it later, so hand-writing it wastes time.
+- **Declined.** The Normal Equation is this day's independent check on the GD
+  implementation (the day's `Done when` is GD-vs-exact agreement), and its
+  tests are part of the suite `/done` must run green — skipping it leaves the
+  day unclosable. Code guidance offered instead.
+- **Outcome:** day left as `status: "current"`; implementation guidance given
+  for `normal_equation.py`.

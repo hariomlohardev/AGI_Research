@@ -153,3 +153,41 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
 - Confidence recorded as `struggled` (repeated re-asks on Q1/Q3/W1/W2 plus
   three discipline-log entries). No pattern promoted — none of today's items
   has appeared on 3 days.
+
+## 2026-09-15 — Day 13 (Month 2 Week 3 Day 1) — Linear Regression (Gradient Descent)
+
+- Six-question quiz + explain-back. Round 1: Q1 gradient derivation correct
+  in essence (chain rule through `ŷ_i`, `2/n` factor) with notation cleanup
+  (`Σ_i`, `X[i][j]`); Q2 first attempt wrong (framed GD-vs-Normal-Equation as
+  generalization/overfitting), took three rounds to land the iterative-vs-exact
+  distinction; Q3 loss-curve shapes partially answered, needed re-ask plus help
+  locating Experiment 2 (`linear_regression.py:221-224`) before the exact
+  `high-lr losses` values were reported; Q5 huge-init accepted first-ask;
+  Q6 feedback given (day felt long, hand-written Normal Equation felt needless
+  given numpy later).
+- Q4 (L2 loss term + weight-gradient term + Gaussian prior + why `b` exempt)
+  never answered correctly across four attempts — gradient line quoted back for
+  the loss part, no prior named, `b` reason restated the code. Flagged via the
+  escape hatch ("i litteraly dont understand whats going on in this"), logged
+  to `month_2/week_3/day_1/flagged_questions.md`; `has_flags` set true.
+- Explain-back shallow and half-missing: "learns from errors/loss" with no
+  gradient-step mechanism (`w −= lr·grad` from zeros) and nothing on what the
+  Normal Equation adds (exact closed-form check). One-line steer given,
+  non-blocking.
+- Demo bug (day material, not learner code): `__main__` Experiments 1/3 used
+  `lr=0.01` on unscaled house-price data (features 8–16, targets ~200), so
+  `fit` diverged to `OverflowError` in `mse_loss`. Fixed to `lr=0.001`
+  (converges `26816 → ~27 → 25.5`); Experiment 2 kept at `lr=1.0` as the
+  intentional divergence demo (`6e9 → 6e14 → 7e19 …`). Tests 14/14 green.
+- Self-report verbatim: time "about 6 to 8 hours" (a range, so
+  `time_spent_minutes` stays `null` — never estimated); difficulty "bitt
+  medium to hard" (not a single easy/medium/hard value, so `difficulty`
+  stays `null`, verbatim preserved here and in `progress.md`).
+- Confidence recorded as `struggled` (repeated Q2 re-asks, Q3 re-ask + lookup
+  help, Q4 flagged after four attempts, shallow explain-back). No pattern
+  promoted — L2↔Gaussian-prior trouble previously appeared on Day 8 and
+  Day 12, but Day 8 was the factor-of-2/flat-prior form and Day 12 the
+  constant-argmax form; today's failure mode (loss-vs-gradient confusion, no
+  prior named) is adjacent, not the same underlying slip a third time.
+  Worth a `/spaced-review` probe on MAP↔L2 + iterative-vs-exact before Week 3
+  builds on the GD loop.

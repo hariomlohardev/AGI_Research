@@ -221,3 +221,13 @@ via YouTube metadata).
 **How it ties to `minisklearn`:** This compatibility layer makes Week 2's formulas deliberate shared utilities for the Week 3 models: MAP explains L2 regularisation, cross-entropy becomes logistic-regression loss, entropy and MI support tree splits and feature selection, and the Gaussian estimators provide the parameter-fitting vocabulary.
 
 **Today's artefacts:** `month_2/week_2/day_6/{learn,roadmap,coding_problems}.md`, `code/week2_utils.py`, and `code/tests/test_week2_utils.py`. The day is generated with a guided review sequence covering statistical estimation, Bayesian inference, and information/entropy.
+
+---
+
+## 2026-09-15 — Day 13 done: Linear Regression (Gradient Descent) (global Day 13, Week 3 Day 1)
+
+- **Result:** 14/14 tests passed (`test_linear_regression.py` 11 + `test_normal_equation.py` 3). `predict`, `mse_loss`, `mse_gradients`, `LinearRegressionGD.fit/predict` with L2 tug (`2·l2·w_j`, bias exempt) plus hand-written Gaussian-elimination `solve_normal_equation` as the GD-vs-exact check.
+- **Demo fix (day material):** `__main__` Experiments 1/3 used `lr=0.01` on unscaled data and diverged to `OverflowError`; lowered to `lr=0.001` (converges `26816 → ~27 → 25.5`, L2 shrinkage `18.32 → 18.13`). Experiment 2 kept at `lr=1.0` as the intentional divergence demo (`6e9 → 6e14 → 7e19 …`).
+- **Confidence:** `struggled` — Q2 took three rounds (iterative-vs-exact), Q3 needed a re-ask + Experiment 2 lookup, Q4 flagged after four attempts (L2 loss-vs-gradient confusion, no prior named, circular `b` reason; logged to `flagged_questions.md`, `has_flags: true`), explain-back shallow (no gradient step, nothing on the Normal Equation). Self-reported time "about 6 to 8 hours" (range, `time_spent_minutes` stays `null`); difficulty "bitt medium to hard" (not a single value, `difficulty` stays `null`).
+- **Advances to:** Day 14 (global 14) — Logistic Regression (`/i-am-in` next).
+- **Code review:** `month_2/week_3/day_1/code_review.md` written by `code-evaluator` (15 findings, style only); `growth-notes.md` updated (no new promotions; `range(len)`, wording, whitespace, docstring-vs-code, leftover-scaffold Themes extended to Day 13).

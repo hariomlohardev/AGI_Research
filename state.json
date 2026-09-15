@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 13,
+  "current_day": 14,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -375,15 +375,15 @@
               "day_in_week": 1,
               "global_day": 13,
               "label": "Day 1",
-              "status": "current",
-              "has_flags": false,
+              "status": "done",
+              "has_flags": true,
               "mode": "guided",
               "topic": "Linear Regression (Gradient Descent)",
               "tags": ["math-heavy", "coding-heavy"],
               "difficulty": null,
               "time_spent_minutes": null,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "struggled",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -401,7 +401,7 @@
               "day_in_week": 2,
               "global_day": 14,
               "label": "Day 2",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

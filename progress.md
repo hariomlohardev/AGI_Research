@@ -13,7 +13,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 ## Month 2 — Probability, Information Theory & Classical ML From Scratch
 - **Started:** 2026-08-24
 - **Language:** `python` · **Skill level:** `intermediate` · **Test command:** `pytest` (default)
-- **Current:** Month 2, Day 13 (Week 3 Day 1 — `current`)
+- **Current:** Month 2, Day 14 (Week 3 Day 2 — `current`)
 - **Source plan:** `D:\Roadmap\firefox\months\month-2-detailed.md`
 
 ### Weeks & days
@@ -39,7 +39,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 
 **Week 3 — Classical ML From Scratch** — `review_status: pending`
 - Done when: Build the algorithms that ran the world before deep learning — and understand that they're not "outdated," they're still the right tool for a huge fraction of real-world problems (tabular data, small datasets, interpretability requirements).
-- Day 1 (global 13) — pending — Linear Regression (Gradient Descent Version)
+- Day 1 (global 13) — **done** — Linear Regression (Gradient Descent) — confidence: `struggled`, difficulty: medium-to-hard (self-reported as a range, so `difficulty` stays `null`), time: about 6–8 hours (self-reported range, so `time_spent_minutes` stays `null`) — has flagged questions (Q4 L2↔prior) to revisit
 - Day 2 (global 14) — pending — Logistic Regression
 - Day 3 (global 15) — pending — Support Vector Machines & the Kernel Trick
 - Day 4 (global 16) — pending — Decision Trees (ID3 Algorithm)
