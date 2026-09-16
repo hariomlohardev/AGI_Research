@@ -236,13 +236,13 @@
               "confidence": "struggled",
               "confusion_notes": [],
               "review_history": {
-                "last_reviewed": null,
-                "times_reviewed": 0
+                "last_reviewed": "2026-09-16",
+                "times_reviewed": 1
               },
               "srs": {
-                "ease_factor": 2.5,
+                "ease_factor": 2.6,
                 "interval_days": 1,
-                "next_review_due": null
+                "next_review_due": "2026-09-17"
               },
               "github_contribution": null,
               "micro_projects": []
@@ -328,13 +328,13 @@
                 }
               ],
               "review_history": {
-                "last_reviewed": null,
-                "times_reviewed": 0
+                "last_reviewed": "2026-09-16",
+                "times_reviewed": 1
               },
               "srs": {
-                "ease_factor": 2.5,
+                "ease_factor": 2.6,
                 "interval_days": 1,
-                "next_review_due": null
+                "next_review_due": "2026-09-17"
               },
               "github_contribution": null,
               "micro_projects": []
@@ -354,13 +354,13 @@
               "confidence": "struggled",
               "confusion_notes": [],
               "review_history": {
-                "last_reviewed": null,
-                "times_reviewed": 0
+                "last_reviewed": "2026-09-16",
+                "times_reviewed": 1
               },
               "srs": {
-                "ease_factor": 2.5,
+                "ease_factor": 2.6,
                 "interval_days": 1,
-                "next_review_due": null
+                "next_review_due": "2026-09-17"
               },
               "github_contribution": null,
               "micro_projects": []
@@ -386,13 +386,13 @@
               "confidence": "struggled",
               "confusion_notes": [],
               "review_history": {
-                "last_reviewed": null,
-                "times_reviewed": 0
+                "last_reviewed": "2026-09-16",
+                "times_reviewed": 1
               },
               "srs": {
-                "ease_factor": 2.5,
+                "ease_factor": 2.36,
                 "interval_days": 1,
-                "next_review_due": null
+                "next_review_due": "2026-09-17"
               },
               "github_contribution": null,
               "micro_projects": []
