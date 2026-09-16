@@ -231,3 +231,22 @@ via YouTube metadata).
 - **Confidence:** `struggled` — Q2 took three rounds (iterative-vs-exact), Q3 needed a re-ask + Experiment 2 lookup, Q4 flagged after four attempts (L2 loss-vs-gradient confusion, no prior named, circular `b` reason; logged to `flagged_questions.md`, `has_flags: true`), explain-back shallow (no gradient step, nothing on the Normal Equation). Self-reported time "about 6 to 8 hours" (range, `time_spent_minutes` stays `null`); difficulty "bitt medium to hard" (not a single value, `difficulty` stays `null`).
 - **Advances to:** Day 14 (global 14) — Logistic Regression (`/i-am-in` next).
 - **Code review:** `month_2/week_3/day_1/code_review.md` written by `code-evaluator` (15 findings, style only); `growth-notes.md` updated (no new promotions; `range(len)`, wording, whitespace, docstring-vs-code, leftover-scaffold Themes extended to Day 13).
+
+---
+
+## Week 3 Day 2 — Logistic Regression (global Day 14) — 2026-09-16
+
+**Topic:** `LogisticRegressionGD` (sigmoid + BCE, batch GD, `l2` support) +
+hand-rolled `metrics.py` (confusion matrix, accuracy/precision/recall).
+
+**How it ties to `minisklearn`:** This is Week 4's `linear_model.py`
+second half alongside Day 13's regressor, and `metrics.py` is the embryo
+of the evaluation step. Day 14 reuses Day 13's GD loop with BCE instead of
+MSE; BCE itself is Week 2 Day 4's cross-entropy applied to 2 classes.
+
+**Today's artefacts:** `month_2/week_3/day_2/{learn,roadmap,coding_problems}.md`,
+`code/logistic_regression.py`, `code/metrics.py`, `code/tests/`
+(15 tests: sigmoid values, BCE hand value, finite-difference gradient
+check, GD fit + threshold validation, L2 shrinkage, metric hand values),
+videos via `video-researcher` (StatQuest logistic regression, StatQuest GD
+step-by-step, 3Blue1Brown DL ch.2 — runtimes unverifiable, omitted).
