@@ -191,3 +191,35 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   prior named) is adjacent, not the same underlying slip a third time.
   Worth a `/spaced-review` probe on MAP↔L2 + iterative-vs-exact before Week 3
   builds on the GD loop.
+
+## 2026-09-17 — Day 14 (Month 2 Week 3 Day 2) — Logistic Regression
+
+- Six-question quiz + explain-back; 15/15 tests green on the first run.
+  Round 1: Q1 sigmoid-derivative derivation correct first-ask (chain rule,
+  split, substitute — the learn.md quota met); Q2 accepted first-ask
+  (non-convex MSE+sigmoid surface, local minima) with a terminology fix
+  (the surface is *non*-convex; convexity is what BCE preserves); Q6
+  feedback given (day felt too long; classification metrics were new, needed
+  a StatQuest video on top of the day material). Q3 (what `p = 0.5` means +
+  where the point sits) took three rounds: uncertainty landed first, then
+  "relative to class 1" for the geometry half, then "lies on the decision
+  boundary" (`z = 0`). Q4 (threshold 0.5 → 0.3) took two rounds: direction
+  (precision down, recall up) first, predicted-positive-set reasoning second.
+  Q5 (BCE vs MSE gradient: two differences + the cancellation) took two
+  rounds: differences (factor of 2, raw `ŷ` vs squashed `p`) first, then a
+  "which cancellation are you talking about" ask — declined as a hint per
+  the no-answers rule, exact question re-asked, `p_i(1-p_i)` named. No flags,
+  no discipline-log entries.
+- Explain-back covered the core (sigmoid squashes the linear score to
+  (0, 1), training minimizes the loss) with a one-line steer to name the
+  loss (binary cross-entropy — *which* loss is the point of the day).
+  Non-blocking.
+- Confidence recorded as `shaky` (three questions needed re-asks, Q3 twice;
+  everything landed, no flags). No pattern promoted — second occurrence of
+  the Day-12 slip (first attempts answer one half of a two-part question:
+  Day 12 "relate X, Y, Z" halves; today Q3/Q4/Q5 each gave the first half
+  before the second). Still below the 3-day threshold; if it shows again,
+  promote it and probe with explicit "give both halves" framing.
+- Learner-noted gap, not a quiz failure: precision/recall/confusion-matrix
+  were brand new (needed outside video). Worth keeping in view when Week 4
+  builds evaluation on top of `metrics.py`.

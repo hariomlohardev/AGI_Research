@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 14,
+  "current_day": 15,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -401,15 +401,15 @@
               "day_in_week": 2,
               "global_day": 14,
               "label": "Day 2",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "Logistic Regression",
               "tags": ["math-heavy", "coding-heavy"],
               "difficulty": null,
-              "time_spent_minutes": null,
+              "time_spent_minutes": 360,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "shaky",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -427,7 +427,7 @@
               "day_in_week": 3,
               "global_day": 15,
               "label": "Day 3",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

@@ -250,3 +250,36 @@ MSE; BCE itself is Week 2 Day 4's cross-entropy applied to 2 classes.
 check, GD fit + threshold validation, L2 shrinkage, metric hand values),
 videos via `video-researcher` (StatQuest logistic regression, StatQuest GD
 step-by-step, 3Blue1Brown DL ch.2 — runtimes unverifiable, omitted).
+
+---
+
+## 2026-09-17 — Day 14 done: Logistic Regression (global Day 14, Week 3 Day 2)
+
+- **Result:** 15/15 tests passed on the first run (`sigmoid`, BCE hand value
+  `0.228`, finite-difference gradient check, GD fit with loss decrease +
+  accuracy ≥ 0.95, threshold validation, L2 shrinkage; metrics hand values
+  `(tp, fp, tn, fn) = (2, 1, 1, 0)`, accuracy `0.75`, precision `2/3`,
+  recall `1.0`).
+- **Confidence:** `shaky` — Q1 (sigmoid-derivative derivation) and Q2
+  (non-convex MSE+sigmoid, local minima) first-ask; Q3 took three rounds
+  (uncertainty → "relative to class 1" → on the decision boundary,
+  `z = 0`); Q4 two rounds (direction → predicted-positive-set reasoning);
+  Q5 two rounds (gradient differences → `p_i(1-p_i)` cancellation, after
+  declining a "which cancellation" ask as a hint and re-asking). No flags,
+  no discipline entries. Explain-back covered the core with a steer to name
+  BCE. Self-reported time "roughly 6 hours" (`time_spent_minutes: 360`);
+  difficulty not given as a single easy/medium/hard value ("not that much
+  hard" in Q6 feedback, so `difficulty` stays `null`). Day felt too long;
+  classification metrics were brand new (needed an outside StatQuest video).
+- **The number that mattered today:** `p_i(1-p_i)` — the sigmoid derivative
+  that cancels out of the BCE gradient, leaving Day-13-shaped `(p_i − y_i)`.
+  Same cancellation is the reason every neural net's output layer trains
+  this cleanly from Month 3 on.
+- **Advances to:** Day 15 (global 15) — Week 3 Day 3 (`/i-am-in` next).
+- **Code review:** `month_2/week_3/day_2/code_review.md` written by
+  `code-evaluator` (9 findings, style only; headline: `metrics.py` trio
+  re-loops instead of reusing `confusion_matrix`, validation copied across
+  four methods). `growth-notes.md` updated — duplicated-validation
+  promoted to Theme (days 10, 13, 14); `range(len)`, wording, whitespace,
+  docstring-vs-code, leftover-scaffold Themes extended to Day 14. No new
+  badge.

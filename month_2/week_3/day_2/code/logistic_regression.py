@@ -11,6 +11,12 @@ from collections.abc import Sequence
 
 _EPS = 1e-15
 
+def is_empty(data:list):
+    return len(data) == 0
+
+def dot_product(a:list,b:list):
+    output = sum(a_i * b_i for a_i , b_i in zip(a,b))
+    return output
 
 def sigmoid(z: float) -> float:
     """Return ``1 / (1 + exp(-z))``, numerically stable for large ``|z|``.
@@ -18,11 +24,14 @@ def sigmoid(z: float) -> float:
     Any real ``z`` maps into ``(0, 1)``; no ``ValueError`` contract — the
     stable branch avoids ``OverflowError`` for inputs like ``±1000``.
     """
-    raise NotImplementedError
-
+    if z >= 0:
+        return 1.0 / (1.0 + math.exp(-z))
+    else:
+        exp_z = math.exp(z)
+        return exp_z / (1.0 + exp_z)
 
 def binary_cross_entropy(
-    y_true: Sequence[int], y_pred: Sequence[float]
+    y_true: Sequence[int], y_pred: Sequence[float] , eps:float = 1e-15
 ) -> float:
     """Return mean binary cross-entropy.
 
@@ -33,7 +42,21 @@ def binary_cross_entropy(
         ValueError: if either input is empty, their lengths differ, or any
             label is not in ``{0, 1}``.
     """
-    raise NotImplementedError
+
+    if is_empty(y_pred):
+        raise ValueError("the y_pred is empty")
+    
+    if is_empty(y_true):
+        raise ValueError("the y_true is empty")
+
+    if len(y_true) != len(y_pred):
+        raise ValueError("then length of y_true is not equal to the length of y_pred")
+    
+    if not all(y in (0,1) for y in y_true) :
+        raise ValueError("one or more label is not in ``{0, 1}``")
+
+    output   = -sum(y_i * math.log(p_i+eps) + (1-y_i )*math.log(1-p_i +eps) for y_i , p_i in zip(y_true , y_pred)) / len(y_true)
+    return output
 
 
 def bce_gradients(
@@ -53,7 +76,45 @@ def bce_gradients(
             ragged, a row's feature count differs from ``len(w)``, or any
             label is not in ``{0, 1}``.
     """
-    raise NotImplementedError
+
+    if is_empty(X):
+        raise ValueError("the X is empty")
+    
+    if is_empty(y):
+        raise ValueError("the y is empty")
+    
+    if is_empty(w):
+        raise ValueError("the w is empty")
+
+    if len(X) != len(y):
+        raise ValueError("the length of input(X) and Output(y)")
+
+    if all(len(row) != len(X[0]) for row in X):
+        raise ValueError("rows are ragged")
+
+    if len(X[0]) != len(w):
+        raise ValueError("the row's feature count differs from length of weights")
+
+    if not all(_y in (0,1) for _y in y) :
+        raise ValueError("one or more label is not in ``(0,1)``")
+
+    k = len(X[0])
+    n = len(y)
+
+    grad_w = [0.0] * k
+    grad_b = 0.0
+
+    for i in range(len(X)):
+        x = X[i]
+
+        p_i = sigmoid(dot_product(x,w) + b)
+        error = p_i - y[i]
+        
+        for j in range(k):
+            grad_w[j] += (1/n)*error * x[j]
+        grad_b += (1/n)*error 
+
+    return (grad_w,grad_b)
 
 
 class LogisticRegressionGD:
@@ -73,7 +134,22 @@ class LogisticRegressionGD:
         Raises:
             ValueError: if ``lr <= 0``, ``epochs <= 0``, or ``l2 < 0``.
         """
-        raise NotImplementedError
+        if lr <= 0:
+            raise ValueError("the Learning rate(lr) can't be zero or negative")
+
+        if epochs <= 0:
+            raise ValueError("epochs can't be negative or zero")
+
+        if l2 < 0:
+            raise ValueError("l2 can't be negative")
+
+        self.lr = lr
+        self.l2 = l2
+        self.epochs = epochs
+        self.w = None
+        self.b = 0
+        self.history = list()
+        
 
     def fit(
         self, X: Sequence[Sequence[float]], y: Sequence[int]
@@ -85,7 +161,39 @@ class LogisticRegressionGD:
                 ragged, rows have zero features, or any label is not in
                 ``{0, 1}``.
         """
-        raise NotImplementedError
+
+        if is_empty(X):
+            raise ValueError("X can't be empty")
+
+        if is_empty(y):
+            raise ValueError("y can't be empty")
+
+        if len(X) != len(y):
+            raise ValueError("length of X and y are different")
+
+        if all(len(row)!=len(X[0]) for row in X):
+            raise ValueError("rows are ragged")
+
+        if all(len(row) == 0 for row in X):
+            raise ValueError("one or more rows have zero features")
+
+        if not all(y_i in (0,1) for y_i in y):
+            raise ValueError("one or more labels is not in ``(0,1)``")
+
+        self.w = [0.0] * len(X[0])
+
+        for _ in range(self.epochs):
+            grad_w, grad_b = bce_gradients(X,y,self.w,self.b)
+            for j in range(len(grad_w)):
+                grad_w[j] = grad_w[j] + 2 * self.l2 * self.w[j]
+                self.w[j] -= self.lr * grad_w[j]
+            self.b -= self.lr * grad_b
+
+            y_pred = [sigmoid(dot_product(x ,self.w) + self.b) for x in X]
+            loss = binary_cross_entropy(y , y_pred)
+            self.history.append(loss)
+
+        return self.history
 
     def predict_proba(self, X: Sequence[Sequence[float]]) -> list[float]:
         """Return raw sigmoid outputs for each row.
@@ -94,7 +202,21 @@ class LogisticRegressionGD:
             ValueError: if called before ``fit`` or if the input is empty,
                 ragged, or has the wrong feature count.
         """
-        raise NotImplementedError
+        if self.w == None:
+            raise ValueError("call fit() first")
+
+        if is_empty(X):
+            raise ValueError("X can't be empty")
+        
+        if all(len(row)!=len(X[0]) for row in X):
+            raise ValueError("rows are ragged")
+
+        if len(X[0]) != len(self.w):
+            raise ValueError("wrong feature count")
+        
+
+        output = [sigmoid(dot_product(x ,self.w) + self.b) for x in X]
+        return output
 
     def predict(
         self, X: Sequence[Sequence[float]], threshold: float = 0.5
@@ -106,7 +228,30 @@ class LogisticRegressionGD:
                 ragged, or has the wrong feature count, or if
                 ``threshold`` is outside ``(0, 1)`` (exclusive).
         """
-        raise NotImplementedError
+        if self.w == None:
+            raise ValueError("call fit() first")
+
+        if is_empty(X):
+            raise ValueError("X can't be empty")
+        
+        if all(len(row)!=len(X[0]) for row in X):
+            raise ValueError("rows are ragged")
+
+        if len(X[0]) != len(self.w):
+            raise ValueError("wrong feature count")
+
+        if not 0 < threshold < 1:
+            raise ValueError("threashoud should be between (0,1)")
+
+        probs = [sigmoid(dot_product(x ,self.w) + self.b) for x in X]
+        output = [0] * len(probs)
+        for i in range(len(probs)):
+            if probs[i] >= threshold:
+                output[i] = 1
+            else:
+                output[i] = 0
+
+        return output
 
 
 if __name__ == "__main__":
