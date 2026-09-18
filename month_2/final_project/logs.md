@@ -283,3 +283,25 @@ step-by-step, 3Blue1Brown DL ch.2 — runtimes unverifiable, omitted).
   promoted to Theme (days 10, 13, 14); `range(len)`, wording, whitespace,
   docstring-vs-code, leftover-scaffold Themes extended to Day 14. No new
   badge.
+
+---
+
+## Week 3 Day 3 — Support Vector Machines & the Kernel Trick (global Day 15)
+
+**Topic:** `LinearSVMGD` (hinge loss + subgradient descent, `l2` support) +
+`polynomial_kernel` + `add_radius_feature` (hand-built ring rescue).
+
+**How it ties to `minisklearn`:** This is the margin-loss member of Week 4's
+model loop — same `fit`/`predict` interface as Days 13–14, so a `LinearSVM`
+drops into the comparison table unchanged, and the table gets more
+interesting for having a non-likelihood loss in it. The ring-vs-radius
+lesson (features beat algorithms) returns on Week 4 Day 2 when encoding
+decisions on real data matter more than model choice. Note the label
+convention shift (`{-1, +1}` vs `{0, 1}`) — Week 4's `metrics.py` must
+handle both.
+
+**Today's artefacts:** `month_2/week_3/day_3/{learn,roadmap,coding_problems}.md`,
+`code/svm.py`, `code/tests/` (16 tests, proven 16/16 vs a throwaway
+reference impl: linear fit 0.775 on ring vs 1.0 rescued, gap-asserted),
+videos via `video-researcher` (StatQuest SVM Parts 1–3 + ritvikmath
+optional, all verified).
