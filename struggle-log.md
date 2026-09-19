@@ -223,3 +223,36 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
 - Learner-noted gap, not a quiz failure: precision/recall/confusion-matrix
   were brand new (needed outside video). Worth keeping in view when Week 4
   builds evaluation on top of `metrics.py`.
+
+## 2026-09-19 — Day 15 (Month 2 Week 3 Day 3) — Support Vector Machines & the Kernel Trick
+
+- 16/16 tests green on the first run (`hinge`, subgradients incl. kink,
+  linear fit, ring fail/rescue, kernels).
+- Five-question quiz + explain-back + 2 feedback. Q1 (why hinge is exactly 0
+  vs CE never 0) took three rounds: round 1 restated the claim without the
+  mechanism; round 2 gave the `max(0, ...)` clipping half without the
+  `-log(p)` half; round 3 landed both (`max(0, 1 - y*s)` clips at 0 once
+  `y*s >= 1`, `-log(p) > 0` for any `p < 1`). Q2 (support vectors as
+  `y*s <= 1`, only non-zero subgradient) first-ask with terminology wobble
+  (soft/hard margin) but the mechanism present. Q3 (kernel trick: linear
+  separator after lifting, trick computes only the dot products) accepted
+  first-ask. Q4 hand calc (`s = 1`, margin `1`, loss `0`) first-ask. Q5
+  (`(11+1)^2 = 144`, `3.61 > 2.25` similarity ordering) correct. No flags,
+  no discipline-log entries.
+- Explain-back gave the right skeleton (margin classification, different
+  loss, kernel avoids building higher-dim vectors) with a one-line steer to
+  name the exact-zero (`y*s >= 1`) and the support-vector-only pull.
+  Non-blocking.
+- Self-reported difficulty `hard` (verbatim "hard hell as hard");
+  `time_spent_minutes` stays `null` (no time given).
+- Durable material feedback (F2): day helped, but asked that future days add
+  longer big-lecture videos tied to each math piece as optional references.
+- Confidence recorded as `shaky` (one question needed two re-asks; everything
+  else first-ask, no flags).
+- Pattern update: third occurrence of the Day-12/Day-14 slip (first attempts
+  answer one half of a two-part question: Day 12 "relate X, Y, Z" halves;
+  Day 14 Q3/Q4/Q5 first-half-only; today Q1 hinge-half before the CE half).
+  Promoted to pattern — probe future two-part questions with explicit "give
+  both halves" framing and a `/spaced-review` pass on hinge-vs-CE vs
+  CE-vs-H. Hinge exact-zero itself is first-time; no concept pattern beyond
+  the answering shape.

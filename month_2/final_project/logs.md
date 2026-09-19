@@ -305,3 +305,32 @@ handle both.
 reference impl: linear fit 0.775 on ring vs 1.0 rescued, gap-asserted),
 videos via `video-researcher` (StatQuest SVM Parts 1–3 + ritvikmath
 optional, all verified).
+
+---
+
+## 2026-09-19 — Day 15 done: Support Vector Machines & the Kernel Trick (global Day 15, Week 3 Day 3)
+
+- **Result:** 16/16 tests passed on the first run (`hinge_loss`,
+  `hinge_subgradients` incl. kink-==1-nothing, `LinearSVMGD` fit with
+  `l2` (bias exempt) + `decision_function`/`predict`, `polynomial_kernel`
+  hand value `144.0`, similarity ordering `3.61 > 2.25`,
+  `add_radius_feature` rescue; linear SVM separates blobs, visibly fails
+  on the ring, radius feature rescues to high accuracy).
+- **Confidence:** `shaky` — Q1 took three rounds (claim-without-mechanism,
+  then hinge-half-only, then both halves with `max(0, 1 - y*s)` vs
+  `-log(p)`); Q2–Q4 first-ask; Q5 correct. No flags. Explain-back gave the
+  right skeleton with a steer to name the exact-zero and the
+  support-vector-only pull. Self-reported difficulty `hard` ("hard hell as
+  hard"); time not given. Material feedback: add longer big-lecture math
+  videos as optional references on future days.
+- **The number that mattered today:** `144` vs `3.61 > 2.25` — the kernel
+  as similarity: neighbour outscores far without ever building the lifted
+  vectors. Same "features beat algorithms" lesson returns Week 4 Day 2.
+- **Advances to:** Day 16 (global 16) — Week 3 Day 4 (`/i-am-in` next).
+- **Code review:** `month_2/week_3/day_3/code_review.md` written by
+  `code-evaluator` (12 findings, style only; headline: unused `C`,
+  dead-and-broken `magnitude`, 4-way duplicated validation).
+  `growth-notes.md` updated — 4 new Themes promoted (vague `output`,
+  `== None`, redundant-paren `return`, untyped helpers); `range(len)`,
+  wording, whitespace, docstring-vs-code, leftover-scaffold,
+  duplicated-validation Themes extended to Day 15. No new badge.
