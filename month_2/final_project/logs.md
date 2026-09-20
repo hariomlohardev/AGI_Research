@@ -334,3 +334,30 @@ optional, all verified).
   `== None`, redundant-paren `return`, untyped helpers); `range(len)`,
   wording, whitespace, docstring-vs-code, leftover-scaffold,
   duplicated-validation Themes extended to Day 15. No new badge.
+
+---
+
+## Week 3 Day 4 — Decision Trees (ID3 Algorithm) (global Day 16)
+
+**Topic:** `entropy` + `information_gain` + `majority_label` + recursive
+`DecisionTreeID3` (`fit`/`predict`/`to_dict`, `max_depth` /
+`min_samples_split`) + `format_tree` (readable print).
+
+**How it ties to `minisklearn`:** This is Week 4's `tree.py` in embryo —
+the `fit`/`predict` interface matches Days 13–15 exactly, so a
+`DecisionTreeClassifier` drops into the model loop unchanged, and Day 17's
+`ensemble.py` (Random Forest) is a bagged crowd of today's class with a
+feature-subset knob. The depth experiment (`max_depth=1` ≈ 0.714 vs
+unlimited = 1.0 train accuracy on tennis) is Week 3's first honest
+overfitting demo — Week 4's evaluation repeats the "training accuracy is
+not the point" lesson on real data. Note the label convention shift
+(arbitrary hashables, no label-range validation) — Week 4's `metrics.py`
+must handle string labels too.
+
+**Today's artefacts:** `month_2/week_3/day_4/{learn,roadmap,coding_problems}.md`,
+`code/decision_tree.py`, `code/tests/` (18 tests, proven 18/18 vs a throwaway
+reference impl: tennis gains Outlook 0.247 > Humidity 0.152 > Wind 0.048 >
+Temperature 0.029, textbook tree shape, depth-1 vs full gap-asserted),
+videos via `video-researcher` (StatQuest Decision Trees + ML Recipes #8,
+both verified; no third long-lecture pick met the verification bar —
+video search was down at generation time).

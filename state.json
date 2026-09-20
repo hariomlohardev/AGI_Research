@@ -459,8 +459,11 @@
               "status": "current",
               "has_flags": false,
               "mode": "guided",
-              "topic": null,
-              "tags": [],
+              "topic": "Decision Trees (ID3 Algorithm)",
+              "tags": [
+                "math-heavy",
+                "coding-heavy"
+              ],
               "difficulty": null,
               "time_spent_minutes": null,
               "expected_minutes": null,
