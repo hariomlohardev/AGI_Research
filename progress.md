@@ -13,7 +13,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 ## Month 2 — Probability, Information Theory & Classical ML From Scratch
 - **Started:** 2026-08-24
 - **Language:** `python` · **Skill level:** `intermediate` · **Test command:** `pytest` (default)
-- **Current:** Month 2, Day 16 (Week 3 Day 4 — `current`)
+- **Current:** Month 2, Day 17 (Week 3 Day 5 — `current`)
 - **Source plan:** `D:\Roadmap\firefox\months\month-2-detailed.md`
 
 ### Weeks & days
@@ -42,7 +42,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 - Day 1 (global 13) — **done** — Linear Regression (Gradient Descent) — confidence: `struggled`, difficulty: medium-to-hard (self-reported as a range, so `difficulty` stays `null`), time: about 6–8 hours (self-reported range, so `time_spent_minutes` stays `null`) — has flagged questions (Q4 L2↔prior) to revisit
 - Day 2 (global 14) — **done** — Logistic Regression — confidence: `shaky`, difficulty: not reported as a single value ("not that much hard" in feedback, so `difficulty` stays `null`), time: 360m (self-reported "roughly 6 hours")
 - Day 3 (global 15) — **done** — Support Vector Machines & the Kernel Trick — confidence: `shaky`, difficulty: `hard`, time: not reported
-- Day 4 (global 16) — pending — Decision Trees (ID3 Algorithm)
+- Day 4 (global 16) — **done** — Decision Trees (ID3 Algorithm) — confidence: `shaky`, difficulty: `hard`, time: 6–7 hours (self-reported range, so `time_spent_minutes` stays `null`)
 - Day 5 (global 17) — pending — Random Forests
 - Day 6 (global 18) — pending — K-Means Clustering
 

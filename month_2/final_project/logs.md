@@ -361,3 +361,35 @@ Temperature 0.029, textbook tree shape, depth-1 vs full gap-asserted),
 videos via `video-researcher` (StatQuest Decision Trees + ML Recipes #8,
 both verified; no third long-lecture pick met the verification bar —
 video search was down at generation time).
+
+---
+
+## 2026-09-20 — Day 16 done: Decision Trees (ID3 Algorithm) (global Day 16, Week 3 Day 4)
+
+- **Result:** 18/18 tests passed (`entropy` hand values incl. tennis
+  `0.940`, IG hand values `1.0` / `≈0.0817`, tennis ordering Outlook
+  `0.247` > Humidity `0.152` > Wind `0.048` > Temperature `0.029`, root
+  Outlook, overcast pure-`yes`, depth-1 `10/14` vs full `1.0` gap-asserted,
+  unseen-value fallback, full `ValueError` contracts).
+- **Confidence:** `shaky` — Q1/Q2/Q4/Q5 first-ask; Q3 took one follow-up
+  (stated overfitting correctly but didn't connect the `1.0` train accuracy
+  to memorisation until asked). No flags. Explain-back gave the core
+  (max-gain feature) with a steer toward recursion. Self-reported difficulty
+  `hard`; time "6-7 hours" (range, so `time_spent_minutes` stays `null`).
+- **Material feedback (second day running):** the two short videos didn't
+  land — same note as Day 15 — explicit ask for full-math big lectures as
+  the primary resource, plus "today's class is so big" (matches the review's
+  ~70-line nested-`build` finding). Future generations should lead with a
+  long lecture pick where one verifies, and consider splitting the ID3 class
+  across two files once the tree grows past one screen.
+- **The number that mattered today:** `1.000` — the unlimited tree reciting
+  all 14 tennis rows back. Training accuracy as a memorisation confession,
+  not an achievement. Same lens Week 4's evaluation step applies on real data.
+- **Advances to:** Day 17 (global 17) — Week 3 Day 5, Random Forests
+  (`/i-am-in` next).
+- **Code review:** `month_2/week_3/day_4/code_review.md` written by
+  `code-evaluator` (10 findings, style only; headline: `Counter` from
+  `typing`, informal error-message voice, duplicated validation ripe for a
+  `_validate_X_y` helper). `growth-notes.md` updated — no new promotions;
+  `range(len)`, `== None`, redundant-`return` streaks all broken (sustained
+  fixes). No new badge.

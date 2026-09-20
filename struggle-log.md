@@ -256,3 +256,33 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   both halves" framing and a `/spaced-review` pass on hinge-vs-CE vs
   CE-vs-H. Hinge exact-zero itself is first-time; no concept pattern beyond
   the answering shape.
+
+## 2026-09-20 — Day 16 (Month 2 Week 3 Day 4) — Decision Trees (ID3 Algorithm)
+
+- 18/18 tests green on the first run (`entropy` hand values, IG hand values
+  `1.0` / `≈0.0817`, tennis ordering Outlook `0.247` > Humidity `0.152` >
+  Wind `0.048` > Temperature `0.029`, root Outlook, depth-1 `10/14` vs full
+  `1.0`, unseen-value fallback, contracts).
+- Five-question quiz + explain-back + 2 feedback. Q1 (IG hand calc) correct
+  numbers first-ask; child entropies (`≈0.9183` each) supplied on follow-up.
+  Q2 (pure node → gain exactly 0) first-ask. Q3 (unlimited-depth risk) took
+  one follow-up: first answer stated overfitting without connecting the
+  `1.0` train accuracy to memorisation; follow-up landed it (`1.000` is the
+  tree reciting all 14 rows, noise included). Q4 (tennis trace
+  `sunny → high → no`) first-ask. Q5 (why strings need no encoding: counting,
+  never arithmetic) first-ask. No flags, no discipline-log entries.
+- Explain-back gave the core (max-gain feature) with a one-line steer toward
+  recursion (same question re-asked at every node). Non-blocking.
+- Self-reported difficulty `hard`; time "6-7 hours" (a range, so
+  `time_spent_minutes` stays `null` — never estimated).
+- Material feedback (not quiz struggle): the two short videos didn't land —
+  second day running after Day 15 — explicit ask for full-math big lectures
+  as the primary resource; plus "today's class is so big" (matches the
+  review's nested-`build` finding). Logged in `final_project/logs.md` for
+  future `/i-am-in` runs.
+- Confidence recorded as `shaky` (one question needed a follow-up;
+  everything else first-ask, no flags).
+- Pattern update: fourth occurrence of the Day-12/Day-14/Day-15 slip (first
+  attempts answer one half of a two-part question — today Q3's overfitting
+  half before the numbers half). Pattern stands; keep the explicit
+  "give both halves" framing on multi-part questions.
