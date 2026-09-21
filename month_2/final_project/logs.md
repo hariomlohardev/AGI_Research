@@ -393,3 +393,13 @@ video search was down at generation time).
   `_validate_X_y` helper). `growth-notes.md` updated — no new promotions;
   `range(len)`, `== None`, redundant-`return` streaks all broken (sustained
   fixes). No new badge.
+
+---
+
+## Week 3 Day 5 — Random Forests (global Day 17) — 2026-09-21
+
+**Topic:** `bootstrap_indices` + `bootstrap_sample` (`random.Random` with replacement, `1/e` OOB) + `RandomForestClassifier` (`n_estimators` bagged ID3 trees, per-split `max_features` feature randomness, majority vote)
+
+**How it ties to `minisklearn`:** This is Week 4's `ensemble.py` in embryo — the `RandomForestClassifier` you write today *is* `ensemble.py` once renamed, behind the same `fit`/`predict` interface as `linear_model.py` and `tree.py`. Day 16's `DecisionTreeID3` becomes a bagged crowd with one knob (`max_features`) added; the depth-vs-ensemble comparison (`max_depth=1` vs unlimited vs forest) is the direct precedent for the model-comparison table on Week 4 Day 3. The OOB size check (`≈36.8%` via `(1−1/n)^n → 1/e`) also foreshadows Week 4's hold-out evaluation — OOB is evaluation without an explicit test split.
+
+**Today's artefacts:** `month_2/week_3/day_5/{learn,roadmap,coding_problems}.md`, `code/random_forest.py`, `code/tests/` (bootstrap determinism/OOB + forest fit/predict + `n_estimators` sweep + feature-randomness ablation, 22 tests total), videos via `video-researcher` (StatQuest Random Forests Part 1, Patrick Loeber ML-From-Scratch #10, StatQuest Bootstrapping Main Ideas — all verified via oEmbed).
