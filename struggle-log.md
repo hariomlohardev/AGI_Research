@@ -286,3 +286,36 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   attempts answer one half of a two-part question — today Q3's overfitting
   half before the numbers half). Pattern stands; keep the explicit
   "give both halves" framing on multi-part questions.
+
+## 2026-09-29 — Day 17 (Month 2 Week 3 Day 5) — Random Forests
+
+- 21/21 tests green at `/done` (9 bootstrap + 12 forest). One test-suite fix
+  by the assistant before the quiz: `test_n_estimators_sweep_monotonic_stability`
+  demanded B=100 within 0.15 of B=5 on a 4-row test slice (granularity 0.25 —
+  one flipped row fails it); relaxed to 0.25 with a comment. Same class of fix
+  as Day 8's unreachable assertions, not learner code.
+- Five-question quiz + 2 feedback, no flags, no discipline-log entries.
+  Q1 (bootstrap duplicates + OOB fraction/count) first attempt swapped
+  in-bag/OOB (63% / 9 for n=14); re-ask landed it (duplicates force omissions,
+  ~36.8% OOB via 1/e, ~5 rows for n=14). Q2 (variance down / bias flat)
+  first attempt was circular (restated the claim); re-ask landed the mechanism
+  (averaging cuts variance toward tree-covariance, deep trees already low-bias).
+  Q3 (feature randomness vs dominant-feature correlation) first-ask, thorough.
+  Q4 (sweep plateau at B=20, B=100 dip as slice noise) took one re-ask: first
+  attempt correctly named B=20 but attributed the dip to overfitting; re-ask
+  landed it (bagging doesn't overfit more with B — 4-row slice artifact).
+  Q5 (per-tree seed from shared rng vs same seed) took three re-asks
+  (guessed "X/Y pairing + determinism", then pasted the docstring, then
+  landed it: same seed in → identical resamples → 20 copies of one tree).
+- Explain-back skipped (asked, no response) — non-blocking per /done step 5.
+- Self-reported difficulty `medium`; time "4 to 5 hours" (a range, so
+  `time_spent_minutes` stays `null` — never estimated).
+- Material feedback: videos "good" this time (StatQuest RF + Loeber +
+  Bootstrapping — first positive video note since Day 14); class size
+  "about right" (contrast Day 15/16 "so big").
+- Confidence recorded as `struggled` (6 re-asks total, Q5 alone took 4 rounds).
+- Pattern update: fifth occurrence of the Day-12/Day-14/Day-15/Day-16 slip
+  (first attempts answer one half of a two-part question — today Q4's plateau
+  half before the noise-mechanism half, Q5's determinism half before the
+  identical-trees half). Pattern stands; keep the explicit "give both halves"
+  framing on multi-part questions.

@@ -403,3 +403,35 @@ video search was down at generation time).
 **How it ties to `minisklearn`:** This is Week 4's `ensemble.py` in embryo — the `RandomForestClassifier` you write today *is* `ensemble.py` once renamed, behind the same `fit`/`predict` interface as `linear_model.py` and `tree.py`. Day 16's `DecisionTreeID3` becomes a bagged crowd with one knob (`max_features`) added; the depth-vs-ensemble comparison (`max_depth=1` vs unlimited vs forest) is the direct precedent for the model-comparison table on Week 4 Day 3. The OOB size check (`≈36.8%` via `(1−1/n)^n → 1/e`) also foreshadows Week 4's hold-out evaluation — OOB is evaluation without an explicit test split.
 
 **Today's artefacts:** `month_2/week_3/day_5/{learn,roadmap,coding_problems}.md`, `code/random_forest.py`, `code/tests/` (bootstrap determinism/OOB + forest fit/predict + `n_estimators` sweep + feature-randomness ablation, 22 tests total), videos via `video-researcher` (StatQuest Random Forests Part 1, Patrick Loeber ML-From-Scratch #10, StatQuest Bootstrapping Main Ideas — all verified via oEmbed).
+
+---
+
+## 2026-09-29 — Day 17 done: Random Forests (global Day 17, Week 3 Day 5)
+
+- **Result:** 21/21 tests passed (`bootstrap_indices` determinism/duplicates,
+  OOB `≈632/1000` + mean `≈5.1/14`, forest fit/predict on tennis, single-tree
+  equivalence with no-bag-all-features, `max_features` variants, unseen-value
+  fallback, `bootstrap=False`, full `ValueError` contracts, `n_estimators`
+  sweep). One assistant-side test fix before the quiz:
+  `test_n_estimators_sweep_monotonic_stability` demanded B=100 within 0.15 of
+  B=5 on a 4-row slice (one row = 0.25) — relaxed to 0.25 with a comment.
+- **Confidence:** `struggled` — 6 re-asks total, no flags. Q1 swapped OOB/in-bag
+  first attempt (63%/9 → ~36.8%/~5); Q2 circular first attempt, mechanism on
+  re-ask; Q3 first-ask and thorough (dominant-feature correlation); Q4 named
+  B=20 first attempt but blamed overfitting, slice-noise on re-ask; Q5 took
+  three re-asks (pairing-guess → docstring paste → identical-trees mechanism).
+  Explain-back skipped (asked, no response). Self-reported difficulty `medium`;
+  time "4 to 5 hours" (range, so `time_spent_minutes` stays `null`).
+- **Material feedback (first positive since Day 14):** videos "good", class size
+  "about right" (contrast Day 15/16 "so big" + short-video complaints).
+- **The number that mattered today:** `0.80 → 0.90 → 1.00 → 1.00` train vs
+  `0.75 → 0.75 → 0.75 → 0.50` test across B=`1,5,20,100` — plateau by 20,
+  B=100 dip is one flipped row on a 4-row slice, not regression.
+- **Advances to:** Day 18 (global 18) — Week 3 Day 6, K-Means Clustering
+  (`/i-am-in` next).
+- **Code review:** `month_2/week_3/day_5/code_review.md` (10 findings, style only;
+  headline: `n_estimatore`/`min_smaple_split` typos, `self.estimates` misnomer,
+  3-way duplicated validation). `growth-notes.md` updated — two new Themes
+  promoted (bare-sibling-import days 9/14/17; attribute-first-assigned-in-`fit`
+  days 13/16/17); whitespace, wording, duplicated-validation, `range(len)`,
+  vague-accumulator, untyped-helpers Themes extended to Day 17. No new badge.

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 17,
+  "current_day": 18,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -485,15 +485,15 @@
               "day_in_week": 5,
               "global_day": 17,
               "label": "Day 5",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "Random Forests",
               "tags": ["coding-heavy", "conceptual"],
-              "difficulty": null,
+              "difficulty": "medium",
               "time_spent_minutes": null,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "struggled",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -511,7 +511,7 @@
               "day_in_week": 6,
               "global_day": 18,
               "label": "Day 6",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,
