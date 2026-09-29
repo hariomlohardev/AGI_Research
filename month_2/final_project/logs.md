@@ -435,3 +435,13 @@ video search was down at generation time).
   promoted (bare-sibling-import days 9/14/17; attribute-first-assigned-in-`fit`
   days 13/16/17); whitespace, wording, duplicated-validation, `range(len)`,
   vague-accumulator, untyped-helpers Themes extended to Day 17. No new badge.
+
+---
+
+## Week 3 Day 6 — K-Means Clustering (global Day 18) — 2026-09-29
+
+**Topic:** `euclidean` + `assign_clusters` + `recompute_centroids` + `inertia` + `standardize` + `KMeans` (Lloyd's assign/update loop, distinct-point init, `tol`/`max_iters`/`n_iters_`/`cluster_centers_`) + `elbow_inertias` (k=1..8, bend at 3)
+
+**How it ties to `minisklearn`:** This is Week 4's `cluster.py` in embryo — the `KMeans` you write today *is* `cluster.py` once renamed, behind the same `fit`/`predict` interface as the supervised models (with `predict` meaning "assign to nearest centroid"). Unlike Days 13–17 there is no accuracy table for it — Week 4 evaluates it by inertia and by eyeball on the same EDA plots from Day 2. The standardize-then-cluster lesson (features beat algorithms, again after Day 15's radius rescue) returns on Week 4 Day 2 when encoding/scaling decisions on real data matter more than model choice. Last day of Week 3 — `/done` runs the Week 3 review quiz against the week's `done_when` before closing the week.
+
+**Today's artefacts:** `month_2/week_3/day_6/{learn,roadmap,coding_problems}.md`, `code/kmeans.py`, `code/tests/` (helpers hand checks + 3-blob fit + determinism + local-optima seeds + elbow + full `ValueError` contracts), videos via `video-researcher` (StatQuest K-means clustering, freeCodeCamp ML-for-Everybody K-Means sections — both verified via oEmbed; elbow + never-increases argument specced by hand in `learn.md` since neither video covers them).
