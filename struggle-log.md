@@ -319,3 +319,46 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   half before the noise-mechanism half, Q5's determinism half before the
   identical-trees half). Pattern stands; keep the explicit "give both halves"
   framing on multi-part questions.
+
+## 2026-10-08 — Day 18 (Month 2 Week 3 Day 6) — K-Means Clustering
+
+- 20/20 tests green at `/done` (2 euclidean + 2 assign + 2 recompute + 2
+  inertia + 3 standardize + 8 fit/predict/elbow + 1 elbow-sweep). Two
+  assistant-side fixes during the build (both documented in-session, not
+  learner code): `assign_clusters` inner loop `range(n)` → `range(len(centroids))`
+  (passed 3×3 unit test by coincidence, IndexError on 60-row fit data);
+  `test_recompute_centroids_rejects_bad_input` case used k=3/label-2 (valid
+  input — empty clusters keep prev centroids) → k=2. One learner regression
+  caught live: the label-range check got deleted in an edit (passing test
+  turned red); restored, plus the `git diff` habit taught for
+  passed-then-fails regressions.
+- Six-question quiz + 2 feedback, no flags, no discipline-log entries.
+  Q1 (seed sensitivity → local optima) first-ask correct. Q2 (never-increases
+  argument + why not global) first attempt gave the minimization half only;
+  re-ask landed the local-vs-global half (greedy downhill, no climbing out).
+  Q3 (×1000 stretch mechanism + standardize rescue) first-ask, thorough
+  (variance ×1e6, blind to feature 1); cited Month-1 PCA for the "seen before"
+  half instead of the in-course Week-1-Day-5/Day-15 sightings — accepted, same
+  lesson. Q4 (elbow picks vs proves) first-ask correct. Q5 (empty-cluster
+  convention in the learner's own code) took three rounds: first attempt
+  described sklearn's farthest-point reassignment instead of the learner's
+  keep-prev-centroid; second gave the mechanism ("because you said") without
+  the why; accepted by combining with the first attempt's why (mean of zero
+  members is 0/0, math would happily drop to k−1). Q6 (`n_iters_` meaning +
+  max_iters-with-shift warning) first-ask correct.
+- Explain-back given (nearest-assignment + converges-but-local); needed a
+  one-line steer sharpening the why-converges half (never-increases argument)
+  — non-blocking per /done step 5.
+- Self-reported difficulty `hard`; time not reported ("ya" to leaving it
+  blank, so `time_spent_minutes` stays `null` — never estimated); class size
+  not reported.
+- Material feedback: videos 2/10 (StatQuest K-means + freeCodeCamp ML-for-
+  Everybody sections, both watched) — lowest video rating of the month
+  (contrast Day 17 "good"). Follow-up: lean implementation-first picks for
+  Week 4 days; the bite-sized from-scratch series format (Loeber-style) has
+  the best reception record.
+- Confidence recorded as `shaky` (Q2 one re-ask, Q5 three rounds, no flags).
+- Pattern update: sixth occurrence of the half-answer slip (Q2's minimization
+  half before the local-optimum half; Q5's sklearn-what before the own-code
+  what+why). Also second occurrence of answering a *different* question than
+  asked (Q5: sklearn's convention vs the learner's own). Pattern stands.

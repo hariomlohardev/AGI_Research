@@ -41,3 +41,16 @@ Not a scolding — just a record, so the honesty of `state.json` stays auditable
   day unclosable. Code guidance offered instead.
 - **Outcome:** day left as `status: "current"`; implementation guidance given
   for `normal_equation.py`.
+
+## 2026-10-08 — Month 2, Day 18 (Week 3 Day 6 — K-Means Clustering)
+
+- **Asked:** to skip the Week 3 review quiz ("i dont have an answer for that"),
+  on the grounds that the goal is LLMs/AGI rather than classical ML.
+- **Declined.** `/done` step 9 requires the week's `done_when` to be answered
+  before `review_status` can be set to `done` — marking it reviewed without an
+  answer would falsify the record, same as skipping tests. (The LLM goal is
+  noted, not dismissed: gradients, likelihood, bias-variance, and honest
+  evaluation from these weeks are the machinery LLMs run on — but the week's
+  gate still needs its answer.)
+- **Outcome:** day and week left as-is (`status: "current"`, Week 3
+  `review_status: "pending"`); review re-asked in smaller pieces below.

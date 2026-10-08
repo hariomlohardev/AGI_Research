@@ -445,3 +445,40 @@ video search was down at generation time).
 **How it ties to `minisklearn`:** This is Week 4's `cluster.py` in embryo — the `KMeans` you write today *is* `cluster.py` once renamed, behind the same `fit`/`predict` interface as the supervised models (with `predict` meaning "assign to nearest centroid"). Unlike Days 13–17 there is no accuracy table for it — Week 4 evaluates it by inertia and by eyeball on the same EDA plots from Day 2. The standardize-then-cluster lesson (features beat algorithms, again after Day 15's radius rescue) returns on Week 4 Day 2 when encoding/scaling decisions on real data matter more than model choice. Last day of Week 3 — `/done` runs the Week 3 review quiz against the week's `done_when` before closing the week.
 
 **Today's artefacts:** `month_2/week_3/day_6/{learn,roadmap,coding_problems}.md`, `code/kmeans.py`, `code/tests/` (helpers hand checks + 3-blob fit + determinism + local-optima seeds + elbow + full `ValueError` contracts), videos via `video-researcher` (StatQuest K-means clustering, freeCodeCamp ML-for-Everybody K-Means sections — both verified via oEmbed; elbow + never-increases argument specced by hand in `learn.md` since neither video covers them).
+
+---
+
+## 2026-10-08 — Day 18 done: K-Means Clustering (global Day 18, Week 3 Day 6) + Week 3 review passed
+
+- **Result:** 20/20 tests passed (`euclidean` hand values, assignment +
+  tiebreak, centroid means + empty-cluster keeps-centroid, inertia hand
+  value 2.0, standardize incl. zero-variance, 3-blob purity + centroid
+  proximity, determinism, k=1 mean, `n_iters_`, full `ValueError` contracts,
+  elbow). Three debugging episodes during the build (all logged in-session):
+  (1) `assign_clusters` picked `max` (farthest) not `min`, plus inner loop
+  `range(n)` over rows instead of centroids — passed the 3×3 unit test by
+  coincidence, IndexError on 60-row fit data; (2) my test typo (k=3/label-2
+  is valid input) → k=2; (3) learner accidentally deleted the label-range
+  check mid-edit (green test turned red) — restored, `git diff` habit taught.
+- **Confidence:** `shaky` — Q1/Q4/Q6 first-ask, Q2 one re-ask (minimization
+  half before local-optimum half), Q3 accepted via Month-1 PCA sighting, Q5
+  three rounds (sklearn's farthest-point first, then mechanism without why —
+  combined). No flags. Explain-back given, needed one steer on the
+  why-converges half. Self-reported difficulty `hard`; time and class size
+  not reported (so `time_spent_minutes` stays `null`).
+- **Material feedback:** videos 2/10 (StatQuest K-means + freeCodeCamp
+  sections, both watched) — lowest video rating of the month. Follow-up:
+  implementation-first picks for Week 4.
+- **Week 3 review: passed** — classical ML not outdated (interpretability
+  for regulated small-table jobs: readable tree paths vs opaque weights),
+  K-Means as the no-labels complement (produces cluster assignments the
+  supervised days can't). One discipline-log entry: initial refusal to
+  answer the review (LLM/AGI goal cited) — declined, re-asked in smaller
+  pieces (R1 took three rounds, R2 two), then passed.
+- **Advances to:** Day 19 (global 19) — Week 4 Day 1, Package Structure
+  (`minisklearn`) (`/i-am-in` next).
+- **Code review:** `month_2/week_3/day_6/code_review.md` (12 findings, style
+  only; headline: whitespace clusters, 6× duplicated validation, `== None`
+  and redundant-parens reappearing after Day 16–17 fixes). `growth-notes.md`
+  updated — one new Theme promoted (`list()`-for-empty-list, days 14/15/18);
+  attribute-in-`__init__` fix holds. No new badge.

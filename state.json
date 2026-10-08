@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 18,
+  "current_day": 19,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -369,7 +369,7 @@
         },
         "3": {
           "done_when": "Build the algorithms that ran the world before deep learning — and understand that they're not \"outdated,\" they're still the right tool for a huge fraction of real-world problems (tabular data, small datasets, interpretability requirements).",
-          "review_status": "pending",
+          "review_status": "done",
           "days": {
             "1": {
               "day_in_week": 1,
@@ -511,7 +511,7 @@
               "day_in_week": 6,
               "global_day": 18,
               "label": "Day 6",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "K-Means Clustering",
@@ -519,10 +519,10 @@
                 "math-heavy",
                 "coding-heavy"
               ],
-              "difficulty": null,
+              "difficulty": "hard",
               "time_spent_minutes": null,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "shaky",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -546,7 +546,7 @@
               "day_in_week": 1,
               "global_day": 19,
               "label": "Day 1",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

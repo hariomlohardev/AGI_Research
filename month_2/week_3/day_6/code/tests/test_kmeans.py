@@ -85,7 +85,7 @@ def test_recompute_centroids_rejects_bad_input():
     with pytest.raises(ValueError):
         recompute_centroids([[0.0]], [0], 0, [[0.0]])
     with pytest.raises(ValueError):
-        recompute_centroids([[0.0]], [2], 3, [[0.0], [1.0], [2.0]])
+        recompute_centroids([[0.0]], [2], 2, [[0.0], [1.0]])
     with pytest.raises(ValueError):
         recompute_centroids([[0.0, 0.0]], [0], 1, [[0.0]])
 

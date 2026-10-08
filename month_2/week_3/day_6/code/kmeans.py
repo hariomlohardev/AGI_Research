@@ -21,13 +21,24 @@ import math
 import random
 
 
+def if_empty_raise(data:list,message=""):
+    if len(data) == 0 :
+        raise ValueError(message)
+
 def euclidean(a: Sequence[float], b: Sequence[float]) -> float:
     """Return the Euclidean distance between two equal-length points.
 
     Raises:
         ValueError: if either point is empty or their lengths differ.
     """
-    raise NotImplementedError
+    if_empty_raise(a, "a is empty")
+    if_empty_raise(b, "b is empty")
+
+    if len(a) != len(b):
+        raise ValueError("The lenght of a and b is different")
+
+    distance = math.sqrt(sum((x2-x1)**2 for x1, x2 in zip(a,b)))
+    return distance
 
 
 def assign_clusters(
@@ -43,7 +54,30 @@ def assign_clusters(
             ragged, points are zero-dimensional, or a centroid's
             dimensionality differs from the points'.
     """
-    raise NotImplementedError
+    if_empty_raise(X , 'X is empty')
+    if_empty_raise(centroids , 'centroids is empty')
+
+    if not all(len(x) == len(X[0]) for x in X):
+        raise ValueError("rows of X are ragged")
+
+    if len(X[0]) == 0:
+        raise ValueError("points are zero-dimensional")
+
+    if len(X[0]) != len(centroids[0]):
+        raise ValueError("centroid's dimensionality differs from the points")
+
+    n = len(X)
+    out = []
+    for i in range(n):
+        row1  = X[i]
+        temp_dist = []
+        for j in range(len(centroids)):
+            row2 = centroids[j]
+            dist = euclidean(row1 ,row2)
+            temp_dist.append(dist)
+        out.append(temp_dist.index(min(temp_dist)))
+    
+    return out
 
 
 def recompute_centroids(
@@ -54,16 +88,52 @@ def recompute_centroids(
 ) -> list[list[float]]:
     """Return the mean of each cluster's assigned points.
 
-    A cluster with no assigned points keeps its previous centroid. This
     is a documented convention, not a mathematical fact.
 
     Raises:
+    A cluster with no assigned points keeps its previous centroid. This
         ValueError: if ``X`` is empty, ``len(X) != len(labels)``, rows of
             ``X`` are ragged, ``k < 1``, any label is outside
             ``0 <= label < k``, or a previous centroid's dimensionality
             differs from the points'.
     """
-    raise NotImplementedError
+
+    if_empty_raise(X , "X is empty")
+
+    if len(X) != len(labels):
+        raise ValueError("lenths of X and labels doiffer")
+
+    if not all(len(x) == len(X[0]) for x in X):
+        raise ValueError("rows of X are ragged")
+
+    if k < 1 :
+        raise ValueError("k cant be less than 1 ")
+
+    if any(label < 0 or label >= k for label in labels):
+        raise ValueError("labels should follow this ``0 <= label < k``")
+
+    dim =len(X[0])
+
+    for i, centroid in enumerate(prev_centroids):
+        if len(centroid) != dim:
+            raise ValueError(
+                f"Dimensionality of prev_centroids[{i}] ({len(centroid)}) "
+                f"differs from points ({dim})."
+            )
+
+    new_centroids = []
+    for j in range(k):
+        members = [X[i] for i in range(len(X)) if labels[i] == j]
+
+        if len(members) == 0:
+            new_centroids.append(list(prev_centroids[j]))
+
+        else:
+            mean  = [sum(row[d] for row in members) / len(members) for d in range(dim)]
+            new_centroids.append(mean)
+
+    return new_centroids
+             
 
 
 def inertia(
@@ -81,7 +151,25 @@ def inertia(
             ``X`` are ragged, or any label is outside
             ``0 <= label < len(centroids)``.
     """
-    raise NotImplementedError
+
+    if_empty_raise(X , "X is empty")
+
+    if len(X) != len(labels):
+        raise ValueError("lenths of X and labels doiffer")
+    
+    if not all(len(x) == len(X[0]) for x in X):
+        raise ValueError("rows of X are ragged")
+
+    if any(label < 0 or label >= len(centroids) for label in labels):
+        raise ValueError("labels should follow this ``0 <= label < len(centroids)``")
+
+
+    output = 0
+
+    for row , label in zip(X,labels):
+        output += euclidean(row , centroids[label]) ** 2
+
+    return output
 
 
 def standardize(
@@ -97,7 +185,36 @@ def standardize(
         ValueError: if ``X`` is empty, rows of ``X`` are ragged, or points
             are zero-dimensional.
     """
-    raise NotImplementedError
+    if_empty_raise(X , "X is empty")
+    
+    if not all(len(x) == len(X[0]) for x in X):
+        raise ValueError("rows of X are ragged")
+
+    if len(X[0]) == 0:
+        raise ValueError("length of rows is zero ")
+
+
+    X_std, means, stds = list() , list() , list()
+
+    columns = [list(col) for col in zip(*X)]
+    for col in columns:
+        n = len(col)
+        mean  = sum(col)/(n)
+        std = math.sqrt(sum((x - mean)**2 for x in col)/ n)
+        if std == 0:
+            x_std =  [(value - mean)/ 1 for value in col]
+        else:
+            x_std =  [(value - mean)/ std for value in col]
+
+        means.append(mean)
+        stds.append(std)
+        X_std.append(x_std)
+
+    X_std = [list(row) for row in zip(*X_std)]
+
+    return (X_std, means, stds)
+
+
 
 
 class KMeans:
@@ -123,7 +240,23 @@ class KMeans:
             ValueError: if ``n_clusters < 1``, ``max_iters < 1``, or
                 ``tol < 0``.
         """
-        raise NotImplementedError
+        if n_clusters < 1:
+            raise ValueError("n_clusters should be more than or equal to 1")
+        
+        if max_iters < 1:
+            raise ValueError("max_iters should be more than or equal to 1")
+
+        if tol < 0 :
+            raise ValueError("tol can't be less than 0")
+
+        self.n_clusters = n_clusters
+        self.max_iters = max_iters
+        self.tol = tol
+        self.random_state = random_state
+        self.cluster_centers_ = None
+        self.n_iters_ = 0
+        
+        
 
     def fit(self, X: Sequence[Sequence[float]]) -> KMeans:
         """Run Lloyd iterations to convergence; return ``self``.
@@ -139,7 +272,36 @@ class KMeans:
                 are zero-dimensional, or ``n_clusters`` exceeds the number
                 of rows.
         """
-        raise NotImplementedError
+            
+        if_empty_raise(X , "X is empty")
+        
+        if not all(len(x) == len(X[0]) for x in X):
+            raise ValueError("rows of X are ragged")
+
+        if len(X[0]) == 0:
+            raise ValueError("length of rows is zero ")
+
+        if self.n_clusters > len(X):
+            raise ValueError("``n_clusters`` exceeds the number of rows.")
+
+        
+        rng = random.Random(self.random_state)
+
+        centroids = [list(p) for p in rng.sample(list(X), self.n_clusters)]
+        n_iters = 0
+        for _ in range(self.max_iters):
+            labels = assign_clusters(X, centroids)
+            new_centroids = recompute_centroids(X, labels, self.n_clusters, centroids)
+            shift = max(euclidean(o, n) for o, n in zip(centroids, new_centroids))
+            centroids, n_iters = new_centroids, n_iters + 1
+            if shift <= self.tol:
+                break
+        self.cluster_centers_, self.n_iters_ = centroids, n_iters
+
+        return self
+
+
+        
 
     def predict(self, X: Sequence[Sequence[float]]) -> list[int]:
         """Assign each row to its nearest fitted centroid (no re-fitting).
@@ -148,7 +310,24 @@ class KMeans:
             ValueError: if called before ``fit``, or on empty, ragged, or
                 width-mismatched input.
         """
-        raise NotImplementedError
+
+        if self.cluster_centers_ == None:
+            raise ValueError("call fit() first ")
+        
+        if_empty_raise(X , "X is empty")
+        
+        if not all(len(x) == len(X[0]) for x in X):
+            raise ValueError("rows of X are ragged")
+
+        if len(X[0]) == 0:
+            raise ValueError("length of rows is zero ")
+
+        if self.n_clusters > len(X):
+            raise ValueError("``n_clusters`` exceeds the number of rows.")
+
+        return assign_clusters(X, self.cluster_centers_) 
+
+        
 
 
 def elbow_inertias(
@@ -166,7 +345,17 @@ def elbow_inertias(
         ValueError: if ``X`` is empty or ``k_range`` is empty or contains
             any ``k < 1``.
     """
-    raise NotImplementedError
+    if_empty_raise(X, "X is empty")
+    if_empty_raise(k_range, "k_range is empty")
+
+    if any(k < 1 for k in k_range):
+        raise ValueError("k_range must contain only k >= 1")
+
+    values = []
+    for k in k_range:
+        model = KMeans(n_clusters=k, random_state=random_state).fit(X)
+        values.append(inertia(X, model.predict(X), model.cluster_centers_))
+    return values
 
 
 def _make_blobs(
