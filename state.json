@@ -549,8 +549,11 @@
               "status": "current",
               "has_flags": false,
               "mode": "guided",
-              "topic": null,
-              "tags": [],
+              "topic": "Package Structure (minisklearn)",
+              "tags": [
+                "coding-heavy",
+                "conceptual"
+              ],
               "difficulty": null,
               "time_spent_minutes": null,
               "expected_minutes": null,

@@ -482,3 +482,13 @@ video search was down at generation time).
   and redundant-parens reappearing after Day 16–17 fixes). `growth-notes.md`
   updated — one new Theme promoted (`list()`-for-empty-list, days 14/15/18);
   attribute-in-`__init__` fix holds. No new badge.
+
+---
+
+## Week 4 Day 1 — Package Structure (global Day 19) — 2026-10-08
+
+**Topic:** `minisklearn/` skeleton + move map + `metrics.py` (new) + `__init__.py` front door
+
+**How it ties to `minisklearn`:** Today IS the final project, day one of six — the package created here is the artifact Days 2–6 operate on (real data → eval → sklearn showdown → write-up → GitHub). Unlike Weeks 1–3, implementations are COPIES (the week folders are the archive, never edited for Week 4 reasons) and the package lives month-level at `month_2/minisklearn/` so all six days share it. The uniform `.fit/.predict` interface is load-bearing: Day 3's harness loops over models without glue code, Day 4 runs the identical loop against real `sklearn`. Only genuinely new code today is `metrics.py` (adapting Day 14's trio + new `f1_score`); everything else is move + normalize + document.
+
+**Today's artefacts:** `month_2/week_4/day_1/{learn,coding_problems,roadmap}.md` (videos via `video-researcher`: Tech With Tim `__init__.py` deep-dive, 2MinutesPy 3-min API-design nudge, ArjanCodes packaging arc first half — all verified live; deliberately short/build-first after the Day-18 2/10 verdict), `month_2/minisklearn/` (`__init__` + 4 move-map skeletons + `metrics.py` stub with full `Raises` contracts), `code/tests/test_package.py` (imports + top-level exposure + interface uniformity + smoke fits + metrics hand values, ~11 tests; green-on-skeleton: 1 pass, 10 fail on `NotImplementedError`/missing names — the task list, not a regression).
