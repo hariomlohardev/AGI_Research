@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 19,
+  "current_day": 20,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -546,18 +546,18 @@
               "day_in_week": 1,
               "global_day": 19,
               "label": "Day 1",
-              "status": "current",
-              "has_flags": false,
+              "status": "done",
+              "has_flags": true,
               "mode": "guided",
               "topic": "Package Structure (minisklearn)",
               "tags": [
                 "coding-heavy",
                 "conceptual"
               ],
-              "difficulty": null,
-              "time_spent_minutes": null,
+              "difficulty": "easy",
+              "time_spent_minutes": 240,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "shaky",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -575,7 +575,7 @@
               "day_in_week": 2,
               "global_day": 20,
               "label": "Day 2",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

@@ -362,3 +362,42 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   half before the local-optimum half; Q5's sklearn-what before the own-code
   what+why). Also second occurrence of answering a *different* question than
   asked (Q5: sklearn's convention vs the learner's own). Pattern stands.
+
+## 2026-10-14 — Day 19 (Month 2 Week 4 Day 1) — Package Structure (minisklearn)
+
+- 11/11 tests green at `/done`, but only after three pre-quiz debug rounds
+  on the moved package (all package-side, none test-side): `__init__.py`
+  still the empty scaffold (no re-exports → `LinearRegression missing`);
+  `tree.py` generator-instead-of-`set` plus `.items()`-instead-of-keys
+  regressions from the Day-16 move; `LogisticRegression.fit` returning the
+  loss-history list instead of `self` (uniform-interface rule). Each fixed
+  and re-run live (8 → 9 → 10 → 11).
+- Six-question quiz + 2 feedback, one flag, no discipline-log entries.
+  Q1 (uniform interface → model loop) first-ask correct. Q2 (empty vs wired
+  `__init__`) first-ask correct. Q3 (relative-import mechanism) accepted
+  first-ask with a one-line steer on the why (copies diverge, `sys.path`
+  hacks are cwd-fragile). Q4 (hand values `[[2,1],[1,2]]`, 4/6, 2/3 ×3)
+  all correct first-ask. Q5 two-parter: the KMeans-no-`y` half first-ask,
+  the predict-before-fit half took two re-asks (normal flow described twice
+  before landing "refuse — no parameters exist yet", i.e. the `ValueError`
+  `test_predict_before_fit_raises` locks in). Q6 (why zero-division
+  conventions return `0.0`) never landed across three attempts — circular
+  ("because of conventions") then mechanistic ("because it give the zero
+  divition error") without reaching the design reason — then flagged via
+  the escape hatch ("i dont quiet understnad what you want from me"),
+  logged to `month_2/week_4/day_1/flagged_questions.md`; `has_flags` true.
+- Explain-back reasonable (same verbs, seamless use, front door eases
+  imports) with a one-line steer toward the loop payoff — non-blocking.
+- Self-reported time "4 hrs" → `time_spent_minutes: 240`; difficulty
+  `easy`.
+- Material feedback: videos 4/10 with "i like big videos that explains
+  all" — third explicit big-lecture ask (Days 15, 16, 19) against the short
+  picks; F2 "NA".
+- Confidence recorded as `shaky` (Q5 re-asks + one flag; Q1–Q4 clean).
+- Pattern update: seventh occurrence of the half-answer slip (Q5's
+  unsupervised half before the predict-before-fit half). The Q6 block is a
+  first-time concept (convention-rationale: loop-robustness + honest-zero),
+  not a concept pattern — but note the answering shape matches Day 8's
+  "don't understand the question" mid-quiz stalls, which resolved there via
+  concrete restatement (same move tried here, didn't land). Revisit Q6 via
+  `/spaced-review` before Day 3's evaluation harness leans on it.

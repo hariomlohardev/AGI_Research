@@ -10,17 +10,44 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
+from .utils import if_empty_raise
 
-def confusion_matrix(
-    y_true: Sequence[int], y_pred: Sequence[int]
-) -> list[list[int]]:
+
+def confusion_matrix(y_true: Sequence[int], y_pred: Sequence[int]) -> list[list[int]]:
     """Return `[[TN, FP], [FN, TP]]` (sklearn layout, positive class 1).
 
     Raises:
         ValueError: if either list is empty, lengths differ, or any label
             is not binary (`0` or `1`).
     """
-    raise NotImplementedError
+
+    if_empty_raise(y_true, "y_true is empty")
+    if_empty_raise(y_pred, "y_pred is empty")
+
+    if len(y_pred) != len(y_true):
+        raise ValueError("the length of y_pred is different from y_true")
+
+    if any(val not in (0,1) for val in y_true):
+         raise ValueError("the labels should be binary (1, 0)")
+    
+    
+    TN, FP, FN, TP = 0,0,0,0
+    for i in range(len(y_pred)):
+        if y_true[i] == 1 and y_pred[i] == 1:
+            TP += 1
+                
+        if y_true[i] == 1 and y_pred[i] == 0:
+            FN += 1
+                
+        if y_true[i] == 0 and y_pred[i] == 0:
+            TN += 1
+
+        if y_true[i] == 0 and y_pred[i] == 1:
+            FP += 1
+
+    return [[TN, FP], [FN, TP]]
+
+    
 
 
 def accuracy_score(y_true: Sequence[int], y_pred: Sequence[int]) -> float:
@@ -30,7 +57,22 @@ def accuracy_score(y_true: Sequence[int], y_pred: Sequence[int]) -> float:
         ValueError: if either list is empty, lengths differ, or any label
             is not binary (`0` or `1`).
     """
-    raise NotImplementedError
+    if_empty_raise(y_true, "y_true is empty")
+    if_empty_raise(y_pred, "y_pred is empty")
+
+    if len(y_pred) != len(y_true):
+        raise ValueError("the length of y_pred is different from y_true")
+
+    if any(val not in (0,1) for val in y_true):
+         raise ValueError("the labels should be binary (1, 0)")
+
+    cm = confusion_matrix(y_true , y_pred)
+
+    TN, FP, FN, TP = cm[0][0], cm[0][1], cm[1][0], cm[1][1]
+
+    return (TP + TN)/ len(y_pred)
+
+
 
 
 def precision_score(y_true: Sequence[int], y_pred: Sequence[int]) -> float:
@@ -43,7 +85,20 @@ def precision_score(y_true: Sequence[int], y_pred: Sequence[int]) -> float:
         ValueError: if either list is empty, lengths differ, or any label
             is not binary (`0` or `1`).
     """
-    raise NotImplementedError
+    if_empty_raise(y_true, "y_true is empty")
+    if_empty_raise(y_pred, "y_pred is empty")
+
+    if len(y_pred) != len(y_true):
+        raise ValueError("the length of y_pred is different from y_true")
+
+    if any(val not in (0,1) for val in y_true):
+         raise ValueError("the labels should be binary (1, 0)")
+
+    cm = confusion_matrix(y_true , y_pred)
+
+    TN, FP, FN, TP = cm[0][0], cm[0][1], cm[1][0], cm[1][1]
+
+    return 0.0 if (TP + FP) == 0 else TP / (TP + FP)
 
 
 def recall_score(y_true: Sequence[int], y_pred: Sequence[int]) -> float:
@@ -56,7 +111,22 @@ def recall_score(y_true: Sequence[int], y_pred: Sequence[int]) -> float:
         ValueError: if either list is empty, lengths differ, or any label
             is not binary (`0` or `1`).
     """
-    raise NotImplementedError
+
+    if_empty_raise(y_true, "y_true is empty")
+    if_empty_raise(y_pred, "y_pred is empty")
+
+    if len(y_pred) != len(y_true):
+        raise ValueError("the length of y_pred is different from y_true")
+
+    if any(val not in (0,1) for val in y_true):
+         raise ValueError("the labels should be binary (1, 0)")
+
+
+    cm = confusion_matrix(y_true , y_pred)
+
+    TN, FP, FN, TP = cm[0][0], cm[0][1], cm[1][0], cm[1][1]
+
+    return 0.0 if (TP + FN) == 0 else TP / (TP + FN)
 
 
 def f1_score(y_true: Sequence[int], y_pred: Sequence[int]) -> float:
@@ -70,4 +140,19 @@ def f1_score(y_true: Sequence[int], y_pred: Sequence[int]) -> float:
         ValueError: if either list is empty, lengths differ, or any label
             is not binary (`0` or `1`).
     """
-    raise NotImplementedError
+    if_empty_raise(y_true, "y_true is empty")
+    if_empty_raise(y_pred, "y_pred is empty")
+
+    if len(y_pred) != len(y_true):
+        raise ValueError("the length of y_pred is different from y_true")
+
+    if any(val not in (0,1) for val in y_true):
+         raise ValueError("the labels should be binary (1, 0)")
+
+    cm = confusion_matrix(y_true , y_pred)
+
+    TN, FP, FN, TP = cm[0][0], cm[0][1], cm[1][0], cm[1][1]
+    P = precision_score(y_true,y_pred)
+    R = recall_score(y_true,y_pred)
+    
+    return 0.0 if P+R == 0 else 2 * P * R / (P + R) 
