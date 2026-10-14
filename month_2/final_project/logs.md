@@ -523,3 +523,27 @@ video search was down at generation time).
   Days 16–17 clean). `growth-notes.md` updated — no new promotions; all
   imports relative (bare-sibling-import theme's first clean day). No new
   badge.
+
+---
+
+## Week 4 Day 2 — Apply to a Real Dataset (global Day 20) — 2026-10-14
+
+**Topic:** Titanic EDA (missingness, balance, distributions) → mean-impute
++ encode → stratified split, stdlib-only
+
+**How it ties to `minisklearn`:** Today produces the fuel Days 3–6 burn:
+clean `X_train/X_test/y_train/y_test` from a genuine messy CSV. Day 3
+trains + scores with the Day-19 metrics, Day 4 reruns the identical
+pipeline against real `sklearn` (fill value and mappings must be on
+record or the comparison is rigged), Day 5 writes up the numbers.
+
+**Today's artefacts:** `month_2/week_4/day_2/{learn,coding_problems,roadmap}.md`
+(videos via `video-researcher`, all verified live via oEmbed: Great Learning
+~4.5h EDA tutorial as primary, Simplilearn EDA project, freeCodeCamp full
+course as backup, Alex The Analyst focused companion — deliberately long
+picks per the learner's big-video ask; all use pandas on screen, framed as
+checklist-not-code since the learner hand-rolls in stdlib),
+`code/{eda,encode,split}.py` stubs, `code/data/titanic.csv` vendored
+(891 rows, 12 cols; Age 177 / Embarked 2 missing, 342 survived — verified
+by fetching + counting, never fabricated), `code/tests/test_data_prep.py`
+(10 tests: synthetic fixtures + CSV pins).
