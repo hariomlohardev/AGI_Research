@@ -538,11 +538,12 @@ pipeline against real `sklearn` (fill value and mappings must be on
 record or the comparison is rigged), Day 5 writes up the numbers.
 
 **Today's artefacts:** `month_2/week_4/day_2/{learn,coding_problems,roadmap}.md`
-(videos via `video-researcher`, all verified live via oEmbed: Great Learning
-~4.5h EDA tutorial as primary, Simplilearn EDA project, freeCodeCamp full
-course as backup, Alex The Analyst focused companion — deliberately long
-picks per the learner's big-video ask; all use pandas on screen, framed as
-checklist-not-code since the learner hand-rolls in stdlib),
+(videos via `video-researcher`, all verified live via oEmbed: Alex The Analyst
+EDA walkthrough ~32 min as primary, Rob Mulla Kaggle intro ~39 min, Alex
+Data Cleaning ~39 min, codebasics one-hot ~22 min — right-sized picks per
+the learner's correction that long videos are for complex topics only;
+all use pandas on screen, framed as checklist-not-code since the learner
+hand-rolls in stdlib),
 `code/{eda,encode,split}.py` stubs, `code/data/titanic.csv` vendored
 (891 rows, 12 cols; Age 177 / Embarked 2 missing, 342 survived — verified
 by fetching + counting, never fabricated), `code/tests/test_data_prep.py`

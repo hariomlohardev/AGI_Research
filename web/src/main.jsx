@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import ReactMarkdown from 'react-markdown';
 import { ArrowUpRight, ArrowRight, BookOpen, Check, ChevronRight, Circle, Clock3, Code2, FileText, Flame, Flower2, FolderOpen, GitPullRequest, LayoutDashboard, Leaf, Library, LoaderCircle, Moon, RefreshCw, Search, ShieldCheck, Sparkles, Sprout, Sun, Target, Trophy, X } from 'lucide-react';
 import { dateKey, dayDocuments, dayTitle, flatten, needsAttention, pretty, studyStreak, summarize } from './model.js';
 import './styles.css';
+import DocumentPage from './DocumentPage.jsx';
 
 const navigation = [
   ['Overview', LayoutDashboard], ['Curriculum', BookOpen], ['Reviews', RefreshCw], ['Projects', Code2], ['Library', Library],
@@ -11,6 +11,7 @@ const navigation = [
 const badgeIcons = { 'first-day-done': Sprout, 'five-day-streak': Flame, comeback: Sparkles, 'first-micro-project': Code2, 'flawless-week': Trophy, 'month-complete': Trophy, 'first-oss-pr': GitPullRequest };
 const docName = path => pretty(path.split('/').at(-1).replace('.md', ''));
 const safeLink = value => /^https?:\/\//i.test(value || '') ? value : undefined;
+const documentFromHash = () => new URLSearchParams(location.hash.slice(1)).get('document');
 
 function Status({ status }) { return <span className={`status ${status}`}>{status === 'done' && <Check size={12} />}{status === 'current' && <span className="live-dot" />}{status === 'current' ? 'In progress' : pretty(status)}</span>; }
 function Empty({ icon: Icon = Leaf, title, children }) { return <div className="empty"><Icon size={32} strokeWidth={1.5} /><h3>{title}</h3><p>{children}</p></div>; }
@@ -27,7 +28,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('all');
   const [selectedDay, setSelectedDay] = useState(null);
-  const [selectedDoc, setSelectedDoc] = useState(null);
+  const [selectedDoc, updateSelectedDoc] = useState(documentFromHash);
   const [dark, setDark] = useState(() => { try { return localStorage.getItem('bloom-theme') === 'dark'; } catch { return false; } });
   const dialog = useRef(null);
   const focusBeforeDialog = useRef(null);
@@ -49,8 +50,17 @@ function App() {
   }
   useEffect(() => { refresh(); const timer = setInterval(refresh, 30000); return () => { clearInterval(timer); request.current?.abort(); }; }, []);
   useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; try { localStorage.setItem('bloom-theme', dark ? 'dark' : 'light'); } catch { /* Theme still works without storage. */ } }, [dark]);
-  useEffect(() => { const handler = () => { const value = pretty(location.hash.slice(1)); if (navigation.some(([name]) => name === value)) { setPage(value); setQuery(''); } }; addEventListener('hashchange', handler); return () => removeEventListener('hashchange', handler); }, []);
-  const isDialogOpen = Boolean(selectedDay || selectedDoc);
+  useEffect(() => {
+    const handler = () => {
+      updateSelectedDoc(documentFromHash());
+      const value = pretty(location.hash.slice(1));
+      if (navigation.some(([name]) => name === value)) setPage(value);
+    };
+    addEventListener('hashchange', handler);
+    addEventListener('popstate', handler);
+    return () => { removeEventListener('hashchange', handler); removeEventListener('popstate', handler); };
+  }, []);
+  const isDialogOpen = Boolean(selectedDay && !selectedDoc);
   useEffect(() => {
     if (isDialogOpen && !dialog.current?.open) { focusBeforeDialog.current = document.activeElement; dialog.current?.showModal(); }
     if (!isDialogOpen && dialog.current?.open) { dialog.current.close(); focusBeforeDialog.current?.focus(); }
@@ -59,6 +69,14 @@ function App() {
   }, [isDialogOpen]);
   function go(name) { setPage(name); setQuery(''); setFilter('all'); location.hash = name.toLowerCase(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
   function closeDialog() { setSelectedDay(null); setSelectedDoc(null); }
+  function setSelectedDoc(path) {
+    if (path && path !== selectedDoc) history.pushState({ bloomDocument: true }, '', `#document=${encodeURIComponent(path)}`);
+    updateSelectedDoc(path);
+  }
+  function backFromDocument() {
+    if (history.state?.bloomDocument) history.back();
+    else { updateSelectedDoc(null); go('Library'); }
+  }
 
   if (!payload) return <div className="boot"><Flower2 size={50} /><h1>Room to grow.</h1><p>{error || 'Gathering your learning journey…'}</p>{error && <button className="primary" onClick={refresh}>Try again</button>}</div>;
   const { state, documents, schema } = payload;
@@ -77,6 +95,8 @@ function App() {
   const match = day => `${dayTitle(day)} ${day.tags.join(' ')} week ${day.week} day ${day.global_day}`.toLowerCase().includes(query.toLowerCase());
   const searchDays = days.filter(match).filter(day => filter === 'all' || day.status === filter);
 
+  if (selectedDoc) return <DocumentPage key={selectedDoc} document={doc} path={selectedDoc} documents={documents} onBack={backFromDocument} onOpen={setSelectedDoc} dark={dark} onToggleTheme={() => setDark(!dark)} error={error} />;
+
   const DayRow = ({ day, compact = false }) => <button className={`day-row ${compact ? 'compact' : ''}`} onClick={() => { setSelectedDoc(null); setSelectedDay(day.id); }}>
     <span className={`day-icon ${day.status}`}>{day.status === 'done' ? <Check size={18} /> : day.status === 'rest' ? <Moon size={18} /> : day.status === 'current' ? <ArrowRight size={18} /> : <span>{day.global_day}</span>}</span>
     <span className="day-copy"><small>WEEK {day.week} · DAY {day.day_in_week}</small><strong>{dayTitle(day)}</strong>{!compact && <span>{day.tags.length ? day.tags.join(' · ') : pretty(day.mode)}{day.confidence && ` · ${pretty(day.confidence)} confidence`}</span>}</span>
@@ -87,7 +107,7 @@ function App() {
     <aside className="sidebar">
       <a className="brand" href="#overview" onClick={event => { event.preventDefault(); go('Overview'); }}><span className="brand-mark"><Flower2 size={27} /></span>bloom<span className="brand-period">.</span></a>
       <div className="space-label">YOUR LEARNING SPACE</div>
-      <nav aria-label="Main navigation">{navigation.map(([name, Icon]) => <button key={name} className={`nav-item ${page === name ? 'active' : ''}`} onClick={() => go(name)} aria-current={page === name ? 'page' : undefined}><Icon size={21} /><span>{name}</span>{name === 'Reviews' && stats.due.length > 0 && <span className="nav-count">{stats.due.length}</span>}</button>)}</nav>
+      <nav aria-label="Main navigation">{navigation.map(([name, Icon]) => <button key={name} aria-label={name} title={name} className={`nav-item ${page === name ? 'active' : ''}`} onClick={() => go(name)} aria-current={page === name ? 'page' : undefined}><Icon size={21} /><span>{name}</span>{name === 'Reviews' && stats.due.length > 0 && <span className="nav-count">{stats.due.length}</span>}</button>)}</nav>
       <div className="sidebar-bottom"><div className="grow-note"><Sprout size={28} /><strong>A little every day.<br />A lot over time.</strong><p>This is what progress looks like.</p></div><div className="profile"><span className="avatar">Y</span><div><strong>Your journey</strong><small>{pretty(monthData.skill_level)} learner</small></div><Leaf size={18} /></div></div>
     </aside>
 
@@ -120,9 +140,9 @@ function App() {
       </div>
     </main>
 
-    <dialog ref={dialog} className={`detail-dialog ${doc ? 'reader-dialog' : ''}`} onCancel={event => { event.preventDefault(); closeDialog(); }} onClick={event => { if (event.target === dialog.current) closeDialog(); }} aria-labelledby="dialog-title">
+    <dialog ref={dialog} className="detail-dialog" onCancel={event => { event.preventDefault(); closeDialog(); }} onClick={event => { if (event.target === dialog.current) closeDialog(); }} aria-labelledby="dialog-title">
       <div className="dialog-top"><span><Flower2 size={19} />{doc ? 'YOUR LEARNING LIBRARY' : 'A CLOSER LOOK'}</span><button className="icon-button" onClick={closeDialog} aria-label="Close details"><X size={21} /></button></div>
-      {doc ? <div className="reader">{selected && <button className="text-button" onClick={() => setSelectedDoc(null)}>← Back to day</button>}<p className="doc-path">{doc.path}</p><h2 id="dialog-title">{docName(doc.path)}</h2><article className="markdown"><ReactMarkdown components={{ a: ({ href, children }) => { if (safeLink(href)) return <a href={href} target="_blank" rel="noreferrer">{children}</a>; if (href?.startsWith('#')) return <a href={href}>{children}</a>; let resolved; try { resolved = new URL(href || '', `https://local.invalid/${doc.path}`).pathname.slice(1); } catch { return <span>{children}</span>; } return documents.some(item => item.path === resolved) ? <button className="inline-link" onClick={() => setSelectedDoc(resolved)}>{children}</button> : <span title={href}>{children}</span>; }, img: ({ alt }) => <span className="muted">[Image: {alt || 'reference image'}]</span> }}>{doc.content}</ReactMarkdown></article></div> : selected && <div className="day-detail"><div className="eyebrow">MONTH {selected.month} · WEEK {selected.week} · DAY {selected.day_in_week}</div><h2 id="dialog-title">{dayTitle(selected)}</h2><Status status={selected.status} /><div className="detail-grid">{[['Mode', pretty(selected.mode)], ['Confidence', selected.confidence ? pretty(selected.confidence) : 'Not recorded'], ['Study time', selected.time_spent_minutes == null ? 'Not recorded' : `${selected.time_spent_minutes} min`], ['Expected time', selected.expected_minutes == null ? 'Not specified' : `${selected.expected_minutes} min`], ['Difficulty', selected.difficulty ? pretty(selected.difficulty) : 'Not recorded'], ['Reviews', selected.review_history.times_reviewed], ['Last reviewed', selected.review_history.last_reviewed || 'Not yet'], ['Next review', selected.srs.next_review_due || 'Not scheduled']].map(([label, value]) => <div key={label}><small>{label}</small><strong>{value}</strong></div>)}</div>{selected.has_flags && <div className="notice attention">This day has flagged quiz questions.</div>}{selected.tags.length > 0 && <div className="review-tags">{selected.tags.map(tag => <span className="tag" key={tag}>{tag}</span>)}</div>}<h3>Learning materials</h3>{dayDocuments(documents, selected).length ? dayDocuments(documents, selected).map(item => <button key={item.path} className="document-row" onClick={() => setSelectedDoc(item.path)}><FileText size={19} /><span>{docName(item.path)}<small>{item.path.slice(selected.folder.length + 1)}</small></span><ArrowUpRight size={17} /></button>) : <p className="muted">No materials generated for this day yet.</p>}{selected.confusion_notes.length > 0 && <><h3>Confusion notes</h3>{selected.confusion_notes.map((note, index) => <blockquote key={index}>{note.note}<small>{note.date}</small></blockquote>)}</>}<div className="detail-actions"><p>Continue in your curriculum assistant. These buttons copy commands.</p><div><Command value={selected.status === 'current' ? '/i-am-in' : '/progress'} /><Command value="/spaced-review" /></div></div></div>}
+      {selected && <div className="day-detail"><div className="eyebrow">MONTH {selected.month} · WEEK {selected.week} · DAY {selected.day_in_week}</div><h2 id="dialog-title">{dayTitle(selected)}</h2><Status status={selected.status} /><div className="detail-grid">{[['Mode', pretty(selected.mode)], ['Confidence', selected.confidence ? pretty(selected.confidence) : 'Not recorded'], ['Study time', selected.time_spent_minutes == null ? 'Not recorded' : `${selected.time_spent_minutes} min`], ['Expected time', selected.expected_minutes == null ? 'Not specified' : `${selected.expected_minutes} min`], ['Difficulty', selected.difficulty ? pretty(selected.difficulty) : 'Not recorded'], ['Reviews', selected.review_history.times_reviewed], ['Last reviewed', selected.review_history.last_reviewed || 'Not yet'], ['Next review', selected.srs.next_review_due || 'Not scheduled']].map(([label, value]) => <div key={label}><small>{label}</small><strong>{value}</strong></div>)}</div>{selected.has_flags && <div className="notice attention">This day has flagged quiz questions.</div>}{selected.tags.length > 0 && <div className="review-tags">{selected.tags.map(tag => <span className="tag" key={tag}>{tag}</span>)}</div>}<h3>Learning materials</h3>{dayDocuments(documents, selected).length ? dayDocuments(documents, selected).map(item => <button key={item.path} className="document-row" onClick={() => setSelectedDoc(item.path)}><FileText size={19} /><span>{docName(item.path)}<small>{item.path.slice(selected.folder.length + 1)}</small></span><ArrowUpRight size={17} /></button>) : <p className="muted">No materials generated for this day yet.</p>}{selected.confusion_notes.length > 0 && <><h3>Confusion notes</h3>{selected.confusion_notes.map((note, index) => <blockquote key={index}>{note.note}<small>{note.date}</small></blockquote>)}</>}<div className="detail-actions"><p>Continue in your curriculum assistant. These buttons copy commands.</p><div><Command value={selected.status === 'current' ? '/i-am-in' : '/progress'} /><Command value="/spaced-review" /></div></div></div>}
     </dialog>
   </div>;
 }

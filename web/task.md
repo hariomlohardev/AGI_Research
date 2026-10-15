@@ -1,5 +1,5 @@
 # Work checklist
 - [x] Inspect real curriculum state and schema.
-- [ ] Build read-only data adapter and dashboard.
-- [ ] Verify calculations, build and browser interactions.
-- [ ] Document startup and confirm existing files are unchanged.
+- [x] Build read-only data adapter and dashboard.
+- [x] Verify calculations, build and browser interactions.
+- [x] Document startup; all assistant writes are confined to web/. Concurrent curriculum changes were observed and left alone.

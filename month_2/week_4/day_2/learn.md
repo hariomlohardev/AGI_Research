@@ -32,33 +32,33 @@ per `coding_problems.md`); you are watching for **what to check and
 why**: which gaps to hunt, which distributions to distrust, what order
 to do things in. Steal the checklist, not the code.
 
-1. **Exploratory Data Analysis Tutorial | Basics of EDA with Python** — Great Learning — https://www.youtube.com/watch?v=05w2322DHUI
-   The big one (~4.5 hours): end-to-end EDA in Python — missing-value
-   checks, distributions, feature inspection. Primary watch, picked for
-   your stated big-video preference. Mirror each section on Titanic as
-   you go: when they check missingness, you run `missing_counts`; when
-   they plot a distribution, you run `numeric_summary`.
+1. **Exploratory Data Analysis in Pandas | Python Pandas Tutorials** — Alex The Analyst — https://www.youtube.com/watch?v=Liv6eeb1VfE (~32 min)
+   The core pick: a focused, right-sized EDA walkthrough on a real
+   dataset (distributions, groupbys, sanity checks). Mirror each step
+   on Titanic as you go: when they check a distribution, you run
+   `numeric_summary`; when they count categories, you run
+   `class_balance`.
 
-2. **Exploratory Data Analysis (EDA) Using Python | Exploratory Data Analysis Project** — Simplilearn — https://www.youtube.com/watch?v=clblk_NwEU8
-   Framed as an EDA *project* on real data rather than isolated
-   concepts — the closest mirror to today's topic. Watch for the
-   shape of the work: explore first, find the gaps, prepare for
-   modeling last. Surfaced independently in two separate searches.
+2. **A Gentle Introduction to Pandas Data Analysis (on Kaggle)** — Rob Mulla — https://www.youtube.com/watch?v=_Eb0utIRdkw (~39 min)
+   Second perspective, closest to the plan's Kaggle angle — taught on
+   Kaggle on a real dataset by a Kaggle Grandmaster. Watch for EDA
+   mechanics: missing-value hunts, value counts (your class balance),
+   distributions.
 
-3. **Data Analysis with Python Course - Numpy, Pandas, Data Visualization** — freeCodeCamp.org — https://www.youtube.com/watch?v=GPVsHOlRBBI
-   Full-length course (several hours) on the whole pipeline. Backup,
-   not required: reach for it if a step's *concept* feels thin (e.g.
-   why a distribution check matters) rather than its mechanics.
+3. **Data Cleaning in Pandas | Python Pandas Tutorials** — Alex The Analyst — https://www.youtube.com/watch?v=bDhvCp3_lYw (~39 min)
+   The prep half: finding and handling missing values — feeds directly
+   into your mean-imputation step. Same series as #1, so no
+   context-switching cost.
 
-4. **Exploratory Data Analysis in Pandas | Python Pandas Tutorials** — Alex The Analyst — https://www.youtube.com/watch?v=Liv6eeb1VfE
-   The focused companion: distributions, grouping, sanity checks in one
-   tight lesson — maps directly onto "check class balance and feature
-   distributions." Watch if the big videos blur together and you want
-   one concrete technique demo.
+4. **Machine Learning Tutorial Python - 6: Dummy Variables & One Hot Encoding** — codebasics — https://www.youtube.com/watch?v=9yl6-HEY7_s (~22 min)
+   The encoding half: dummy variables and one-hot encoding, short and
+   tightly scoped — watch right before writing `label_encode`/`one_hot`.
 
-(All four verified live at generation time. Deliberately long picks
-after your 4/10 verdict and the big-video ask — no 3-minute shorts
-today.)
+(All four verified live at generation time. Right-sized picks per your
+correction — long videos reserved for complex topics; nothing
+course-length today. Honest gap: none demos a hand-written stratified
+split, so that piece rests on your coding tasks — fitting, since the
+day specifies stdlib-only splitting anyway.)
 
 ## Math — none today
 

@@ -47,7 +47,7 @@ ground truth, pinned by the tests.
 
 ## Files in this day (and beyond it)
 
-- `learn.md` — EDA theory + verified videos (long picks per your ask)
+- `learn.md` — EDA theory + verified videos (right-sized, 22–39 min each)
 - `coding_problems.md` — EDA → impute/encode → split spec + CSV pins
 - `roadmap.md` — execution order and final-project tie
 - `code/eda.py`, `code/encode.py`, `code/split.py` — your stubs

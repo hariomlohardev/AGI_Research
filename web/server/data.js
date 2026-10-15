@@ -20,7 +20,9 @@ export async function loadCurriculum(root = projectRoot) {
     catch (error) { if (error.code === 'ENOENT') return; throw error; }
     for (const entry of entries) {
       // Symlinks and code/dependency directories are intentionally not traversed.
-      if (entry.isDirectory() && /^(week_\d+|day_\d+|final_project|github_contribution|micro_projects|[a-z0-9]+(?:-[a-z0-9]+)+)$/.test(entry.name)) await walk(path.join(relative, entry.name));
+      const isLearningFolder = /^(week_\d+|day_\d+|final_project|github_contribution|micro_projects)$/.test(entry.name);
+      const isProjectFolder = path.basename(relative) === 'micro_projects' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.name);
+      if (entry.isDirectory() && (isLearningFolder || isProjectFolder)) await walk(path.join(relative, entry.name));
       if (entry.isFile() && entry.name.endsWith('.md')) await addDocument(path.join(relative, entry.name));
     }
   }
