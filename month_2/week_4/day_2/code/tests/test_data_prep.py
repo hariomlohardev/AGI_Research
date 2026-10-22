@@ -122,7 +122,7 @@ def _titanic_xy():
 def test_integration_no_missing_numeric():
     X, y = _titanic_xy()
     assert len(X) == 889 and len(y) == 889
-    assert all(isinstance(v, float) for row in X for v in row)
+    assert all(isinstance(v, (int, float)) and not isinstance(v, bool) for row in X for v in row)
     assert all(v == v for row in X for v in row)  # no NaN
     assert set(y) <= {0, 1}
 

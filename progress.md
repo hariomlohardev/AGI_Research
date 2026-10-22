@@ -13,7 +13,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 ## Month 2 — Probability, Information Theory & Classical ML From Scratch
 - **Started:** 2026-08-24
 - **Language:** `python` · **Skill level:** `intermediate` · **Test command:** `pytest` (default)
-- **Current:** Month 2, Day 20 (Week 4 Day 2 — `current`)
+- **Current:** Month 2, Day 21 (Week 4 Day 3 — `current`)
 - **Source plan:** `D:\Roadmap\firefox\months\month-2-detailed.md`
 
 ### Weeks & days
@@ -50,7 +50,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 **Week 4 — Month 2 Capstone** — `review_status: pending`
 - Done when: Stop writing isolated scripts. Package everything from Weeks 1–3 into one real, reusable, tested library — and use it on a genuine dataset the way you'd use sklearn.
 - Day 1 (global 19) — **done** — Package Structure (`minisklearn`) — confidence: `shaky`, difficulty: `easy`, time: 240m (self-reported "4 hrs") — has flagged questions (Q6 zero-division rationale) to revisit
-- Day 2 (global 20) — current — Apply to a Real Dataset (EDA, imputation, encoding, split)
+- Day 2 (global 20) — **done** — Apply to a Real Dataset (EDA, imputation, encoding, split) — confidence: `shaky`, difficulty: easy - medium (self-reported as a range, so `difficulty` stays `null`), time: 240m (self-reported "4 hrs")
 - Day 3 (global 21) — pending — Evaluate (confusion matrix, accuracy/precision/recall/F1)
 - Day 4 (global 22) — pending — Compare Against Real `sklearn`
 - Day 5 (global 23) — pending — Write It Up (README + blog post)

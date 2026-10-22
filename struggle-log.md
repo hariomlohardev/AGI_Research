@@ -401,3 +401,36 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   "don't understand the question" mid-quiz stalls, which resolved there via
   concrete restatement (same move tried here, didn't land). Revisit Q6 via
   `/spaced-review` before Day 3's evaluation harness leans on it.
+
+## 2026-10-22 — Day 20 (Month 2 Week 4 Day 2) — Apply to a Real Dataset
+
+- Build episode before the quiz: 9/10 on the first run, the failure in
+  *my* test, not learner code — `test_integration_no_missing_numeric`
+  demanded all-`float` while the test's own pipeline helper uses
+  `label_encode` (ints, per its contract) for Sex/Embarked. Fixed the
+  assertion to int-or-float (bool excluded), re-ran 10/10. Same class of
+  assistant-side fix as Day 17's suite relaxation; learner code untouched.
+- Four-question quiz + 2 feedback, no flags, no discipline-log entries.
+  Q1 (62%-accuracy illusion + precision/recall exposure) took one re-ask:
+  first attempt named only a vague "precision metrics" half, retry landed
+  the full mechanism (zero predictive power, recall 0/342, precision 0/0).
+  Q2 (two fill strategies + one downside each) took one re-ask: strategies
+  named first, downsides missing; retry landed both (mean/median
+  variance-spike and relationship destruction; KNN cost and noise
+  propagation). Q3 (stratification rationale) first-ask correct
+  (representativeness), sharpened with the starved-train/noisy-test
+  failure mode.
+- Explain-back reasonable (dirty data breaks training, EDA inspects first)
+  with a one-line steer adding the other two verbs (encode to
+  numbers-only, split for an honest test set). Non-blocking.
+- Self-reported time "4 hrs" → `time_spent_minutes: 240`; difficulty
+  "easy - medium" (a range, so `difficulty` stays `null` — never coerced,
+  verbatim preserved here and in the logs). Material feedback: replacement
+  videos "good" on length (the 22–39 min swap landed); F2 "NAA".
+- Confidence recorded as `shaky` (two questions needed one re-ask each;
+  everything landed, no flags).
+- Pattern update: eighth occurrence of the half-answer slip (Q1's vague
+  one-metric half before the two-metric mechanism). Neutral voice
+  observation (no integrity claim; the quiz is open-book by design): both
+  retries arrived in a markedly more polished register than the first
+  attempts — logged so future `/done` runs can compare, not as a finding.

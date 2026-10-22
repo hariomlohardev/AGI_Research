@@ -548,3 +548,37 @@ hand-rolls in stdlib),
 (891 rows, 12 cols; Age 177 / Embarked 2 missing, 342 survived — verified
 by fetching + counting, never fabricated), `code/tests/test_data_prep.py`
 (10 tests: synthetic fixtures + CSV pins).
+
+---
+
+## 2026-10-22 — Day 20 done: Apply to a Real Dataset (global Day 20, Week 4 Day 2)
+
+- **Result:** 10/10 tests passed — but the first run was 9/10, and the
+  failure was in *my* test, not learner code:
+  `test_integration_no_missing_numeric` demanded all-`float` while the
+  test's own pipeline helper uses `label_encode` (ints, per its contract)
+  for Sex/Embarked. Fixed the assertion to int-or-float (bool excluded),
+  re-ran 10/10. Same assistant-side-fix class as Day 17's suite
+  relaxation; learner untouched. The day's verdict: clean fully-numeric
+  `X_train/X_test/y_train/y_test` (889 rows post Embarked-drop, 7 cols),
+  fully hand-rolled (`load_csv`, `missing_counts`, `class_balance`,
+  `numeric_summary`, `to_float_column`, `fill_mean`, `label_encode`,
+  `one_hot`, seeded per-class `stratified_split`).
+- **Confidence:** `shaky` — Q1 (62%-accuracy illusion: recall 0/342,
+  precision 0/0) and Q2 (mean/median vs KNN + one downside each) each took
+  one re-ask; Q3 (stratification rationale) first-ask. No flags.
+  Explain-back reasonable with one steer (EDA → encode → split). Note
+  Q1's precision-0/0 half answers Day 19's flagged Q6 from the wild —
+  the zero-division convention is sticking.
+- **Self-report:** time "4 hrs" → 240m; difficulty "easy - medium" (a
+  range, so `difficulty` stays `null`, verbatim preserved). Material
+  feedback: replacement videos "good" on length (the 22–39 min swap
+  landed); F2 "NA".
+- **Advances to:** Day 21 (global 21) — Week 4 Day 3, Evaluate
+  (`/i-am-in` next).
+- **Code review:** `month_2/week_4/day_2/code_review.md` (8 findings,
+  style only; headline: bare sibling import back after Day 19's
+  all-relative fix, bare `except`, `== None` relapse amid correct uses,
+  in-place-mutate `fill_mean`, message typos, `Counter`-vs-`dict`
+  annotation). `growth-notes.md` updated — 7 Themes extended to Day 20,
+  no new promotions. No new badge.
