@@ -582,3 +582,26 @@ by fetching + counting, never fabricated), `code/tests/test_data_prep.py`
   in-place-mutate `fill_mean`, message typos, `Counter`-vs-`dict`
   annotation). `growth-notes.md` updated — 7 Themes extended to Day 20,
   no new promotions. No new badge.
+
+---
+
+## Week 4 Day 3 — Evaluate (global Day 21) — 2026-10-22
+
+**Topic:** confusion matrix + accuracy/precision/recall/F1 from the four
+cells, scored on the Titanic splits with `minisklearn` models
+
+**How it ties to `minisklearn`:** First honest report card — package
+models scored by package metrics on real data. Day 4 reruns this exact
+table against real `sklearn` on the identical test set (keep the split
+seed on record); Day 5 writes up whatever the numbers say.
+
+**Today's artefacts:** `month_2/week_4/day_3/{learn,coding_problems,roadmap}.md`
+(videos via `video-researcher`: StatQuest Confusion Matrix ~7 min +
+StatQuest ROC/AUC ~20 min bonus — both oEmbed-verified live; runtimes
+approximate since WebSearch was down this session, discovery leaned on
+the plan's suggested searches),
+`code/evaluate.py` stub (`load_titanic_xy`, `comparison_table`,
+`misclassified_indices`, full `Raises` contracts), `code/tests/test_evaluate.py`
+(synthetic fixtures + `minisklearn.metrics` hand values + 889-row CSV
+pins + one integration run training both models; wiring proven 4-fail-on-stub
+/ 1-pass against the finished package).

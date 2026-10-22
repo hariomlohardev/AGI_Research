@@ -607,8 +607,11 @@
               "status": "current",
               "has_flags": false,
               "mode": "guided",
-              "topic": null,
-              "tags": [],
+              "topic": "Evaluate (confusion matrix, accuracy/precision/recall/F1)",
+              "tags": [
+                "coding-heavy",
+                "conceptual"
+              ],
               "difficulty": null,
               "time_spent_minutes": null,
               "expected_minutes": null,
