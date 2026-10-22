@@ -8,14 +8,21 @@ Titanic test data.
 ## Watch first
 
 1. **Machine Learning Fundamentals: The Confusion Matrix** — StatQuest
-   with Josh Starmer (~7 min) — https://www.youtube.com/watch?v=vGx4OVhjeoQ
-2. **ROC and AUC, Clearly Explained!** — StatQuest with Josh Starmer
+   with Josh Starmer (~7 min) — https://www.youtube.com/watch?v=Kdsp6soqA7o
+2. **Machine Learning Fundamentals: Sensitivity and Specificity** —
+   StatQuest with Josh Starmer (short) — https://www.youtube.com/watch?v=vP06aMoz4v8
+   (sensitivity *is* recall under another name; pairs with specificity to
+   round out all four cells)
+3. **ROC and AUC, Clearly Explained!** — StatQuest with Josh Starmer
    (~20 min, bonus — threshold thinking) — https://www.youtube.com/watch?v=4jRBRDbJemM
 
-Both verified live at generation time (YouTube oEmbed resolved each URL
-to exactly this title + author). Runtimes are approximate — glance at
-the durations on the page; both sit at or under the short-explainer
-band. Take the metric definitions, not anyone's library code: you are
+> Note: the plan's original confusion-matrix link (a StatQuest upload)
+> turned out to be a removed video — it was swapped for the re-upload
+> above, verified live at fix time against StatQuest's own official
+> video index (statquest.org/video_index.html) plus a watch-page fetch
+> with no unavailable/removed wording. The dead ID fails those same
+> checks, so they're confirmed to discriminate. Runtimes are
+> approximate — glance at the durations on the page. Take the metric definitions, not anyone's library code: you are
 hand-rolling all of this in stdlib Python.
 
 ## The math (paper, Problem 1)
