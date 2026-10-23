@@ -9,7 +9,7 @@ description: Design and scaffold a small hands-on project applying the current (
 
 ## Steps
 
-1. Read `state.json`. The current day, or the most recently completed day if the current day isn't done yet, must have `status: "done"` — otherwise tell the user clearly to finish and run `/done` first, and stop.
+1. Read `state.json`. The current day , or the most recently completed day if the current day isn't done yet, must have `status: "done"` — otherwise tell the user clearly to finish and run `/done` first, and stop.
 
 2. Design a small, self-contained project applying that day's topic hands-on. It may deliberately pull in concepts/code from earlier **completed** days where it makes sense — if it does, say explicitly which days it's drawing on. Factor in `$ARGUMENTS` if the user specified a kind of project.
 
