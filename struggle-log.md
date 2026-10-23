@@ -434,3 +434,20 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   observation (no integrity claim; the quiz is open-book by design): both
   retries arrived in a markedly more polished register than the first
   attempts — logged so future `/done` runs can compare, not as a finding.
+
+## 2026-10-23 — Day 21 (Month 2 Week 4 Day 3) — Evaluate (confusion matrix, accuracy/precision/recall/F1)
+
+- Clean run, no build episode: 5/5 on the first run (4 fail-on-stub by
+  design + 1 metrics hand-value pass against the finished package).
+  Quiz: Q1–Q3 all first-ask, no flags — recall-over-precision with
+  FN-cost reasoning, the 99%-accuracy-useless model on a 1%-positive
+  example, and F1 as the lower-punishing harmonic mean.
+- Explain-back skipped (asked, answered only "ya" — same shape as
+  Day 17; single-day observation, not a pattern).
+- Self-reported time "4 hrs" → `time_spent_minutes: 240`; difficulty
+  "easy - medium" (a range, so `difficulty` stays `null`, verbatim
+  preserved here and in the logs). Material feedback: replacement
+  confusion-matrix video played ("yss"); F2 "NA".
+- Confidence recorded as `strong` (no re-asks, no flags).
+- No new concept pattern. Note the Day-20 voice observation did not
+  recur — all three answers arrived in the learner's own register.

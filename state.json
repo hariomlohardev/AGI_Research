@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 21,
+  "current_day": 22,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -604,7 +604,7 @@
               "day_in_week": 3,
               "global_day": 21,
               "label": "Day 3",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "Evaluate (confusion matrix, accuracy/precision/recall/F1)",
@@ -613,9 +613,9 @@
                 "conceptual"
               ],
               "difficulty": null,
-              "time_spent_minutes": null,
+              "time_spent_minutes": 240,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "strong",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -633,7 +633,7 @@
               "day_in_week": 4,
               "global_day": 22,
               "label": "Day 4",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

@@ -605,3 +605,28 @@ the plan's suggested searches),
 (synthetic fixtures + `minisklearn.metrics` hand values + 889-row CSV
 pins + one integration run training both models; wiring proven 4-fail-on-stub
 / 1-pass against the finished package).
+
+---
+
+## 2026-10-23 — Day 21 done: Evaluate (global Day 21, Week 4 Day 3)
+
+- **Result:** 5/5 tests passed on the first run — rebuilding Day-20's
+  pipeline from the raw CSV via cross-day imports (no copies),
+  `comparison_table` with 3-decimal rendering, `misclassified_indices`,
+  `minisklearn.metrics` hand values (`0.75 / 2/3 / 1.0 / 0.8`), the
+  889-row rebuild, and one integration run (both models train, metrics
+  sane, table renders both names).
+- **Confidence:** `strong` — Q1 (recall-over-precision, FN-cost), Q2
+  (99%-accuracy-useless model on 1%-positive), Q3 (F1 as the
+  lower-punishing harmonic mean) all first-ask. No flags. Explain-back
+  skipped (asked, "ya" only — same shape as Day 17).
+- **Self-report:** time "4 hrs" → 240m; difficulty "easy - medium"
+  (range, so `difficulty` stays `null`, verbatim preserved). Material
+  feedback: replacement confusion-matrix video played ("yss"); F2 "NA".
+- **Advances to:** Day 22 (global 22) — Week 4 Day 4, Compare Against
+  Real `sklearn` (`/i-am-in` next).
+- **Code review:** `month_2/week_4/day_3/code_review.md` (6 findings,
+  style only; headline: cross-day `sys.path` shim + bare imports, two
+  unused imports, `range(len)` in the X assembly). `growth-notes.md`
+  updated — 4 Theme extensions (range-len, bare-import, leftover,
+  whitespace-narrow), no new promotions. No new badge.
