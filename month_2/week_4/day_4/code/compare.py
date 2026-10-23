@@ -1,0 +1,78 @@
+"""Day 22 — compare minisklearn against real sklearn (stub, see Problems 1-2)."""
+
+from __future__ import annotations
+
+import math
+import pathlib
+import sys
+from collections.abc import Mapping, Sequence
+from typing import Any
+
+DAY2CODE = pathlib.Path(__file__).resolve().parents[2] / "day_2" / "code"
+DAY3CODE = pathlib.Path(__file__).resolve().parents[2] / "day_3" / "code"
+MONTH2 = pathlib.Path(__file__).resolve().parents[3]
+
+sys.path.insert(0, str(DAY2CODE))
+sys.path.insert(0, str(DAY3CODE))
+sys.path.insert(0, str(MONTH2))
+
+from split import stratified_split  # type: ignore[import-not-found]
+from evaluate import load_titanic_xy  # type: ignore[import-not-found]
+from minisklearn import metrics
+
+
+def load_same_split(
+    csv_path: str,
+    test_ratio: float = 0.2,
+    seed: int = 0,
+) -> tuple[list[list[float]], list[list[float]], list[int], list[int]]:
+    """Reload Day 21's exact Titanic split from the raw CSV.
+
+    Rebuilds ``(X, y)`` with Day 21's cleaning/feature choices, then applies
+    Day 20's stratified split with the supplied ratio and seed.
+
+    Raises:
+        ValueError: if the CSV has no usable data rows.
+    """
+    raise NotImplementedError
+
+
+def score_classifier(
+    model: Any,
+    X_train: Sequence[Sequence[float]],
+    y_train: Sequence[int],
+    X_test: Sequence[Sequence[float]],
+    y_test: Sequence[int],
+) -> dict[str, float]:
+    """Fit one classifier and score it with minisklearn's metrics.
+
+    The same function must work for a ``minisklearn`` classifier and the
+    corresponding ``sklearn`` classifier because both expose ``.fit`` and
+    ``.predict``. Both sides are scored with ``minisklearn.metrics`` so the
+    comparison measures model behavior, not metric-definition drift.
+
+    Raises:
+        ValueError: if ``model`` does not expose ``.fit`` and ``.predict``,
+            if either split is empty, or if rows and labels have mismatched
+            lengths.
+    """
+    raise NotImplementedError
+
+
+def accuracy_gap(mine: float, theirs: float) -> float:
+    """Return the absolute difference between two accuracy values.
+
+    Raises:
+        ValueError: if either accuracy is NaN or infinite.
+    """
+    raise NotImplementedError
+
+
+def gap_verdict(gap: float, tolerance: float = 0.03) -> str:
+    """Classify an accuracy gap as a match or as needing investigation.
+
+    Raises:
+        ValueError: if ``gap`` is negative or non-finite, or if
+            ``tolerance`` is non-positive or non-finite.
+    """
+    raise NotImplementedError

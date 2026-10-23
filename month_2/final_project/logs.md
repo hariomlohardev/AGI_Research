@@ -630,3 +630,23 @@ pins + one integration run training both models; wiring proven 4-fail-on-stub
   unused imports, `range(len)` in the X assembly). `growth-notes.md`
   updated — 4 Theme extensions (range-len, bare-import, leftover,
   whitespace-narrow), no new promotions. No new badge.
+
+---
+
+## Week 4 Day 4 — Compare Against Real `sklearn` (global Day 22) — 2026-10-23
+
+**Topic:** same-split, same-ruler validation of `minisklearn` against
+`scikit-learn==1.9.1` on Titanic
+
+**How it ties to `minisklearn`:** This is the final-project validation
+gate. The classifiers are compared with the package’s own metrics, while
+K-Means is compared by inertia because cluster IDs are arbitrary. The
+manual deliverable is an honest gap investigation plus a paragraph Day 5
+can publish.
+
+**Today's artefacts:** `month_2/week_4/day_4/{learn,coding_problems,roadmap}.md`
+(no videos: the source plan explicitly says “Watch first: none today”),
+`code/compare.py` stub (`load_same_split`, `score_classifier`,
+`accuracy_gap`, `gap_verdict`, full `Raises` contracts),
+`code/tests/test_compare.py` (contracts + real-split logistic integration
++ `sklearn` K-Means smoke test), and pinned `scikit-learn==1.9.1`.
