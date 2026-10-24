@@ -665,8 +665,10 @@
               "status": "current",
               "has_flags": false,
               "mode": "guided",
-              "topic": null,
-              "tags": [],
+              "topic": "Write It Up (README + blog post)",
+              "tags": [
+                "conceptual"
+              ],
               "difficulty": null,
               "time_spent_minutes": null,
               "expected_minutes": null,

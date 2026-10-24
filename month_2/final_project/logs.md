@@ -673,3 +673,21 @@ can publish.
   and `fit =`, space-before-comma). `growth-notes.md` updated — 3 Theme
   extensions (leftover-scaffold, PEP-8 whitespace, error-message
   wording), no new promotions. No new badge.
+
+---
+
+## Week 4 Day 5 — Write It Up (global Day 23) — 2026-10-24
+
+**Topic:** README + blog post — the portfolio packaging of `minisklearn`
+
+**How it ties to `minisklearn`:** The README ships with the package
+(`month_2/minisklearn/README.md`); the blog post publishes the honest
+Day-22 numbers. Day 6 publishes exactly what is written today, so post
+text and Day-22 table must never disagree.
+
+**Today's artefacts:** `month_2/week_4/day_5/{learn,coding_problems,roadmap}.md`
+(no videos: the source plan explicitly says "Watch first: none today" —
+a writing day), `blog_post.md` draft slot, and
+`code/tests/test_writeup.py` (deliverable shape checks only — no code
+stubs, prose is the deliverable; taste and honesty graded by Problem 3
+and `/done`).

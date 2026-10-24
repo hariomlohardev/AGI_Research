@@ -53,7 +53,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 - Day 2 (global 20) — **done** — Apply to a Real Dataset (EDA, imputation, encoding, split) — confidence: `shaky`, difficulty: easy - medium (self-reported as a range, so `difficulty` stays `null`), time: 240m (self-reported "4 hrs")
 - Day 3 (global 21) — **done** — Evaluate (confusion matrix, accuracy/precision/recall/F1) — confidence: `strong`, difficulty: easy - medium (self-reported as a range, so `difficulty` stays `null`), time: 240m (self-reported "4 hrs")
 - Day 4 (global 22) — **done** — Compare Against Real `sklearn` — confidence: `strong`, difficulty: `easy`, time: 120m (self-reported "2 hrs")
-- Day 5 (global 23) — pending — Write It Up (README + blog post)
+- Day 5 (global 23) — generated — Write It Up (README + blog post)
 - Day 6 (global 24) — pending — Push to GitHub + Rest
 
 > Notes: This month has **no explicitly labelled Rest Days** — every day above is a real study day (status `pending`/`current`). Rest will be real on Month 2 Day 6 only in the sense of lighter load. Badges / streak / confusion notes / flags all start empty — they'll fill as you run `/done`, `/confused`, `/spaced-review`.
