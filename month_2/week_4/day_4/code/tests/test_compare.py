@@ -1,7 +1,7 @@
 """Tests for Day 22 sklearn-comparison helpers.
 
-Imports this day's `code/` plus Day 2, Day 3, and month-level `minisklearn`
-through sys.path shims (the same reuse pattern as Days 20-21).
+Imports this day's `code/` plus Day 2, Day 3, and the packaged
+`minisklearn/src/` tree through sys.path shims (the same reuse pattern as Days 20-21).
 `load_same_split` is provided and already working; the scoring/gap tests
 fail until those stubs are implemented — each is a task in
 coding_problems.md.
@@ -19,11 +19,12 @@ import pytest
 
 CODE = pathlib.Path(__file__).resolve().parents[1]
 MONTH2 = pathlib.Path(__file__).resolve().parents[4]
+MINISKLEARN_SRC = MONTH2 / "minisklearn" / "src"
 DAY2CODE = MONTH2 / "week_4" / "day_2" / "code"
 DAY3CODE = MONTH2 / "week_4" / "day_3" / "code"
 
 sys.path.insert(0, str(CODE))
-sys.path.insert(0, str(MONTH2))
+sys.path.insert(0, str(MINISKLEARN_SRC))
 sys.path.insert(0, str(DAY2CODE))
 sys.path.insert(0, str(DAY3CODE))
 

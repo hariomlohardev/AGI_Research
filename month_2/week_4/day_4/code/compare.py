@@ -15,11 +15,11 @@ from typing import Any
 
 DAY2CODE = pathlib.Path(__file__).resolve().parents[2] / "day_2" / "code"
 DAY3CODE = pathlib.Path(__file__).resolve().parents[2] / "day_3" / "code"
-MONTH2 = pathlib.Path(__file__).resolve().parents[3]
+MINISKLEARN_SRC = pathlib.Path(__file__).resolve().parents[3] / "minisklearn" / "src"
 
 sys.path.insert(0, str(DAY2CODE))
 sys.path.insert(0, str(DAY3CODE))
-sys.path.insert(0, str(MONTH2))
+sys.path.insert(0, str(MINISKLEARN_SRC))
 
 from split import stratified_split  # type: ignore[import-not-found]
 from evaluate import load_titanic_xy  # type: ignore[import-not-found]

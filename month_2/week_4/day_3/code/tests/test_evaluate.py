@@ -1,7 +1,7 @@
 """Tests for Day 21 evaluation helpers (synthetic fixtures + CSV pins + integration).
 
 Imports the day's `code/` via a sys.path shim, `minisklearn` from the
-month root, and Day 20's `split.py` for the integration run (reuse, not
+packaged `minisklearn/src/` tree, and Day 20's `split.py` for the integration run (reuse, not
 a copy — same pattern the learner's own script uses). Everything here
 fails on the stubs — each test is a task in coding_problems.md.
 """
@@ -13,10 +13,11 @@ import pytest
 
 CODE = pathlib.Path(__file__).resolve().parents[1]
 MONTH2 = pathlib.Path(__file__).resolve().parents[4]
+MINISKLEARN_SRC = MONTH2 / "minisklearn" / "src"
 DAY2CODE = MONTH2 / "week_4" / "day_2" / "code"
 
 sys.path.insert(0, str(CODE))
-sys.path.insert(0, str(MONTH2))
+sys.path.insert(0, str(MINISKLEARN_SRC))
 sys.path.insert(0, str(DAY2CODE))
 
 import evaluate

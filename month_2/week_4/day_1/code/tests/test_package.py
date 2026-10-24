@@ -1,6 +1,6 @@
 """Tests for the minisklearn package skeleton (imports + interface + metrics).
 
-Imports the month-level package `month_2/minisklearn/` via a sys.path shim
+Imports the packaged `month_2/minisklearn/src/` tree via a sys.path shim
 (same harness shape as prior days). Everything here fails on the empty
 skeleton — each test is a task in coding_problems.md Problems 1-3.
 """
@@ -11,7 +11,10 @@ import sys
 
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4]))
+MONTH2 = pathlib.Path(__file__).resolve().parents[4]
+MINISKLEARN_SRC = MONTH2 / "minisklearn" / "src"
+
+sys.path.insert(0, str(MINISKLEARN_SRC))
 
 import minisklearn
 from minisklearn import cluster, ensemble, linear_model, metrics, tree
