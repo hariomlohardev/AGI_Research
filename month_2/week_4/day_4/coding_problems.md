@@ -11,18 +11,18 @@ Scale: **intermediate** (source plan as-is). Python with your existing
 
 ---
 
-## Problem 1 — Reload the exact Day 21 split (`code/compare.py`)
+## Problem 1 — Reload the exact Day 21 split (provided, not rewritten)
 
-Implement:
+Use the provided `load_same_split(csv_path, test_ratio=0.2, seed=0)` in
+`code/compare.py`:
 
-1. `load_same_split(csv_path, test_ratio=0.2, seed=0)`
-   - Rebuild `(X, y)` using Day 21’s `load_titanic_xy`.
-   - Split it using Day 20’s `stratified_split`.
-   - Return `(X_train, X_test, y_train, y_test)`.
-   - `ValueError` if the CSV has no usable rows.
-   - Import the helper files; do not copy them.
+- It calls Day 21’s `load_titanic_xy` and Day 20’s `stratified_split`
+  where they already live — no copies, no reimplementation, no new
+  imports from you.
+- The path setup at the top of `compare.py` is already written for the
+  same reason: one shim, reused, not something to redo every day.
 
-2. Confirm the reloaded split still looks like Day 21:
+Confirm the reloaded split still looks like Day 21:
    - 889 total rows.
    - Approximately 38% positive labels on each side.
    - 7 numeric features per row.

@@ -1,8 +1,10 @@
 """Tests for Day 22 sklearn-comparison helpers.
 
 Imports this day's `code/` plus Day 2, Day 3, and month-level `minisklearn`
-through sys.path shims (the same reuse pattern as Days 20-21). Everything
-here fails on the stubs — each test is a task in coding_problems.md.
+through sys.path shims (the same reuse pattern as Days 20-21).
+`load_same_split` is provided and already working; the scoring/gap tests
+fail until those stubs are implemented — each is a task in
+coding_problems.md.
 
 The suite checks the comparison machinery and one real-data supervised
 integration. It does not grade the learner's final four-model conclusions:
@@ -16,7 +18,7 @@ import sys
 import pytest
 
 CODE = pathlib.Path(__file__).resolve().parents[1]
-MONTH2 = pathlib.Path(__file__).resolve().parents[3]
+MONTH2 = pathlib.Path(__file__).resolve().parents[4]
 DAY2CODE = MONTH2 / "week_4" / "day_2" / "code"
 DAY3CODE = MONTH2 / "week_4" / "day_3" / "code"
 

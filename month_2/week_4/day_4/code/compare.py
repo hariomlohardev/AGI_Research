@@ -1,4 +1,9 @@
-"""Day 22 — compare minisklearn against real sklearn (stub, see Problems 1-2)."""
+"""Day 22 — compare minisklearn against real sklearn (see Problems 2-3).
+
+`load_same_split` is provided (not a stub): it reuses Day 21's rebuild and
+Day 20's split in place, so nothing from those days is rewritten or copied.
+Implement the scoring/gap helpers below it.
+"""
 
 from __future__ import annotations
 
@@ -28,13 +33,16 @@ def load_same_split(
 ) -> tuple[list[list[float]], list[list[float]], list[int], list[int]]:
     """Reload Day 21's exact Titanic split from the raw CSV.
 
-    Rebuilds ``(X, y)`` with Day 21's cleaning/feature choices, then applies
-    Day 20's stratified split with the supplied ratio and seed.
+    Provided helper (already implemented): rebuilds ``(X, y)`` with Day 21's
+    cleaning/feature choices, then applies Day 20's stratified split with
+    the supplied ratio and seed. Call it; do not reimplement or copy those
+    files.
 
     Raises:
         ValueError: if the CSV has no usable data rows.
     """
-    raise NotImplementedError
+    X, y = load_titanic_xy(csv_path)
+    return stratified_split(X, y, test_ratio=test_ratio, seed=seed)
 
 
 def score_classifier(
