@@ -466,3 +466,28 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
   `easy`. Material feedback F1/F2 both "NA".
 - Confidence recorded as `strong` (no re-asks, no flags).
 - No new concept pattern.
+
+## 2026-10-24 — Day 23 (Month 2 Week 4 Day 5) — Write It Up (README + blog post)
+
+- No code today — 4/4 shape tests green after moving the learner's
+  `blog_post.md` from `day_5/code/` to `day_5/` (placement fix only; prose
+  untouched). Quiz: Q1 (leakage + length-mismatch from
+  `fit(X_train, y_test)`) took one re-ask; Q2's causes (tiny lr on unscaled
+  features, ID3 fragmentation) took four rounds — the first attempts were
+  generic theory (thresholds/class-weights, "local minima", "sklearn is
+  different") rather than the post's own diagnosis — then quoted correctly
+  from the blog, but the one-line-each recall mechanism ("why does each
+  cause sink recall specifically?") never landed and was flagged via the
+  escape hatch ("i dont understand it"), logged to
+  `month_2/week_4/day_5/flagged_questions.md`; `has_flags` true. Q3
+  (inertia over accuracy for KMeans) and Q4 (`investigate` = document the
+  gap, don't hide it) first-ask.
+- Explain-back reasonable (README orients a repo visitor; post spreads
+  awareness) — accepted without steer.
+- Self-reported time "2hrs" → `time_spent_minutes: 120`; difficulty `easy`.
+- Confidence recorded as `struggled` (repeated Q2 re-asks + one flag).
+- No pattern promoted — the flagged item (cause→recall-mechanism link) is a
+  first-time concept; the half-answer slip did not recur (Q2's eventual
+  answer quoted both causes together). Revisit the flagged question via
+  `/spaced-review`: underfit majority-leaning classifiers lose recall first
+  (conservative positives → false negatives).

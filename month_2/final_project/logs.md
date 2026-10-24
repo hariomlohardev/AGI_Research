@@ -691,3 +691,29 @@ a writing day), `blog_post.md` draft slot, and
 `code/tests/test_writeup.py` (deliverable shape checks only — no code
 stubs, prose is the deliverable; taste and honesty graded by Problem 3
 and `/done`).
+
+---
+
+## 2026-10-24 — Day 23 done: Write It Up (global Day 23, Week 4 Day 5)
+
+- **Result:** 4/4 shape tests passed (`test_writeup.py`). The only failure
+  was placement, not prose: `blog_post.md` sat in `day_5/code/` instead of
+  `day_5/` — moved, words untouched, re-ran green. README carries install,
+  usage, model list, and the Day-22 comparison table; blog post (300+ words)
+  names `sklearn` and reports the four real gaps.
+- **Confidence:** `struggled` — Q1 took one re-ask (leakage + length
+  mismatch), Q2's two causes took four rounds then quoted right from the
+  post, but the why-recall mechanism half was flagged ("i dont understand
+  it", logged to `flagged_questions.md`, `has_flags: true`); Q3/Q4
+  first-ask. Explain-back reasonable (README orients visitors, post spreads
+  awareness). Self-reported time "2hrs" → 120m; difficulty `easy`.
+- **The number that mattered today:** `742754.6` twice — the KMeans inertia
+  match that anchors the whole write-up's honest-verdicts framing.
+- **Advances to:** Day 24 (global 24) — Week 4 Day 6, Push to GitHub + Rest
+  (`/i-am-in` next).
+- **Code review:** `month_2/week_4/day_5/code_review.md` (12 findings, style
+  and structure only; headlines: `fit(X_train, y_test)` wrong-variable
+  example, `recall_score` shadowing its own import, two competing usage
+  examples, blog surprise/differently sections detached from the diagnosed
+  causes). `growth-notes.md` updated — one Theme extension
+  (PEP-8 whitespace, snippet spacing), no new promotions. No new badge.
