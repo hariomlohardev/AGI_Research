@@ -16,3 +16,8 @@ recall-specific symptom (missed survivors / false negatives vs. the
 majority-leaning classifier lose recall first (conservative positive
 predictions → false negatives), and why does ID3 fragmentation of
 continuous features end in under-predicted positives?
+
+**Status update (2026-10-24 review pass):** revisited — the ID3→recall chain
+answered correctly first ask (fragmented leaves memorize training points;
+unseen survivors fall into died-majority leaves → false negatives). Record
+kept for history.

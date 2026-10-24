@@ -15,3 +15,7 @@ a comprehension block on what the question was after.
 evaluate-every-model harness keeps running when one model predicts no
 positives) plus honesty (`0.0` is the earned score — no correct positive
 predictions were made). Revisit via `/spaced-review`.
+
+**Status update (2026-10-24 review pass):** revisited — both halves answered
+correctly first ask (raising would crash the harness mid-run; `0.0` is the
+earned score). Record kept for history.
