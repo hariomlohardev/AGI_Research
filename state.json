@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "current_month": 2,
-  "current_day": 22,
+  "current_day": 23,
   "badges_unlocked": [
     {
       "id": "first-day-done",
@@ -633,7 +633,7 @@
               "day_in_week": 4,
               "global_day": 22,
               "label": "Day 4",
-              "status": "current",
+              "status": "done",
               "has_flags": false,
               "mode": "guided",
               "topic": "Compare Against Real sklearn",
@@ -641,10 +641,10 @@
                 "coding-heavy",
                 "conceptual"
               ],
-              "difficulty": null,
-              "time_spent_minutes": null,
+              "difficulty": "easy",
+              "time_spent_minutes": 120,
               "expected_minutes": null,
-              "confidence": null,
+              "confidence": "strong",
               "confusion_notes": [],
               "review_history": {
                 "last_reviewed": null,
@@ -662,7 +662,7 @@
               "day_in_week": 5,
               "global_day": 23,
               "label": "Day 5",
-              "status": "pending",
+              "status": "current",
               "has_flags": false,
               "mode": "guided",
               "topic": null,

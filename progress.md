@@ -13,7 +13,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 ## Month 2 — Probability, Information Theory & Classical ML From Scratch
 - **Started:** 2026-08-24
 - **Language:** `python` · **Skill level:** `intermediate` · **Test command:** `pytest` (default)
-- **Current:** Month 2, Day 22 (Week 4 Day 4 — `current`)
+- **Current:** Month 2, Day 23 (Week 4 Day 5 — `current`)
 - **Source plan:** `D:\Roadmap\firefox\months\month-2-detailed.md`
 
 ### Weeks & days
@@ -52,7 +52,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 - Day 1 (global 19) — **done** — Package Structure (`minisklearn`) — confidence: `shaky`, difficulty: `easy`, time: 240m (self-reported "4 hrs") — has flagged questions (Q6 zero-division rationale) to revisit
 - Day 2 (global 20) — **done** — Apply to a Real Dataset (EDA, imputation, encoding, split) — confidence: `shaky`, difficulty: easy - medium (self-reported as a range, so `difficulty` stays `null`), time: 240m (self-reported "4 hrs")
 - Day 3 (global 21) — **done** — Evaluate (confusion matrix, accuracy/precision/recall/F1) — confidence: `strong`, difficulty: easy - medium (self-reported as a range, so `difficulty` stays `null`), time: 240m (self-reported "4 hrs")
-- Day 4 (global 22) — generated — Compare Against Real `sklearn`
+- Day 4 (global 22) — **done** — Compare Against Real `sklearn` — confidence: `strong`, difficulty: `easy`, time: 120m (self-reported "2 hrs")
 - Day 5 (global 23) — pending — Write It Up (README + blog post)
 - Day 6 (global 24) — pending — Push to GitHub + Rest
 

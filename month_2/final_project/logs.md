@@ -650,3 +650,26 @@ can publish.
 `accuracy_gap`, `gap_verdict`, full `Raises` contracts),
 `code/tests/test_compare.py` (contracts + real-split logistic integration
 + `sklearn` K-Means smoke test), and pinned `scikit-learn==1.9.1`.
+
+---
+
+## 2026-10-24 — Day 22 done: Compare Against Real `sklearn` (global Day 22, Week 4 Day 4)
+
+- **Result:** 5/5 tests passed. `load_same_split` reuses Day 21's rebuild
+  and Day 20's split in place (no copies); `score_classifier` scores both
+  `minisklearn` and `sklearn` models with `minisklearn.metrics`;
+  `accuracy_gap` + `gap_verdict` contracts hold; logistic-pair integration
+  on the real split lands in sane ranges; `sklearn` K-Means smoke test
+  passes.
+- **Confidence:** `strong` — Q1–Q5 all first-ask, no flags. Explain-back
+  reasonable: same split + same ruler proves math/implementation
+  agreement, not speed or scaling.
+- **Self-report:** time "2 hrs" → 120m; difficulty `easy`. Material
+  feedback F1/F2 both "NA".
+- **Advances to:** Day 23 (global 23) — Week 4 Day 5, Write It Up
+  (`/i-am-in` next).
+- **Code review:** `month_2/week_4/day_4/code_review.md` (10 findings,
+  style only; headline: duplicate mid-file `import math`, unused `Mapping`
+  and `fit =`, space-before-comma). `growth-notes.md` updated — 3 Theme
+  extensions (leftover-scaffold, PEP-8 whitespace, error-message
+  wording), no new promotions. No new badge.

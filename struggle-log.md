@@ -451,3 +451,18 @@ Conceptual sticking points surfaced during quizzes — not code style (that's `g
 - Confidence recorded as `strong` (no re-asks, no flags).
 - No new concept pattern. Note the Day-20 voice observation did not
   recur — all three answers arrived in the learner's own register.
+
+## 2026-10-24 — Day 22 (Month 2 Week 4 Day 4) — Compare Against Real sklearn
+
+- Quiz: Q1–Q5 all first-ask, no flags — flat-region/non-unique-optimum
+  reading of matched-accuracy/diverged-weights, sklearn's K-Means
+  defaults (`k-means++`, `n_init=10`) as a gap source, the comparison as
+  the month's reality check, inertia-over-label-equality for K-Means, and
+  a 0.04 gap correctly verdict `"investigate"` with `n_estimators` /
+  `random_state` as the first check.
+- Explain-back reasonable and unprompted-precise: same split + same ruler
+  proves math/implementation agreement, not speed or scaling.
+- Self-reported time "2 hrs" → `time_spent_minutes: 120`; difficulty
+  `easy`. Material feedback F1/F2 both "NA".
+- Confidence recorded as `strong` (no re-asks, no flags).
+- No new concept pattern.

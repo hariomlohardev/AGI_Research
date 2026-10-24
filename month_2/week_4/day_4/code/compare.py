@@ -86,14 +86,16 @@ def score_classifier(
 
     fit  = model.fit(X_train , y_train)
 
-    predicted_y = model.predict(X_test)
+    y_pred = model.predict(X_test)
 
-    
+    return {
+        "accuracy": metrics.accuracy_score(y_test , y_pred),
+        "precision": metrics.precision_score(y_test , y_pred), 
+        "recall": metrics.recall_score(y_test , y_pred),
+        "f1": metrics.f1_score(y_test , y_pred)
+        }
 
-
-
-    raise NotImplementedError
-
+import math
 
 def accuracy_gap(mine: float, theirs: float) -> float:
     """Return the absolute difference between two accuracy values.
@@ -101,7 +103,14 @@ def accuracy_gap(mine: float, theirs: float) -> float:
     Raises:
         ValueError: if either accuracy is NaN or infinite.
     """
-    raise NotImplementedError
+    # Check if either value is NaN or Infinite
+    if math.isnan(mine) or math.isnan(theirs):
+        raise ValueError("Accuracy values cannot be NaN.")
+        
+    if math.isinf(mine) or math.isinf(theirs):
+        raise ValueError("Accuracy values cannot be infinite.")
+
+    return abs(mine - theirs)
 
 
 def gap_verdict(gap: float, tolerance: float = 0.03) -> str:
@@ -111,4 +120,20 @@ def gap_verdict(gap: float, tolerance: float = 0.03) -> str:
         ValueError: if ``gap`` is negative or non-finite, or if
             ``tolerance`` is non-positive or non-finite.
     """
-    raise NotImplementedError
+    # Validate gap constraints
+    if math.isnan(gap) or math.isinf(gap):
+        raise ValueError("Gap cannot be non-finite.")
+    if gap < 0:
+        raise ValueError("Gap cannot be negative.")
+
+    # Validate tolerance constraints
+    if math.isnan(tolerance) or math.isinf(tolerance):
+        raise ValueError("Tolerance cannot be non-finite.")
+    if tolerance <= 0:
+        raise ValueError("Tolerance must be positive.")
+
+    # Classify the verdict
+    if gap <= tolerance:
+        return "match"
+    else:
+        return "investigate"
