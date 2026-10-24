@@ -694,6 +694,25 @@ and `/done`).
 
 ---
 
+## Week 4 Day 6 — Push to GitHub + Rest (global Day 24) — 2026-10-24
+
+**Topic:** publishing the capstone — final cleanup, dependency audit, push
+with a readable history, README render check, then rest
+
+**How it ties to `minisklearn`:** Today publishes exactly what Days 1–5
+built. The audit locks the plan's dependency bar into a check: the package
+tree is stdlib-only (no third-party imports), the validation deps live
+pinned at the repo root. No videos: the source plan explicitly says
+"Watch first: nothing — actually rest today."
+
+**Today's artefacts:** `month_2/week_4/day_6/{learn,roadmap,coding_problems}.md`,
+`code/audit_requirements.py` stub (`third_party_imports`,
+`pinned_requirements`, full `Raises` contracts),
+`code/tests/test_audit.py` (fixture unit tests + real-tree pins:
+package stdlib-only, root requirements fully pinned; proven 8-fail-on-stub).
+
+---
+
 ## 2026-10-24 — Day 23 done: Write It Up (global Day 23, Week 4 Day 5)
 
 - **Result:** 4/4 shape tests passed (`test_writeup.py`). The only failure
