@@ -59,11 +59,39 @@ def score_classifier(
     ``.predict``. Both sides are scored with ``minisklearn.metrics`` so the
     comparison measures model behavior, not metric-definition drift.
 
+    Returns:
+        Exactly one dictionary per call, with exactly these keys:
+        ``{"accuracy": float, "precision": float, "recall": float,
+        "f1": float}``.
+        Call once per model: one dictionary for yours, one for sklearn's.
+
     Raises:
         ValueError: if ``model`` does not expose ``.fit`` and ``.predict``,
             if either split is empty, or if rows and labels have mismatched
             lengths.
     """
+
+    if not hasattr(model, 'fit') or not hasattr(model, 'predict'):
+        raise ValueError("The model must expose both '.fit' and '.predict' methods.")
+
+    # 2. Validate that no splits are empty
+    if len(X_train) == 0 or len(y_train) == 0 or len(X_test) == 0 or len(y_test) == 0:
+        raise ValueError("Execution failed: One or more data splits are empty.")
+
+    # 3. Validate rows and labels have matching lengths for both splits
+    if len(X_train) != len(y_train):
+        raise ValueError(f"Mismatched training lengths: {len(X_train)} rows vs {len(y_train)} labels.")
+    if len(X_test) != len(y_test):
+        raise ValueError(f"Mismatched testing lengths: {len(X_test)} rows vs {len(y_test)} labels.")
+
+    fit  = model.fit(X_train , y_train)
+
+    predicted_y = model.predict(X_test)
+
+    
+
+
+
     raise NotImplementedError
 
 
