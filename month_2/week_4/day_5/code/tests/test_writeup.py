@@ -15,8 +15,8 @@ import re
 
 import pytest
 
-DAYDIR = pathlib.Path(__file__).resolve().parents[1]
-MONTH2 = pathlib.Path(__file__).resolve().parents[3]
+DAYDIR = pathlib.Path(__file__).resolve().parents[2]
+MONTH2 = pathlib.Path(__file__).resolve().parents[4]
 README = MONTH2 / "minisklearn" / "README.md"
 BLOG = DAYDIR / "blog_post.md"
 
