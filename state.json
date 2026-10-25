@@ -540,7 +540,7 @@
         },
         "4": {
           "done_when": "Stop writing isolated scripts. Package everything from Weeks 1–3 into one real, reusable, tested library — and use it on a genuine dataset the way you'd use sklearn.",
-          "review_status": "pending",
+          "review_status": "done",
           "days": {
             "1": {
               "day_in_week": 1,

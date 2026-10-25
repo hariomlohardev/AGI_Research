@@ -13,7 +13,7 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 ## Month 2 — Probability, Information Theory & Classical ML From Scratch
 - **Started:** 2026-08-24
 - **Language:** `python` · **Skill level:** `intermediate` · **Test command:** `pytest` (default)
-- **Current:** Month 2, Day 24 (Week 4 Day 6 — `current`)
+- **Current:** Month 2, Day 24 (Week 4 Day 6 — work complete, `current` pointer rolls to Month 3 on `/month`)
 - **Source plan:** `D:\Roadmap\firefox\months\month-2-detailed.md`
 
 ### Weeks & days
@@ -47,13 +47,13 @@ Human-readable log of months/weeks/days — spans all months. `state.json` is th
 - Day 6 (global 18) — **done** — K-Means Clustering — confidence: `shaky`, difficulty: `hard`, time: not reported
 - Week 3 review: **passed** — classical ML not outdated (interpretability for regulated jobs), K-Means as the no-labels complement.
 
-**Week 4 — Month 2 Capstone** — `review_status: pending`
+**Week 4 — Month 2 Capstone** — `review_status: done`
 - Done when: Stop writing isolated scripts. Package everything from Weeks 1–3 into one real, reusable, tested library — and use it on a genuine dataset the way you'd use sklearn.
 - Day 1 (global 19) — **done** — Package Structure (`minisklearn`) — confidence: `shaky`, difficulty: `easy`, time: 240m (self-reported "4 hrs") — has flagged questions (Q6 zero-division rationale) to revisit
 - Day 2 (global 20) — **done** — Apply to a Real Dataset (EDA, imputation, encoding, split) — confidence: `shaky`, difficulty: easy - medium (self-reported as a range, so `difficulty` stays `null`), time: 240m (self-reported "4 hrs")
 - Day 3 (global 21) — **done** — Evaluate (confusion matrix, accuracy/precision/recall/F1) — confidence: `strong`, difficulty: easy - medium (self-reported as a range, so `difficulty` stays `null`), time: 240m (self-reported "4 hrs")
 - Day 4 (global 22) — **done** — Compare Against Real `sklearn` — confidence: `strong`, difficulty: `easy`, time: 120m (self-reported "2 hrs")
 - Day 5 (global 23) — **done** — Write It Up (README + blog post) — confidence: `struggled`, difficulty: `easy`, time: 120m (self-reported "2 hrs") — has flagged questions (Q2 recall-mechanism half) to revisit
-- Day 6 (global 24) — pending — Push to GitHub + Rest
+- Day 6 (global 24) — **done (work complete)** — Push to GitHub + Rest — confidence: `shaky`, difficulty: `easy`, time: not reported — Week 4 review passed. State flip (`current`→`done`, `month-complete` badge) rides with the Month-3 `/month` commit: the tracker requires exactly one `current` day and Month 3 doesn't exist yet.
 
 > Notes: This month has **no explicitly labelled Rest Days** — every day above is a real study day (status `pending`/`current`). Rest will be real on Month 2 Day 6 only in the sense of lighter load. Badges / streak / confusion notes / flags all start empty — they'll fill as you run `/done`, `/confused`, `/spaced-review`.
