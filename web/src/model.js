@@ -33,3 +33,45 @@ export function dayDocuments(documents, day) {
 }
 
 export const finalProjectFolder = month => `month_${month}/${Number(month) >= 3 ? 'docs/' : ''}final_project/`;
+
+// View-only preparation: source plans never become recorded progress here.
+export function curriculumView(state, plans = []) {
+  const months = { ...state.months };
+  for (const plan of plans) {
+    const key = String(plan.month);
+    if (months[key]) continue;
+    const weeks = {};
+    for (const item of plan.days) {
+      const week = String(item.week), day = String(item.day_in_week);
+      weeks[week] ??= { done_when: 'Follow the source roadmap for this learning week.', review_status: 'pending', days: {} };
+      weeks[week].days[day] = { ...item, topic: item.label, status: item.rest ? 'rest' : 'pending',
+        mode: 'guided', tags: [], has_flags: false, confidence: null, difficulty: null,
+        time_spent_minutes: null, expected_minutes: null, confusion_notes: [], micro_projects: [],
+        github_contribution: null, review_history: { times_reviewed: 0, last_reviewed: null },
+        srs: { next_review_due: null }, prepared: true };
+    }
+    months[key] = { language: 'python', skill_level: 'intermediate', prepared: true, roadmap: plan.roadmap, weeks };
+  }
+  return { ...state, months };
+}
+
+export const resourceKind = resource => resource.kind || 'markdown';
+export const resourceLabels = { markdown: 'Notes', notebook: 'Notebooks', python: 'Python code', test: 'Tests' };
+
+export function dayWorkspace(resources, day) {
+  const legacy = 'month_' + day.month + '/week_' + day.week + '/day_' + day.day_in_week;
+  const suffix = '/week_' + day.week + '/day_' + day.day_in_week + '/';
+  const prefixes = Number(day.month) >= 3
+    ? [day.folder + '/', 'month_' + day.month + '/notebooks' + suffix,
+      'month_' + day.month + '/src/month' + day.month + suffix, 'month_' + day.month + '/tests' + suffix]
+    : [legacy + '/'];
+  const selected = resources.filter(item => prefixes.some(prefix => item.path.startsWith(prefix)));
+  return Object.entries(resourceLabels).map(([kind, label]) => ({ kind, label, items: selected.filter(item => resourceKind(item) === kind) }));
+}
+
+export function pairedResource(resources, resource) {
+  let match, target;
+  if ((match = /^month_(\d+)\/notebooks\/(.+)\.ipynb$/.exec(resource.path))) target = 'month_' + match[1] + '/src/month' + match[1] + '/' + match[2] + '.py';
+  else if ((match = /^month_(\d+)\/src\/month\d+\/(.+)\.py$/.exec(resource.path))) target = 'month_' + match[1] + '/notebooks/' + match[2] + '.ipynb';
+  return resources.find(item => item.path === target) || null;
+}
