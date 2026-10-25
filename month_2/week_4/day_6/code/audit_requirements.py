@@ -22,7 +22,27 @@ def third_party_imports(root: str | Path) -> set[str]:
     Raises:
         ValueError: if `root` is not an existing directory.
     """
-    raise NotImplementedError
+    root_path = Path(root)
+    if not root_path.is_dir():
+        raise ValueError(f"not an existing directory: {root!r}")
+
+    stdlib = set(sys.stdlib_module_names)
+    found: set[str] = set()
+    for path in sorted(root_path.rglob("*.py")):
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    top = alias.name.split(".")[0]
+                    if top not in stdlib:
+                        found.add(top)
+            elif isinstance(node, ast.ImportFrom):
+                if node.level:
+                    continue  # relative import — intra-package, not third-party
+                module = (node.module or "").split(".")[0]
+                if module and module not in stdlib:
+                    found.add(module)
+    return found
 
 
 def pinned_requirements(path: str | Path) -> dict[str, str]:
@@ -36,4 +56,22 @@ def pinned_requirements(path: str | Path) -> dict[str, str]:
         ValueError: if the file does not exist, or on any entry that is
             not `==`-pinned.
     """
-    raise NotImplementedError
+    req_path = Path(path)
+    if not req_path.is_file():
+        raise ValueError(f"requirements file not found: {path!r}")
+
+    pinned: dict[str, str] = {}
+    for lineno, raw in enumerate(req_path.read_text(encoding="utf-8").splitlines(), 1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        name, sep, version = line.partition("==")
+        name = name.strip()
+        version = version.split(";")[0].strip()
+        if not sep or not name or not version or " " in version or "=" in version:
+            raise ValueError(f"{path}:{lineno}: not an ==-pinned entry: {raw!r}")
+        base = name.split("[")[0].strip()
+        if not base or base.endswith("["):
+            raise ValueError(f"{path}:{lineno}: bad package name: {raw!r}")
+        pinned[base] = version
+    return pinned
