@@ -1,0 +1,218 @@
+{
+  "month": 3,
+  "layout_version": 2,
+  "preparation_status": "prepared_not_started",
+  "source": {
+    "name": "month-3-detailed-revised-v5.md",
+    "snapshot": "docs/roadmap.md",
+    "sha256": "c3f793ea17a5ffe1de5d27846fbab6a53ca076498358b7b7f59befe8a47e7dae",
+    "snapshot_sha256": "58023d695ef399610ac74dff9c9fd156f22ad39e37765fd6b038cac2f2801c57",
+    "formatting_note": "Snapshot replaces Markdown trailing-space line breaks with explicit <br>; original roadmap file is unchanged."
+  },
+  "workflow": {
+    "authoring": "ipynb",
+    "python_export": "py:percent",
+    "docs": "docs",
+    "notebooks": "notebooks",
+    "source": "src/month3",
+    "tests": "tests"
+  },
+  "days": [
+    {
+      "week": 1,
+      "day_in_week": 1,
+      "global_day": 1,
+      "label": "Tensors, shape reasoning and autograd",
+      "rest": false
+    },
+    {
+      "week": 1,
+      "day_in_week": 2,
+      "global_day": 2,
+      "label": "Module, Dataset, DataLoader and a complete training loop",
+      "rest": false
+    },
+    {
+      "week": 1,
+      "day_in_week": 3,
+      "global_day": 3,
+      "label": "GPU setup, honest timing and checkpoint recovery",
+      "rest": false
+    },
+    {
+      "week": 1,
+      "day_in_week": 4,
+      "global_day": 4,
+      "label": "Dropout, BatchNorm and useful histograms",
+      "rest": false
+    },
+    {
+      "week": 1,
+      "day_in_week": 5,
+      "global_day": 5,
+      "label": "Manual backward pass, with independent verification",
+      "rest": false
+    },
+    {
+      "week": 1,
+      "day_in_week": 6,
+      "global_day": 6,
+      "label": "Protected rest",
+      "rest": true
+    },
+    {
+      "week": 1,
+      "day_in_week": 7,
+      "global_day": 7,
+      "label": "Diagnose a real training run",
+      "rest": false
+    },
+    {
+      "week": 1,
+      "day_in_week": 8,
+      "global_day": 8,
+      "label": "Independent MNIST classifier",
+      "rest": false
+    },
+    {
+      "week": 2,
+      "day_in_week": 1,
+      "global_day": 9,
+      "label": "Convolution mechanics and numerical correctness",
+      "rest": false
+    },
+    {
+      "week": 2,
+      "day_in_week": 2,
+      "global_day": 10,
+      "label": "A CNN baseline and the Month 4 tensor workshop",
+      "rest": false
+    },
+    {
+      "week": 2,
+      "day_in_week": 3,
+      "global_day": 11,
+      "label": "CIFAR-10 data pipeline and an augmentation experiment",
+      "rest": false
+    },
+    {
+      "week": 2,
+      "day_in_week": 4,
+      "global_day": 12,
+      "label": "AlexNet ideas, implemented at a manageable scale",
+      "rest": false
+    },
+    {
+      "week": 2,
+      "day_in_week": 5,
+      "global_day": 13,
+      "label": "VGG-style blocks and the limits of architecture comparisons",
+      "rest": false
+    },
+    {
+      "week": 2,
+      "day_in_week": 6,
+      "global_day": 14,
+      "label": "ResNet-20, a documented recipe and an honest checkpoint",
+      "rest": false
+    },
+    {
+      "week": 2,
+      "day_in_week": 7,
+      "global_day": 15,
+      "label": "Protected rest",
+      "rest": true
+    },
+    {
+      "week": 3,
+      "day_in_week": 1,
+      "global_day": 16,
+      "label": "RNN cell and gradients through time",
+      "rest": false
+    },
+    {
+      "week": 3,
+      "day_in_week": 2,
+      "global_day": 17,
+      "label": "The copy task, defined precisely",
+      "rest": false
+    },
+    {
+      "week": 3,
+      "day_in_week": 3,
+      "global_day": 18,
+      "label": "LSTM cell, memory paths and the original paper",
+      "rest": false
+    },
+    {
+      "week": 3,
+      "day_in_week": 4,
+      "global_day": 19,
+      "label": "Protected rest",
+      "rest": true
+    },
+    {
+      "week": 3,
+      "day_in_week": 5,
+      "global_day": 20,
+      "label": "GRU cell and a controlled three-model comparison",
+      "rest": false
+    },
+    {
+      "week": 3,
+      "day_in_week": 6,
+      "global_day": 21,
+      "label": "A correct character-language-model pipeline",
+      "rest": false
+    },
+    {
+      "week": 3,
+      "day_in_week": 7,
+      "global_day": 22,
+      "label": "Retrieval, a small independent rebuild and cleanup",
+      "rest": false
+    },
+    {
+      "week": 4,
+      "day_in_week": 1,
+      "global_day": 23,
+      "label": "Budgeted tuning with a valid selection rule",
+      "rest": false
+    },
+    {
+      "week": 4,
+      "day_in_week": 2,
+      "global_day": 24,
+      "label": "Final metrics, samples and failure analysis",
+      "rest": false
+    },
+    {
+      "week": 4,
+      "day_in_week": 3,
+      "global_day": 25,
+      "label": "Use saved models in separate inference notebooks",
+      "rest": false
+    },
+    {
+      "week": 4,
+      "day_in_week": 4,
+      "global_day": 26,
+      "label": "Write a report with two defensible case studies",
+      "rest": false
+    },
+    {
+      "week": 4,
+      "day_in_week": 5,
+      "global_day": 27,
+      "label": "Reproduction, archive and readiness for Month 4",
+      "rest": false
+    },
+    {
+      "week": 4,
+      "day_in_week": 6,
+      "global_day": 28,
+      "label": "Protected rest",
+      "rest": true
+    }
+  ]
+}

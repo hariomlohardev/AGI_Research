@@ -8,13 +8,14 @@ invariant, etc.). Every skill in `.claude/skills/` and every agent in
 this file. Do not invent new top-level fields in a skill/agent — if a field
 is missing here, add it here first, then use it everywhere consistently.
 
-**This is no longer just a convention.** `state.schema.json` at the project
-root is the machine-enforced counterpart of this file, checked by
-`scripts/validate_state.py` and gated on every commit by
-`.githooks/pre-commit`. Any invented or mistyped field, wrong enum value, or
-missing required field in `state.json` gets **rejected at commit time**, not
-just flagged by a reader of this doc. If you change the shape here, change
-`state.schema.json` to match — they must stay in sync.
+state.schema.json is the machine-enforced counterpart, checked by
+scripts/validate_state.py after every local state mutation. Personal state
+is ignored by Git; it is not published or restored by ordinary Git reverts.
+The pre-commit hook checks staged public artifacts and rejects attempts to
+publish state.json. CI tests the validator with a sanitized fixture. Change
+the machine schema and this documentation together before using new fields.
+Notebook/source/test layout metadata lives in month_N/curriculum.json and
+does not change the state schema.
 
 ## Top-level shape
 
@@ -146,7 +147,7 @@ just flagged by a reader of this doc. If you change the shape here, change
   it generates the day based on the material's actual content. Can be
   amended later just by asking Claude conversationally (e.g. "tag today as
   needs-review too") — any such ad hoc edit still runs
-  `scripts/validate_state.py` before committing, same as every other write.
+  `scripts/validate_state.py` after the local write, like every other state mutation.
 - **...days.<D>.difficulty** (`"easy" | "medium" | "hard" | null`):
   self-rated by the user during `/done`, alongside `time_spent_minutes` —
   never assumed or inferred by Claude. `null` until the day is done and the
@@ -183,7 +184,8 @@ just flagged by a reader of this doc. If you change the shape here, change
   - `pr_url`: `null` until the user gives their real, submitted PR's URL;
     never filled in speculatively.
 - **...days.<D>.micro_projects**: array, populated by `/micro-project`. Each
-  entry has `slug` (matches the folder name under `micro_projects/`), `name`,
+  entry has `slug` (matches the docs folder under `micro_projects/`; Month 3+
+  code/notebook/test folders normalize hyphens to underscores for imports), `name`,
   `status` (`in_progress` or `done`), and `created` (ISO date string).
 - **months.<N>.started** (ISO date string): set once, when `/month` first
   creates month `N`. Used by `/pace` to project a finish date from the
@@ -297,8 +299,11 @@ are free-form `{id, date}` pairs.
 `months.<N>.language` and `months.<N>.test_command` (see field definitions
 above) let `/done` and `/i-am-in` work outside Python:
 
-- `"python"` (default): `/i-am-in` writes `code/` + `code/tests/` for
-  `pytest`; `/done` runs `pytest code/tests/`.
+- "python" (default): Month 2 keeps code/ and code/tests/. Month 3+ writes
+  implementation notebooks, exports Python into src/monthN, places tests
+  separately under tests, and runs pytest with the month's pyproject config.
+  Resolve exact day paths with scripts/curriculum_paths.py; use day_in_week,
+  including Week 1 Day 8, rather than global_day for folder names.
 - `"javascript"` / `"typescript"`: `/i-am-in` writes stubs + Jest-style tests;
   `/done` runs `npm test` (or the project's existing test script) instead.
 - `"other"`: `months.<N>.test_command` must be set (asked once, at `/month`
@@ -388,10 +393,10 @@ the throughline, but uses `state.json` only to know which month number is
    same logic: advance `current_day`, and if the resulting day's `status` is
    `rest`, keep advancing until a non-rest day is reached (marking each
    skipped rest day's status unchanged — it's already `rest`, not `done`).
-5. Any skill that writes `state.json` runs `python3 scripts/validate_state.py`
-   before committing, and stops (fixes the write, doesn't force the commit)
-   if it reports errors. `.githooks/pre-commit` enforces this regardless, but
-   checking proactively gives a clearer, closer-to-the-cause error message.
+5. A state-writing skill first keeps a local backup, then runs
+   python scripts/validate_state.py after the mutation and stops on any
+   validation error. Private state updates do not create public commits.
+   The pre-commit hook independently checks the staged publication boundary.
 6. **Discipline gate**: `/i-am-in` refuses to generate a new day if 3 or
    more *done* days in the current month have `(has_flags: true OR confidence:
    "struggled")` **and** `review_history.times_reviewed == 0` — i.e. real,

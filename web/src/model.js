@@ -3,7 +3,7 @@ export const pretty = value => String(value ?? '').replaceAll(/[-_]/g, ' ').repl
 export const dayTitle = day => day.topic || (day.status === 'rest' ? 'A little room to recharge' : `Day ${day.global_day} · Topic not recorded`);
 export function flatten(state) {
   return Object.entries(state.months).sort(([a], [b]) => Number(a) - Number(b)).flatMap(([month, data]) =>
-    Object.entries(data.weeks).flatMap(([week, details]) => Object.entries(details.days).map(([key, day]) => ({ ...day, month, week, key, id: `${month}-${week}-${key}`, folder: `month_${month}/week_${week}/day_${day.day_in_week}` }))).sort((a, b) => a.global_day - b.global_day));
+    Object.entries(data.weeks).flatMap(([week, details]) => Object.entries(details.days).map(([key, day]) => ({ ...day, month, week, key, id: `${month}-${week}-${key}`, folder: `month_${month}/${Number(month) >= 3 ? 'docs/days/' : ''}week_${week}/day_${day.day_in_week}` }))).sort((a, b) => a.global_day - b.global_day));
 }
 export function studyStreak(days) {
   let index = days.findLastIndex(day => day.status === 'done');
@@ -31,3 +31,5 @@ export function summarize(days, today = dateKey()) {
 export function dayDocuments(documents, day) {
   return documents.filter(doc => doc.path.startsWith(`${day.folder}/`));
 }
+
+export const finalProjectFolder = month => `month_${month}/${Number(month) >= 3 ? 'docs/' : ''}final_project/`;

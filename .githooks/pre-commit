@@ -1,18 +1,15 @@
 #!/bin/sh
-# Blocks any commit that stages state.json unless it passes
-# scripts/validate_state.py. Activated via:
-#   git config core.hooksPath .githooks
-# (this is set automatically by /month's first-run setup).
-
-if git diff --cached --name-only | grep -qx "state.json"; then
-    python3 scripts/validate_state.py
-    status=$?
-    if [ $status -ne 0 ]; then
-        echo ""
-        echo "Commit aborted: state.json failed schema validation (see errors above)."
-        echo "Fix the write in state.json — don't hand-edit around this check — then try committing again."
-        exit 1
-    fi
+# Check actual staged public content. Private state is validated by state-writing skills.
+set -eu
+if [ -x .venv/Scripts/python.exe ]; then
+    exec .venv/Scripts/python.exe scripts/check_public.py
+elif [ -x .venv/bin/python ]; then
+    exec .venv/bin/python scripts/check_public.py
+elif command -v py >/dev/null 2>&1; then
+    exec py -3 scripts/check_public.py
+elif command -v python3 >/dev/null 2>&1; then
+    exec python3 scripts/check_public.py
+else
+    echo "Python not found. Create the project environment and install requirements-dev.txt."
+    exit 1
 fi
-
-exit 0

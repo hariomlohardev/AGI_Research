@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "curriculum-month3"
+version = "0.1.0"
+description = "Notebook-first deep-learning study with reviewable Python exports"
+requires-python = ">=3.12"
+# Install compatible torch/torchvision separately for the chosen CPU/CUDA runtime.
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--import-mode=importlib"

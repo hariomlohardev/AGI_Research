@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { loadCurriculum } from './server/data.js';
+import { loadCurriculum, loadExampleCurriculum } from './server/data.js';
 
 function readOnlyCurriculum() {
   function middleware(server) {
@@ -16,7 +16,7 @@ function readOnlyCurriculum() {
     configureServer: middleware,
     configurePreviewServer: middleware,
     async generateBundle() {
-      this.emitFile({ type: 'asset', fileName: 'data/curriculum.json', source: JSON.stringify(await loadCurriculum()) });
+      this.emitFile({ type: 'asset', fileName: 'data/curriculum.json', source: JSON.stringify(await loadExampleCurriculum()) });
     },
   };
 }

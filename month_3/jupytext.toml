@@ -1,0 +1,6 @@
+# Notebook inputs are authoritative. Use scripts/notebooks.py sync for deterministic exports.
+notebook_metadata_filter = "-all"
+cell_metadata_filter = "-all"
+[formats]
+"notebooks/" = "ipynb"
+"src/month3/" = "py:percent"

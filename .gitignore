@@ -1,7 +1,76 @@
+# Python and local environments
 venv/
 .venv/
 __pycache__/
-*.pyc
-.pytest_cache/
-.DS_Store
+*.py[cod]
 *.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.benchmarks/
+# Notebook execution state and editor files
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+node_modules/
+# Local assistant configuration, personal state, coaching and backups
+/.claude/
+/CLAUDE.md
+/CLAUDE.local.md
+/.local/
+/.remember/
+/state.json
+/progress.md
+/growth-notes.md
+/struggle-log.md
+/discipline-log.md
+/bonus-watches.md
+/project-history.md
+/reports/
+/docs/maintenance/
+**/code_review.md
+**/flagged_questions.md
+**/confusion_notes.md
+**/github_contribution/
+**/final_project/logs.md
+# Credentials; deliberately share only an explicit template
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Bulk/recoverable experiment artifacts; share manifests and curated results
+**/data/raw/
+**/data/processed/
+**/checkpoints/
+**/runs/
+**/artifacts/
+**/scratch/
+**/results/raw/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.npy
+*.npz
+*.parquet
+*.log
+*.tmp
+# Curated notebooks, Python exports, tests, docs and result summaries are tracked.
+
+# Dataset downloads and optional experiment trackers
+/month_*/data/
+wandb/
+lightning_logs/
+mlruns/
+*.h5
+*.hdf5
+*.pkl
+*.pickle

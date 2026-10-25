@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
-import { flatten, summarize, studyStreak, dateKey, needsAttention } from '../src/model.js';
-import { loadCurriculum } from '../server/data.js';
+import { readFile, writeFile, mkdir, mkdtemp, rm } from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import { flatten, summarize, studyStreak, dateKey, needsAttention, dayDocuments, finalProjectFolder } from '../src/model.js';
+import { loadCurriculum, loadExampleCurriculum } from '../server/data.js';
 
 const day = (status, extra = {}) => ({ status, time_spent_minutes: null, review_history: { times_reviewed: 0 }, ...extra });
 test('streak spans months, skips rest and current days, and stops at a real gap', () => {
@@ -31,12 +33,35 @@ test('flattening keeps month ordering and distinguishes month-local day numbers'
   assert.deepEqual(rows.map(row => row.id), ['1-1-1', '1-1-2', '2-1-1']);
   assert.equal(rows[2].folder, 'month_2/week_1/day_1');
 });
-test('live adapter reads actual state/schema and exposes only learning markdown', async () => {
-  const before = await readFile(new URL('../../state.json', import.meta.url), 'utf8');
-  const data = await loadCurriculum();
-  assert.deepEqual(data.state, JSON.parse(before));
+test('adapter supports both layouts without requiring personal state in a clone', async t => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'curriculum-layout-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const fixture = JSON.parse(await readFile(new URL('../../tests/fixtures/valid_state.json', import.meta.url), 'utf8'));
+  fixture.months['3'] = { weeks: { '1': { days: { '8': { global_day: 8, day_in_week: 8, status: 'current' } } } } };
+  const before = JSON.stringify(fixture);
+  await writeFile(path.join(root, 'state.json'), before);
+  await writeFile(path.join(root, 'state.schema.json'), await readFile(new URL('../../state.schema.json', import.meta.url)));
+  const docs = ['progress.md', 'month_1/week_1/day_1/learn.md', 'month_3/docs/days/week_1/day_8/learn.md', 'month_3/docs/final_project/structure.md'];
+  for (const name of [...docs, 'month_3/src/month3/private.md', '.claude/private.md']) {
+    await mkdir(path.dirname(path.join(root, name)), { recursive: true });
+    await writeFile(path.join(root, name), '# fixture');
+  }
+  const data = await loadCurriculum(root);
+  assert.deepEqual(data.state, fixture);
   assert.ok(data.schema.properties.months);
-  assert.ok(data.documents.some(doc => doc.path === 'progress.md'));
-  assert.ok(data.documents.every(doc => doc.path.endsWith('.md') && !doc.path.includes('/code/') && !doc.path.includes('.claude/')));
-  assert.equal(await readFile(new URL('../../state.json', import.meta.url), 'utf8'), before);
+  assert.deepEqual(data.documents.map(doc => doc.path).sort(), docs.sort());
+  const current = flatten(fixture).find(day => day.month === '3');
+  assert.equal(current.folder, 'month_3/docs/days/week_1/day_8');
+  assert.equal(dayDocuments(data.documents, current).length, 1);
+  assert.equal(finalProjectFolder('3'), 'month_3/docs/final_project/');
+  assert.equal(finalProjectFolder('2'), 'month_2/final_project/');
+  assert.equal(await readFile(path.join(root, 'state.json'), 'utf8'), before);
+});
+
+test('public bundle data contains only the sanitized fixture and no private documents', async () => {
+  const example = await loadExampleCurriculum();
+  const fixture = JSON.parse(await readFile(new URL('../../tests/fixtures/valid_state.json', import.meta.url), 'utf8'));
+  assert.deepEqual(example.state, fixture);
+  assert.equal(example.stateSource, 'example');
+  assert.deepEqual(example.documents, []);
 });

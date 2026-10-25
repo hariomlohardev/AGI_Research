@@ -1,39 +1,55 @@
 name: CI
-
-# Activates automatically once this repo is pushed to GitHub — nothing
-# else to configure. Runs the same checks scripts/validate_state.py and
-# .githooks/pre-commit already enforce locally, plus the full pytest suite
-# (the tooling's own tests/, and, if present, any day's code/tests/).
-
 on:
   push:
-    branches: ["**"]
   pull_request:
-    branches: ["**"]
-
+permissions:
+  contents: read
 jobs:
-  validate-and-test:
+  public-and-tooling:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Validate state.json against state.schema.json
-        run: python3 scripts/validate_state.py
-
-      - name: Run tooling test suite (scripts/, tests/)
-        run: pytest tests/ -v
-
-      - name: Run any generated day/micro-project tests, if present
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Validate fixture-backed state, exports and publishing policy
         run: |
-          if find . -path ./node_modules -prune -o -path "*/code/tests" -print | grep -q .; then
-            pytest --rootdir=. -v $(find . -path ./node_modules -prune -o -type d -path "*/code/tests" -print)
-          else
-            echo "No generated day content yet — nothing under code/tests/ to run."
+          python -m pytest tests -q
+          python scripts/check_public.py --worktree
+          python scripts/notebooks.py check --month 3
+  curriculum:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install legacy learning dependencies
+        run: python -m pip install -r requirements.txt -r requirements-dev.txt
+      - name: Install Month 3 CPU dependencies when exercises exist
+        shell: bash
+        run: |
+          if find month_3/tests -name 'test_*.py' -print -quit | grep -q .; then
+            if [ ! -f month_3/requirements-runtime.txt ]; then
+              echo "Prepare a compatible pinned Month 3 runtime before publishing exercise tests."
+              exit 1
+            fi
+            python -m pip install -r month_3/requirements-runtime.txt
           fi
+      - run: python scripts/run_curriculum_tests.py
+  dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+        working-directory: web
+      - run: npm test
+        working-directory: web
+      - run: npm run build
+        working-directory: web

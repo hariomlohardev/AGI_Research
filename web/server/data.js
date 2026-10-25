@@ -20,7 +20,7 @@ export async function loadCurriculum(root = projectRoot) {
     catch (error) { if (error.code === 'ENOENT') return; throw error; }
     for (const entry of entries) {
       // Symlinks and code/dependency directories are intentionally not traversed.
-      const isLearningFolder = /^(week_\d+|day_\d+|final_project|github_contribution|micro_projects)$/.test(entry.name);
+      const isLearningFolder = /^(docs|days|reports|week_\d+|day_\d+|final_project|github_contribution|micro_projects)$/.test(entry.name);
       const isProjectFolder = path.basename(relative) === 'micro_projects' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.name);
       if (entry.isDirectory() && (isLearningFolder || isProjectFolder)) await walk(path.join(relative, entry.name));
       if (entry.isFile() && entry.name.endsWith('.md')) await addDocument(path.join(relative, entry.name));
@@ -30,4 +30,10 @@ export async function loadCurriculum(root = projectRoot) {
   for (const month of Object.keys(state.months)) if (/^\d+$/.test(month)) await walk(`month_${month}`);
   documents.sort((a, b) => a.path.localeCompare(b.path, undefined, { numeric: true }));
   return { state, schema, documents, loadedAt: new Date().toISOString() };
+}
+
+// Public static builds contain only a sanitized example, never live coaching/progress.
+export async function loadExampleCurriculum(root = projectRoot) {
+  const [state, schema] = await Promise.all(['tests/fixtures/valid_state.json', 'state.schema.json'].map(async name => JSON.parse(await readFile(path.join(root, name), 'utf8'))));
+  return { state, schema, documents: [], stateSource: 'example', loadedAt: new Date().toISOString() };
 }
