@@ -7,8 +7,14 @@ name = "curriculum-month3"
 version = "0.1.0"
 description = "Notebook-first deep-learning study with reviewable Python exports"
 requires-python = ">=3.12"
-# Install compatible torch/torchvision separately for the chosen CPU/CUDA runtime.
-dependencies = []
+# Install compatible torch/torchvision for the actual CPU/CUDA runtime.
+# Tested 2026-10-26 on Windows CPU: torch 2.14.1+cpu, torchvision 0.29.1+cpu
+# from https://download.pytorch.org/whl/cpu (the default PyPI index serves
+# CUDA builds on Windows; use the CPU index for CPU-only machines).
+dependencies = [
+  "torch",
+  "torchvision",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
