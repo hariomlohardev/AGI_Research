@@ -1,0 +1,7 @@
+# Month 3 CPU runtime for CI (ubuntu-latest, Python 3.12) and CPU-only machines.
+# Pinned to the exact versions the exercises were tested against (Windows CPU,
+# 2026-10-26: torch 2.14.1+cpu, torchvision 0.29.1+cpu). The default PyPI index
+# serves CUDA builds on most platforms, so install from the PyTorch CPU index.
+--index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1+cpu
+torchvision==0.29.1+cpu
