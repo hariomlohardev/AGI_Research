@@ -40,6 +40,35 @@ def is_main_guard(node: ast.AST) -> bool:
             and node.test.comparators[0].value == "__main__" and not node.orelse)
 
 
+def is_student_owned(month_root: Path, week: int, day: int) -> bool:
+    """Layout metadata: student-owned days export a review copy, not a library.
+
+    The flag lives in month_N/curriculum.json day entries (layout metadata, not
+    state). Unknown or unreadable plans mean strict: the safe default.
+    """
+    try:
+        plan = json.loads((month_root / "curriculum.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    days = plan.get("days", []) if isinstance(plan, dict) else []
+    return any(isinstance(entry, dict) and entry.get("week") == week
+               and entry.get("day_in_week") == day and entry.get("student_owned") is True
+               for entry in days)
+
+
+def owned_for_notebook(month_root: Path, notebook: Path) -> bool:
+    """Resolve the student-owned flag from a notebook path; strict on doubt."""
+    try:
+        parts = notebook.resolve().relative_to((month_root / "notebooks").resolve()).parts
+        week = int(parts[0].removeprefix("week_"))
+        day = int(parts[1].removeprefix("day_"))
+    except (ValueError, IndexError, AttributeError):
+        return False
+    if parts[0] != f"week_{week}" or parts[1] != f"day_{day}":
+        return False
+    return is_student_owned(month_root, week, day)
+
+
 def import_safety_errors(text: str) -> list[str]:
     """Conservative syntactic gate; never import or execute untrusted study code."""
     errors = []
@@ -64,7 +93,7 @@ def import_safety_errors(text: str) -> list[str]:
     return errors
 
 
-def notebook_errors(notebook: dict, *, clean: bool = True) -> list[str]:
+def notebook_errors(notebook: dict, *, clean: bool = True, student_owned: bool = False) -> list[str]:
     errors = []
     if notebook.get("metadata", {}).get("widgets"):
         errors.append("widget state must be removed before publication")
@@ -81,9 +110,19 @@ def notebook_errors(notebook: dict, *, clean: bool = True) -> list[str]:
         if clean and (cell.get("outputs") or cell.get("execution_count") is not None):
             errors.append(f"cell {index}: clear outputs/execution count before publication")
     try:
-        errors.extend(import_safety_errors(export_text(notebook)))
+        export = export_text(notebook)
     except (ValueError, TypeError, KeyError) as exc:
         errors.append(f"invalid notebook: {exc}")
+        return errors
+    if student_owned:
+        # Review copy: the learner's top-level runs stay as they are. The
+        # mirror must still be real, parseable Python with no shell/magic.
+        try:
+            ast.parse(export)
+        except SyntaxError as exc:
+            errors.append(f"invalid Python at line {exc.lineno}: {exc.msg}")
+    else:
+        errors.extend(import_safety_errors(export))
     return errors
 
 
@@ -99,8 +138,8 @@ def clean_notebook(notebook: dict) -> None:
             cell["execution_count"] = None
 
 
-def check_pair(notebook: dict, source: str | None, *, clean: bool = True) -> list[str]:
-    errors = notebook_errors(notebook, clean=clean)
+def check_pair(notebook: dict, source: str | None, *, clean: bool = True, student_owned: bool = False) -> list[str]:
+    errors = notebook_errors(notebook, clean=clean, student_owned=student_owned)
     if source is None:
         errors.append("missing Python mirror; run notebooks.py sync")
     elif export_text(notebook) != source.replace("\r\n", "\n"):
@@ -135,12 +174,14 @@ def main() -> int:
                 path.write_text(json.dumps(notebook, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
                 print(f"cleaned {path.relative_to(ROOT)}")
                 continue
-            errors = notebook_errors(notebook, clean=args.action == "check")
+            errors = notebook_errors(notebook, clean=args.action == "check",
+                                        student_owned=owned_for_notebook(month_root, path))
             if args.action == "sync" and not errors:
                 source.parent.mkdir(parents=True, exist_ok=True)
                 source.write_text(export_text(notebook), encoding="utf-8", newline="\n")
             elif args.action == "check":
-                errors = check_pair(notebook, source.read_text(encoding="utf-8") if source.exists() else None)
+                errors = check_pair(notebook, source.read_text(encoding="utf-8") if source.exists() else None,
+                                    student_owned=owned_for_notebook(month_root, path))
             if errors:
                 failed = True
                 print(f"FAIL {path.relative_to(ROOT)}: " + "; ".join(errors))

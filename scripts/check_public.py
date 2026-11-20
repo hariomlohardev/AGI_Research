@@ -7,12 +7,13 @@ This is a conservative publishing check, not a comprehensive secret scanner.
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import re
 import subprocess
 from pathlib import Path, PurePosixPath
 
-from notebooks import check_pair
+from notebooks import check_pair, is_student_owned
 
 ROOT = Path(__file__).resolve().parents[1]
 PRIVATE_ROOT_FILES = {"CLAUDE.md", "CLAUDE.local.md", "state.json", "progress.md", "growth-notes.md",
@@ -23,6 +24,15 @@ PRIVATE_PARTS = {".claude", ".local", ".remember", ".venv", "venv", "node_module
 PRIVATE_NAMES = {"code_review.md", "flagged_questions.md", "confusion_notes.md"}
 BULK_SUFFIXES = {".pt", ".pth", ".ckpt", ".safetensors", ".onnx", ".npy", ".npz", ".parquet", ".pem", ".key", ".h5", ".hdf5", ".pkl", ".pickle"}
 SECRET = re.compile(rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\b(?:ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,}|AKIA[A-Z0-9]{16}|sk-ant-[A-Za-z0-9_-]{20,})")
+
+
+def student_owned_pair(root: Path, number: str, relative: str) -> bool:
+    """Student-owned flag for a path relative to month_N/notebooks/ (or its src mirror)."""
+    relative = re.sub(r"^month\d+/", "", relative)
+    match = re.fullmatch(r"week_(\d+)/day_(\d+)/.+", relative)
+    if not match:
+        return False
+    return is_student_owned(root / f"month_{number}", int(match.group(1)), int(match.group(2)))
 
 
 def private_path(name: str) -> bool:
@@ -71,7 +81,9 @@ def audit(root: Path, *, worktree: bool = False) -> list[str]:
                 number, relative = match.groups()
                 mirror = f"month_{number}/src/month{number}/{relative}.py"
                 source = read(mirror)
-                for error in check_pair(json.loads(data), source.decode("utf-8") if source is not None else None):
+                owned = student_owned_pair(root, number, relative)
+                for error in check_pair(json.loads(data), source.decode("utf-8") if source is not None else None,
+                                        student_owned=owned):
                     errors.append(f"{name}: {error}")
             elif re.fullmatch(r"month_\d+/src/month\d+/.+\.py", name) and not name.endswith("/__init__.py"):
                 # A changed paired export must match the notebook even if only .py was staged.
@@ -80,8 +92,14 @@ def audit(root: Path, *, worktree: bool = False) -> list[str]:
                 nbname = f"month_{number}/notebooks/{relative}.ipynb"
                 nbdata = read(nbname)
                 if nbdata is not None:
-                    for error in check_pair(json.loads(nbdata), data.decode("utf-8")):
+                    for error in check_pair(json.loads(nbdata), data.decode("utf-8"),
+                                            student_owned=student_owned_pair(root, number, relative)):
                         errors.append(f"{name}: {error}")
+                elif student_owned_pair(root, number, relative):
+                    try:
+                        ast.parse(data.decode("utf-8"))
+                    except (SyntaxError, UnicodeError) as exc:
+                        errors.append(f"{name}: invalid Python: {exc}")
                 else:
                     from notebooks import import_safety_errors
                     errors.extend(f"{name}: {error}" for error in import_safety_errors(data.decode("utf-8")))

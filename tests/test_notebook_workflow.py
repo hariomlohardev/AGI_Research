@@ -53,6 +53,17 @@ def test_export_rejects_eager_training_but_allows_explicit_main_guard():
     assert not import_safety_errors("CONFIG = {'mode': 'smoke'}\ndef run():\n    pass\nif __name__ == '__main__':\n    run()\n")
 
 
+def test_student_owned_notebook_keeps_runs_but_still_blocks_magic_and_syntax():
+    from notebooks import notebook_errors
+    owned = notebook("model = train_for_hours()\n")
+    assert notebook_errors(owned, clean=False, student_owned=True) == []
+    assert notebook_errors(owned, clean=False)
+    broken = notebook("def broken(:\n")
+    assert any("invalid Python" in e for e in notebook_errors(broken, clean=False, student_owned=True))
+    magic = notebook("%pip install torch")
+    assert any("magic" in e for e in notebook_errors(magic, clean=False, student_owned=True))
+
+
 def test_cleaning_is_explicit_and_preserves_inputs():
     nb = notebook()
     original = nb.cells[1].source
